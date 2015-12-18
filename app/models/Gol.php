@@ -1,7 +1,8 @@
 <?php
 
-class Gol extends Eloquent {
-
-		protected $table = 'tgol';
-		public $timestamps= false;
+class Gol extends Eloquent
+{
+    protected $table = 'tgol';
+    public $timestamps= false;
+    protected $primaryKey = 'idgol';
 }

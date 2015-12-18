@@ -5,7 +5,7 @@
 @stop
 
 @section('estilos')
-<link href="{{asset('/js/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
+    <link href="{{asset('/js/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
 @stop
 
 @section('rutanavegacion')

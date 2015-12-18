@@ -3,17 +3,17 @@
 class Jugador extends Eloquent
 {
     protected $table = 'tjugador';
-    protected $primaryKey = 'dni';
+    protected $primaryKey = 'idjugador';
 	public $timestamps = false;
+    protected $fillable = ['idjugador','foto','estado','codequipo','coddocente'];
 
-	protected $fillable = ['dni','foto','estado','codequipo','coddocente'];
-
-
-    public function dataEquipo() {
+    public function dataEquipo()
+    {
         return $this->hasMany("Equipo", 'codequipo', 'codequipo');
     }
 
-    public function dataDocente() {
+    public function dataDocente()
+    {
         return $this->hasMany("Docente", 'coddocente', 'coddocente');
     }
 

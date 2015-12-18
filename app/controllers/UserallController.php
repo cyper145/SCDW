@@ -56,7 +56,7 @@ class UserallController extends \BaseController {
                                     {
                                         Session::put('user_name',$user->DataEquipo[0]->nombre);
                                         Session::put('user_codequipo',$user->DataEquipo[0]->codequipo);
-                                        return Redirect::to('/');
+                                        return Redirect::to('equipo/index.html');
                                     }
                                     else
                                     {

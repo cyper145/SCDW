@@ -35,14 +35,13 @@ class CampeonatoController extends \BaseController {
 
     public function detallejugador($idjugador)
     {
-        $jugador = Jugador::where('dni','=',$idjugador)->first();
+        $jugador = Jugador::where('idjugador','=',$idjugador)->first();
         return View::make('user_com_organizing.campeonato.equipojugador.jugador.detail')
             ->with('jugador',$jugador);
     }
 
 	public function insertarcampeonato()
 	{
-		//$todocampeonato = Campeonato::all();
         return View::make('user_com_organizing.campeonato.insertar');
 	}
 

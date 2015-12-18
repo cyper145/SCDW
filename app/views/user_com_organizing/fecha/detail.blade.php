@@ -9,25 +9,21 @@
 @stop
 
 @section('nombrevista')
-    @lang('Detalles del Torneo')
+    @lang('Detalle de fecha del torneo:')
 @stop
 
 @section('contenido')
     <div class="row col-lg-12">
         <div class="col-lg-12 col-no-gutter">
             <div class="panel panel-primary">
-                <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span> Informacion de Torneo {{$torneo->tipo}}</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span> Informacion de fecha {{$fecha->nrofecha}}</div>
                 <div class="panel-body">
-                    <strong class="primary-font">Tipo: </strong><span class="text-primary">Torneo {{$torneo->tipo}}</span><br>
-                    <strong class="primary-font">Dia de Inicio: </strong><span class="text-primary">{{$torneo->diainicio}}</span><br>
+                    <strong class="primary-font">Numero de fecha: </strong><span class="text-primary">{{$fecha->nrofecha}}</span><br>
+                    <strong class="primary-font">Dia de la fecha: </strong><span class="text-primary">{{$fecha->diafecha}}</span><br>
+                    <strong class="primary-font">Lugar: </strong><span class="text-primary">{{$fecha->lugar}}</span><br>
                 </div>
                 <div class="panel panel-footer">
-                    <a class="btn btn-info" href="#">Ver Equipos</a>
-                    <a class="btn btn-info" href="#">verFechas</a>
-                    <a class="btn btn-info" href="#">Tabla de goleadores</a>
-                    <a class="btn btn-info" href="#">Tabla de posiciones</a>
-                    <a class="btn btn-success" href="#">Generar Fixture</a>
-                    <a class="btn btn-success" href="#fixture">Ver Fixture</a>
+                    <a class="btn btn-info" href="#">Ver Fixture</a>
                 </div>
             </div>
         </div>
@@ -35,30 +31,38 @@
     <div class="row row-no-gutter col-no-gutter-container" id="actividades">
         <div class="col-md-12 col-no-gutter">
             <div class="panel panel-default">
-                <div class="panel-heading">Fechas</div>
+                <div class="panel-heading">Fixture</div>
                 <div class="panel-body">
                     <table data-toggle="table" data-url="tables/data2.json">
                         <thead>
                         <tr>
-                            <th>Numero de fecha</th>
-                            <th>Dia de ejecucion de la fecha</th>
-                            <th>Acción</th>
+                            <th>partido</th>
+                            <th>hora</th>
+                            <th class="text-center">{{$fecha->diafecha}}</th>
+                            <th>Accion</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($fechas as $val)
+                        @foreach($fixture as $val)
                             <tr>
-                                <td>{{$val->nrofecha}}°fecha</td>
-                                <td>{{$val->diafecha}}</td>
+                                <td>{{$val->nropartido}}°</td>
+                                <td>{{$val->hora}}</td>
+                                <td class="text-center">{{$val->dataEquipo1[0]->nombre.' <----> '.$val->dataEquipo2[0]->nombre}}</td>
                                 <td>
                                     <a class="label label-success" href="{{ URL::to( 'fechas/detail/'.$val->idfecha);}}">
                                         <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
+                                    </a><br>
+                                    <a class="label label-primary" href="partido/{{ $val->idfixture}}" >
+                                        <span class="glyphicon glyphicon-list"></span> &nbsp;Partido
                                     </a><br>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="panel-footer">
+                    Descansa:
                 </div>
             </div>
         </div>
@@ -184,34 +188,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($equipos as $val)
-                            <tr>
-                                <td>{{$val->codequipo}}</td>
-                                <td>{{$val->DataEquipo[0]->nombre}}</td>
-                                <td>
-                                    {{ HTML::image('storage/equipo/'.$val->DataEquipo[0]->logo,'User Image',array('class'=>'img-responsive','style'=>'width: 50px')) }}
-                                </td>
-                                <td>{{$val->DataEquipo[0]->fotouniforme}}</td>
-                                <td>{{$val->DataEquipo[0]->estado}}</td>
-                                <td>
-                                    <a class="label label-success" href="equipo/detalle/{{ $val->codequipo}}" >
-                                        <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
-                                    </a><br>
-                                </td>
-                            </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div><!--/.row-->
-    <div class="row col-no-gutter-container" id="fixture">
-        <div class="col-lg-12 col-no-gutter">
-            <div class="panel panel-success">
-                <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span> Fixtures del torneo {{$torneo->tipo}}</div>
-                <div class="panel-body color-orange">
-                    <!-- aqui se pondra el fixture del torneo -->
+                <div class="panel-footer">
+                    <a class="btn btn-success" href="#">Aceptar</a>
                 </div>
             </div>
         </div>

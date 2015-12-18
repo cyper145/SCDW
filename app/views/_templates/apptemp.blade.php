@@ -66,9 +66,19 @@
 			</div>
 		</div><!--/.row-->
                 
-		@section('contenido')@show		
+		@section('contenido')@show
+
 	</div>
 	<!-- FIN DE PARTE DE CONTENIDO-->
+
+    <div class="modal-footer">
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b> Versión</b> 3.2
+            </div>
+            <strong>Copyright &copy; UNSAAC-2015 Wilson RS. </strong> All rights reserved.
+        </footer>
+    </div>
         
 	<script src="{{asset('/js/jquery-1.11.1.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>

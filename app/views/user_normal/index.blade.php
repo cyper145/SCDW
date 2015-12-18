@@ -5,7 +5,6 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( '/home');}}"><span class="glyphicon glyphicon-adjust"></span></a></li>
 @stop
 
 @section('nombrevista')

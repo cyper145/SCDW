@@ -55,7 +55,7 @@
                                 {{ HTML::image('storage/jugador/'.$val->foto,'User Image',array('class'=>'img-responsive','style'=>'width: 50px')) }}
                             </td>
                             <td>
-                                <a class="label label-success" href="jugador/detail/{{ $val->dni}}" >
+                                <a class="label label-success" href="jugador/detail/{{ $val->idjugador}}" >
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>
                             </td>

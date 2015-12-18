@@ -1,137 +1,140 @@
 <?php
 
-class JugadorController extends \BaseController {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
+class JugadorController extends \BaseController
+{
+    public function listar()
+    {
         $codequipo = Session::get('user_codequipo');
-        $jugador = Jugador::where('codequipo','=',$codequipo)->paginate(2);
-        return View::make('user_com_organizing.jugador.index',compact('jugador'));
-	}
+        $jugadores = Jugador::where('codequipo','=',$codequipo)->get();
+        return View::make('user_equipo.jugador.list')
+            ->with('jugadores',$jugadores);
+    }
 
+    public function insertar_get()
+    {
+        return View::make('user_equipo.jugador.insert');
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-        return View::make('user_com_organizing.jugador.create');
-	}
+    public function insertar_post()
+    {
+        $coddocente = substr(Input::get('Nombre'), 0,5);
+        if($docente = Docente::where('coddocente', '=', $coddocente)->first())
+        {
+            $haydocenteenequipo = Jugador::where('coddocente','=',$coddocente)->where('codequipo','=',Session::get('user_codequipo'))->first();
+            if($haydocenteenequipo == '')//no hay todavia este jugador
+            {
+                if(Input::hasFile('foto'))
+                {
+                    $fullnamedocente = $docente->apellidopaterno.' '.$docente->apellidomaterno.' '.$docente->nombre;
+                    $file = Input::file('foto');
+                    $extension = $file->getClientOriginalExtension();
+                    $namefotocomplete = $fullnamedocente.'.'.$extension;
+                    $file->move('storage/jugador', $namefotocomplete);
 
+                    $newjugador = new Jugador();
+                    $newjugador->foto = $namefotocomplete;
+                    $newjugador->estado = 'habilitado';//el jugador se crea por defecto en habilitado
+                    $newjugador->codequipo = Session::get('user_codequipo');
+                    $newjugador->coddocente = $coddocente;
+                    $newjugador->save();
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$jugador = new Jugador();
-		$objJugador=Input::all();
-		if(!isset($objJugador['foto']) && $objJugador['foto']==''){
-            $objJugador['foto']='sin_foto';
-		}else{
-			$ext = Input::file('foto')->getClientOriginalExtension();
-      		$nombre = 'logo_eq_'.rand(11111,99999).'.'.$ext;
-			Input::file('foto')->move('storage/jugador', $nombre);
-            $objJugador['foto']=$nombre;
-		}
-        $jugador->create($objJugador);
-
-        Session::flash('message','Jugador agregado correctamente');
-        return Redirect::to('/jugador');
-        print_r(Input::all());
-	}
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        $jugador = Jugador::find($id);
-        return View::make('user_com_organizing.jugador.edit',array('jugador'=>$jugador));
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		/*
-		$rules= array
-                (
-					'capacidad' => 'required|numeric|min:15',
-					'estado' => 'required',
-					'capacidad' => 'required',
-                );
-        $validator=Validator::make(Input::All(),$rules);
-        */
-
-        $jugador = Jugador::findOrFail($id);
-
-        /* if ($validator->passes()) { */
-        $dataObj=Input::all();
-        if(!isset($dataObj['foto']) && $dataObj['foto']==''){
-			$dataObj['foto']='sin_foto';
-		}else{
-			$ext = Input::file('foto')->getClientOriginalExtension();
-      		$nombre = 'logo_eq_'.rand(11111,99999).'.'.$ext;
-			Input::file('foto')->move('storage/jugador', $nombre);
-			$dataObj['foto']=$nombre;
-		}
-
-        //obtenemos el campo file definido en el formulario
-        /* $foto = $request->file('Foto'); */
-        $jugador->update($dataObj);
-        
-        /*}
+                    Session::flash('message','Jugador agregado correctamente');
+                    return Redirect::to('jugador/listar.html');
+                }
+                else
+                {
+                    $error = ['wilson'=>'No ha ingresado ninguna foto'];
+                    return Redirect::back()->withInput()->withErrors($error);
+                }
+            }
+            else
+            {
+                $error = ['wilson'=>'Este jugador ya existe'];
+                return Redirect::back()->withInput()->withErrors($error);
+            }
+        }
         else
-        {*/
-        	Session::flash('message','Jugador actualizado correctamente');
-        	return Redirect::to('/jugador');
-    	/* } */
-	}
+        {
+            $error = ['wilson'=>'Este docente no existe'];
+            return Redirect::back()->withInput()->withErrors($error);
+        }
+    }
 
+    public function delete($idjugador)
+    {
+        $jugador = Jugador::findOrFail($idjugador);
+        $jugador->delete();
+        Session::flash('message', 'Jugador elimnado correctamente');
+        return Redirect::to('jugador/listar.html');
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		$jugador = Jugador::findOrFail($id);
-    	$jugador->delete();
-    	Session::flash('message', 'Jugador elimnado correctamente');
-    	//return redirect()->route('tasks.index');
-    	return Redirect::to('/jugador');
-	}
+    public function detail($idjugador)
+    {
+        $jugador = Jugador::where('idjugador','=',$idjugador)->first();
+        return View::make('user_equipo.jugador.detail')
+            ->with('jugador',$jugador);
+    }
 
+    public function edit_get($idjugador)
+    {
+        $jugadoraeditar = Jugador::where('idjugador','=',$idjugador)->first();
+        return View::make('user_equipo.jugador.edit')->with('jugadoraeditar',$jugadoraeditar);
+    }
+
+    public function edit_post()
+    {
+        $idjugador = Input::get('idjugador');
+        $coddocente = substr(Input::get('Nombre'), 0,5);
+        if($docente = Docente::where('coddocente', '=', $coddocente)->first())//el docente es valido
+        {
+            if($haydocenteenequipo = Jugador::where('idjugador','=',$idjugador)->first())
+            {
+                if(Input::hasFile('foto'))//hay foto
+                {
+                    $fullnamedocente = $docente->apellidopaterno.' '.$docente->apellidomaterno.' '.$docente->nombre;
+                    $file = Input::file('foto');
+                    $extension = $file->getClientOriginalExtension();
+                    $namefotocomplete = $fullnamedocente.'.'.$extension;
+                    if($haydocenteenequipo->coddocente == $coddocente)//no se ha cambiado el nombre del jugador
+                    {
+                        $file->move('storage/jugador', $namefotocomplete);
+                        Jugador::where('idjugador','=',$idjugador)->update(['foto'=>$namefotocomplete]);
+
+                        Session::flash('message','Jugador agregado correctamente');
+                        return Redirect::to('jugador/listar.html');
+                    }
+                    else//se ha cambiado el nombre del jugador entonces se tine que validar
+                    {
+                        $haydocenteenequipo = Jugador::where('coddocente','=',$coddocente)->where('codequipo','=',Session::get('user_codequipo'))->first();
+                        if($haydocenteenequipo == '')//jugador no existe todavia
+                        {
+                            $file->move('storage/jugador', $namefotocomplete);
+                            Jugador::where('idjugador','=',$idjugador)->update(['foto'=>$namefotocomplete,'codequipo'=>$coddocente]);
+                        }
+                        else//jugador ya existe
+                        {
+                            $error = ['wilson'=>'Este jugador ya es parte del equipo. por favor ingrese otro jugador'];
+                            return Redirect::back()->withInput()->withErrors($error);
+                        }
+                    }
+                }
+                else
+                {
+                    $error = ['wilson'=>'No ha ingresado ninguna foto'];
+                    return Redirect::back()->withInput()->withErrors($error);
+                }
+            }
+            else
+            {
+                $error = ['wilson'=>'No se encontro jugador en la base de datos'];
+                return Redirect::back()->withInput()->withErrors($error);
+            }
+        }
+        else
+        {
+            $error = ['wilson'=>'Este docente no existe'];
+            return Redirect::back()->withInput()->withErrors($error);
+        }
+    }
 
 }

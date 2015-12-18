@@ -7,157 +7,32 @@ class ArbitroController extends \BaseController {
      *
      * @return Response
      */
-    public function eliminar($id)
-    {
-        echo "esto es una prueba de eliminar";
-        $test = Arbitro::where('coddocente','=',$id)->delete($id);
-        //print_r($test);
-        echo "elimiado";
-        //return $this->showUsers();
-        return Redirect::to('arbitros/listar');
-    }
+
     public function index()
     {
-        $todoarbitros = Arbitro::all();
-        return View::make('user_com_organizing.arbitro.ver')->with('todoarbitros',$todoarbitros);
+        $arbitros = Arbitro::paginate(2);
+        return View::make('user_com_organizing.arbitros.list')->with('arbitros',$arbitros);
     }
-    public function nuevoArbitro()
+
+    public  function insertar_get()
     {
-        return View::make('user_com_organizing.arbitros.crear');
+        return View::make('user_com_organizing.arbitros.new');
     }
-    public function agregarArbitro()
+
+    public  function insertar_post()
     {
-        return View::make('user_com_organizing.arbitros.insertar');
+        $respuesta = Arbitro::isertar(Input::all());
+        if($respuesta['error']==true)
+        {
+            return Redirect::to('Arbitros/insertar.html')->withErrors($respuesta['mensaje'])->withInput();
+        }
+        return Redirect::to('Arbitros/list.html')->withErrors($respuesta['mensaje']);
     }
-    /**
-     * Crear el usuario nuevo
-     */
-    public function crearArbitro()
+
+    public function eliminar($dni)
     {
-        Arbitro::create(Input::all());
-        // el método create nos permite crear un nuevo usuario en la base de datos, este método es proporcionado por Laravel
-        // create recibe como parámetro un arreglo con datos de un modelo y los inserta automáticamente en la base de datos
-        // en este caso el arreglo es la información que viene desde un formulario y la obtenemos con el metodo Input::all()
-
-        return Redirect::to('arbitros');
-        // el método redirect nos devuelve a la ruta de mostrar la lista de los usuarios
-
+        Arbitro::find($dni)->delete();
+        $error = ['wilson'=>'Arbitro eliminado correctamente'];
+        return Redirect::back()->withInput()->withErrors($error);
     }
-    public function editarArbitro($id)
-    {
-        $arbitro = Arbitro::where('coddocente', '=', $id)->get();
-        return View::make('user_com_organizing.arbitros.editar')->with('arbitro',$arbitro);
-        return View::make('user_com_organizing.arbitros.editar')->with('arbitro',$arbitro);
-    }
-
-    /**
-     * Ver usuario con id
-     */
-    public function verArbitro($id)
-    {
-        // en este método podemos observar como se recibe un parámetro llamado id
-        // este es el id del usuario que se desea buscar y se debe declarar en la ruta como un parámetro
-
-        $arbitro = Arbitro::find($id);
-        // para buscar al usuario utilizamos el metido find que nos proporciona Laravel
-        // este método devuelve un objete con toda la información que contiene un usuario
-
-        return View::make('user_com_organizing.arbitros.ver', array('arbitros' => $arbitro));
-    }
-    public function buscar($id)
-    {
-        // en este método podemos observar como se recibe un parámetro llamado id
-        // este es el id del usuario que se desea buscar y se debe declarar en la ruta como un parámetro
-
-        $arbitro = Arbitro::find($id);
-        // para buscar al usuario utilizamos el metido find que nos proporciona Laravel
-        // este método devuelve un objete con toda la información que contiene un usuario
-
-        return View::make('user_com_organizing.arbitros.busca', array('arbitros' => $arbitro));
-    }
-    public function insertarArbitro($id)
-    {
-        $docente = Docente::where('coddocente', '=', $id)->get();
-        return View::make('user_com_organizing.arbitros.insertar')->with('arbitros',$docente);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-        $arbitro = new Arbitro;
-        $arbitro->dni = Input::get('DNI');
-        $arbitro->nombre = Input::get('Nombre');
-        $arbitro->categoria = Input::get('Categoria');
-        $arbitro->idarbitropartido = Input::get('ID');
-        $arbitro->save();
-        return Redirect::to('arbitros/listar');
-    }
-
-
-
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        $entra = Input::all();
-        $arbitro = DB::table('tarbitros')
-            ->where('coddocente', $id)
-            ->update(array(
-                'nombre' => $entra['Nombre'],
-                'categoria' => $entra['Categoria'],
-                'idarbitropartido' => $entra['ID']));
-        return Redirect::to('arbitros/listar');
-
-        $docente = DB::table('tdocente')
-            ->where('coddocente', $id)
-            ->update(array(
-                'nombre' => $entra['Nombre'],
-                'categoria' => $entra['Categoria']));
-
-        return Redirect::to('arbitros/listar');
-    }
-    public function insertarArbitro1()
-    {
-        //$todocampeonato = Campeonato::all();
-        return View::make('user_com_organizing.arbitros.insertar');
-    }
-    public function asignar()
-    {
-        //$arbitros = Arbitro::all();
-        $docentes = Docente::all();
-        // Con el método all() le estamos pidiendo al modelo de Usuario
-        // que busque todos los registros contenidos en esa tabla y los devuelva en un Array
-
-        //return View::make('arbitros.asigna', array('docentes' => $docentes));
-        return View::make('user_com_organizing.arbitros.asigna', array('docentes' => $docentes));
-
-        // El método make de la clase View indica cual vista vamos a mostrar al usuario
-        //y también pasa como parámetro los datos que queramos pasar a la vista.
-        // En este caso le estamos pasando un array con todos los usuarios
-    }
-    public function mostrarArbitros()
-    {
-        $arbitros = Arbitro::all();
-
-        // Con el método all() le estamos pidiendo al modelo de Usuario
-        // que busque todos los registros contenidos en esa tabla y los devuelva en un Array
-
-        return View::make('user_com_organizing.arbitros.lista', array('arbitros' => $arbitros));
-
-        // El método make de la clase View indica cual vista vamos a mostrar al usuario
-        //y también pasa como parámetro los datos que queramos pasar a la vista.
-        // En este caso le estamos pasando un array con todos los usuarios
-    }
-
 }

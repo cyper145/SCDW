@@ -219,5 +219,166 @@ public function partido_all()
 		//
 	}
 
+    public  function partido($idfixture)
+    {
+        $fixture = Fixture::where('idfixture','=',$idfixture)->first();
+        $jugadoresequipo1 = Jugador::where('codequipo','=',$fixture->equipo1)->get();
+        $jugadoresequipo2 = Jugador::where('codequipo','=',$fixture->equipo2)->get();
+        $arbitros = Arbitro::all();
+        //todos los jugadores de este partido
+        $Delanteros1 = '';
+        $Mediocampistas1 = '';
+        $Defensas1 = '';
+        $Guardameta1 = '';
+        $suplentes1 = '';
+        $capitan1 = '';
+        $jugadoresdeunpartido2 = '';
+        //recuperamos los arbitros del partido
+        $arbitrosdelpartido = '';
+        //verificamos si el partido ya se jugó
+        if($partido = Partido::where('idfixture', '=', $idfixture)->first())
+        {
+            //recuperar los datos del partido jugado
+            $arbitrosdelpartido = ArbitroPorPartido::where('idarbitroporpartido','=',$partido->idarbitroporpartido)->first();
+            //resuperamos todos los jugadores de este partido
+            $Delanteros1 = DB::table('tjugadorenjuego')
+                ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+                ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
+                ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+                ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+                ->where('tjugador.codequipo','=',$fixture->equipo1)
+                ->where('tjugadorenjuego.condicionenpartido','=','delantero')
+                ->get();
+            $Mediocampistas1 = DB::table('tjugadorenjuego')
+                ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+                ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
+                ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+                ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+                ->where('tjugador.codequipo','=',$fixture->equipo1)
+                ->where('tjugadorenjuego.condicionenpartido','=','mediocampista')
+                ->get();
+            $Defensas1 = DB::table('tjugadorenjuego')
+                ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+                ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
+                ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+                ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+                ->where('tjugador.codequipo','=',$fixture->equipo1)
+                ->where('tjugadorenjuego.condicionenpartido','=','defensa')
+                ->get();
+            $Guardameta1 = DB::table('tjugadorenjuego')
+            ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+            ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
+            ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+            ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+            ->where('tjugador.codequipo','=',$fixture->equipo1)
+            ->where('tjugadorenjuego.condicionenpartido','=','guardameta')
+            ->get();
+            $suplentes1 = DB::table('tjugadorenjuego')
+                ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+                ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
+                ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+                ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+                ->where('tjugador.codequipo','=',$fixture->equipo1)
+                ->where('tjugadorenjuego.condicionenpartido','=','suplente')
+                ->get();
+            $capitan1  = DB::table('tjugadorenjuego')
+                ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+                ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
+                ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+                ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+                ->where('tjugador.codequipo','=',$fixture->equipo1)
+                ->where('tjugadorenjuego.escapitan','=','si')
+                ->get();
+            $jugadoresdeunpartido2 = DB::table('tjugadorenjuego')
+                ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
+                ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
+                ->where('tjugador.codequipo','=',$fixture->equipo2)
+                ->get();
+        }
+        else//crear un nuevo partido
+        {
+            $partidonew = new Partido();
+            $partidonew -> idfixture = $idfixture;
+            $partidonew->save();
+        }
+        return View::make('user_com_organizing.fecha.partido.index',compact('fixture'))
+            ->with('jugadoresequipo1',$jugadoresequipo1)
+            ->with('jugadoresequipo2',$jugadoresequipo2)
+            ->with('partido',$partido)
+            ->with('arbitrosdelpartido',$arbitrosdelpartido)
+            ->with('Delanteros1',$Delanteros1)
+            ->with('Mediocampistas1',$Mediocampistas1)
+            ->with('Defensas1',$Defensas1)
+            ->with('Guardameta1',$Guardameta1)
+            ->with('suplentes1',$suplentes1)
+            ->with('capitan1',$capitan1)
+            ->with('jugadoresdeunpartido2',$jugadoresdeunpartido2)
+            ->with('arbitros',$arbitros);
+    }
 
+    public  function arbitroadd($idfixture)
+    {
+        $respuesta = ArbitroPorPartido::isertar(Input::all());
+        if($respuesta['error']==true)
+        {
+            return Redirect::to('fechas/detail/partido/'.$idfixture)->withErrors($respuesta['mensaje']);
+        }
+        return Redirect::to('fechas/detail/partido/'.$idfixture)->withErrors($respuesta['mensaje']);
+    }
+
+    public function jugadoradd($idfixture)
+    {
+        $respuesta = JugadorEnJuego::isertar(Input::all());
+        if($respuesta['error']==true)
+        {
+            return Redirect::to('fechas/detail/partido/'.$idfixture)->withErrors($respuesta['mensaje']);
+        }
+        return Redirect::to('fechas/detail/partido/'.$idfixture)->withErrors($respuesta['mensaje']);
+    }
+
+    public function jugadordelete($idjugadorenjuego,$idfixture)
+    {
+        JugadorEnJuego::find($idjugadorenjuego)->delete();
+        $respuesta['mensaje'] = 'Jugador eliminado correctamente de este partido';
+        return Redirect::to('fechas/detail/partido/'.$idfixture)->withErrors($respuesta['mensaje']);
+    }
+
+    public function jugadorgollist($idjugadorenjuego,$idfixture)
+    {
+        $golesdeljugadorenjuego = Gol::where('idjugadorenjuego','=',$idjugadorenjuego)->get();
+        return View::make('user_com_organizing.fecha.partido.insidencia.gol.list')
+            ->with('idfixture',$idfixture)
+            ->with('golesdeljugadorenjuego',$golesdeljugadorenjuego)
+            ->with('idjugadorenjuego',$idjugadorenjuego);
+    }
+
+    public function jugadorgol_get($idjugadorenjuego,$idfixture)
+    {
+        return View::make('user_com_organizing.fecha.partido.insidencia.gol.insert')
+            ->with('idfixture',$idfixture)
+            ->with('idjugadorenjuego',$idjugadorenjuego);
+    }
+
+    public  function jugadorgol_post()
+    {
+        $idfixture = Input::get('idfixture');
+        $idjugadorenjuego = Input::get('idjugadorenjuego');
+        $newgol = new Gol();
+        $newgol->minuto = Input::get('minuto');
+        $newgol->idjugadorenjuego = $idjugadorenjuego;
+        $newgol->save();
+        $respuesta['mensaje'] = 'Gol agregado correctamente';
+        return Redirect::to('fechas/detail/partido/gol/list/'.$idjugadorenjuego.'/'.$idfixture)->withErrors($respuesta['mensaje']);
+    }
+
+    public function jugadorgoldelete($idjugadorenjuego,$idfixture,$idgol)
+    {
+        Gol::find($idgol)->delete();
+        $respuesta['mensaje'] = 'Gol eliminado correctamente';
+        return Redirect::to('fechas/detail/partido/gol/list/'.$idjugadorenjuego.'/'.$idfixture)->withErrors($respuesta['mensaje']);
+    }
+    public function jugadorinsidencia($idjugadorenjuego,$idfixture)
+    {
+      echo 'falta';
+    }
 }

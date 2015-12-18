@@ -106,60 +106,12 @@
             <!-- begin integrantes -->
             <li><a href="{{URL::to('comision/integrantes/list.html')}}"><span class="glyphicon glyphicon-list"></span> Integrantes</a></li>
             <!-- end integrantes -->
-
+            <!-- begin Arbitro -->
+            <li><a href="{{URL::to('Arbitros/list.html')}}"><span class="glyphicon glyphicon-list"></span> Arbitros</a></li>
+            <!-- end Arbitros-->
             <!-- begin campeonato -->
             <li><a href="{{URL::to('campeonato/listar')}}"><span class="glyphicon glyphicon-list"></span> Camponatos</a></li>
             <!-- end campeonato -->
-            <!-- begin jugador en juego-->
-            <li class="parent {{ (Request::is( 'jugador') || Request::is( 'jugador/*')) ? 'active open' : ''}}">
-                <a href="javascript:void(0)">
-                    <span class="glyphicon glyphicon-user"></span> Jugador en juego <span data-toggle="collapse" href="#sub-item-sin_j" class="icon pull-right">
-                <em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-sin_j">
-                    <li>
-                        <a class="{{ Request::is( 'jugador_juego/index') ? 'active open' : '' }}" href="{{URL::to('jugador_juego/')}}">
-                            <span class="glyphicon glyphicon-list"></span> Jugadores en juego
-                        </a>
-                    </li>
-                    <li>
-                        <a class="{{ Request::is( 'jugador_juego/create') ? 'active open' : '' }}" href="{{URL::to('jugador_juego/create')}}">
-                            <span class="glyphicon glyphicon-plus"></span> Agregar jugador en juego
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- en jugador en juego -->
-            <!-- begin Arbitro -->
-            <li class="parent ">
-                <a href="{{ URL::to( 'arbitros/listar');}}">
-                    <span class="glyphicon glyphicon-user"></span> Arbitros <span data-toggle="collapse" href="#sub-item-11" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-11">
-                    <li>
-                        <a class="" href="{{ URL::to( 'arbitros/listar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Listar
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ URL::to( 'arbitros/agregar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Insertar
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="" href="{{ URL::to( 'arbitros/buscar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Buscar
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ URL::to( 'arbitros/porPartido');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Por Partido
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- end Arbitros-->
             <!-- begin movimiento -->
             <li class="parent ">
                 <a href="{{ URL::to( 'movimientos');}}">
@@ -180,98 +132,6 @@
                 </ul>
             </li>
             <!-- end movimiento -->
-            <!-- begin gol -->
-            <li class="parent ">
-                <a href="{{ URL::to( 'gol/');}}">
-                    <span class="glyphicon glyphicon-dashboard"></span> Gol <span data-toggle="collapse" href="#sub-item-12" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-12">
-                    <li>
-                        <a class="" href="{{ URL::to( 'gol/insertar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Ingresar
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ URL::to( 'gol/listar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> listar
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- end gol -->
-
-            <!-- begin bases -->
-            <li class="parent ">
-                <a href="base/ver">
-                    <span class="glyphicon glyphicon-book"></span> bases <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-4">
-                    <li>
-                        <a class="" href="#">
-                            <span class="glyphicon glyphicon-share-alt"></span> ingresar bases
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- end bases -->
-
-            <!-- begin cronograma -->
-            <li class="parent ">
-                <a href="cronograma/ver">
-                    <span class="glyphicon glyphicon-dashboard"></span> cronograma <span data-toggle="collapse" href="#sub-item-cronograma" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-cronograma">
-                    <li>
-                        <a class="" href="#">
-                            <span class="glyphicon glyphicon-share-alt"></span> ingresar cronograma
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- end cronograma -->
-
-            <!-- begin partido -->
-            <li class="parent ">
-                <a href="partido/listar">
-                    <span class="glyphicon glyphicon-list"></span> partidos <span data-toggle="collapse" href="#sub-item-5" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-5">
-                    <li>
-                        <a class="" href="#">
-                            <span class="glyphicon glyphicon-share-alt"></span> registrar nuevo partido
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- begin sanciones -->
-            <li class="parent ">
-                <a href="{{ URL::to( 'sancion/listar');}}">
-                    <span class="glyphicon glyphicon-user"></span> Sanciones <span data-toggle="collapse" href="#sub-item-10" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-10">
-                    <li>
-                        <a class="" href="{{ URL::to( 'sancion/insertar')}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Nueva Sancion
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!--end sanciones -->
-
-            <!-- begin insidencias -->
-            <li class="parent ">
-                <a href="{{ URL::to( 'incidencias/listar');}}">
-                    <span class="glyphicon glyphicon-user"></span> Incidencias <span data-toggle="collapse" href="#sub-item-insidencias" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-insidencias">
-                    <li>
-                        <a class="" href="{{ URL::to( 'incidencias/insertar')}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Nueva incidencia
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!--end insidencias -->
              <!-- begin acta de reunion -->
             <li class="parent ">
                     <a href="{{ URL::to( 'acta/ver');}}">
@@ -290,8 +150,6 @@
                         
                     </ul>
             </li>
-
-
              <!-- end acta de reunion -->
 
             <!-- //////////////////////////////////// END USER COMISION ORGANIZADORA ////////////////////////////////////-->
@@ -302,26 +160,9 @@
                 if(User::isEquipo())
                 {?>
                     <!--//////////////////////////////////// BEGIN USER EQUIPO////////////////////////////////////-->
-                    <li><a href="{{URL::to('/fixture/ver')}}"><span class="glyphicon glyphicon-hand-up"></span>funciones del equipo</a></li>
                     <!-- begin jugador -->
-                    <li class="parent {{ (Request::is( 'jugador') || Request::is( 'jugador/*')) ? 'active open' : ''}}">
-                        <a href="javascript:void(0)">
-                            <span class="glyphicon glyphicon-user"></span> Jugador <span data-toggle="collapse" href="#sub-item-sin_j" class="icon pull-right">
-            <em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                        </a>
-                        <ul class="children collapse" id="sub-item-sin_j">
-                            <li>
-                                <a class="{{ Request::is( 'jugador/index') ? 'active open' : '' }}" href="{{URL::to('jugador')}}">
-                                    <span class="glyphicon glyphicon-list"></span> listar jugador
-                                </a>
-                            </li>
-                            <li>
-                                <a class="{{ Request::is( 'jugador/create') ? 'active open' : '' }}" href="{{URL::to('jugador/create')}}">
-                                    <span class="glyphicon glyphicon-plus"></span> Agregar jugador
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li><a href="{{URL::to('equipo/index.html')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="{{URL::to('jugador/listar.html')}}"><span class="glyphicon glyphicon-list"></span> Jugadores</a></li>
                     <!-- en jugador -->
                     <!-- ////////////////////////////////////END USER EQUIPO////////////////////////////////////-->
                 <?php

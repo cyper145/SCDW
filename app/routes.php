@@ -81,15 +81,12 @@ Route::group(array('before'=>'organ'), function()
             //--jugador en juego
             Route::resource('jugador_juego', 'JugadorEnJuegoController');
             //--arbitro
-            Route::get('arbitros/', 'ArbitroController@mostrarArbitros');
-            Route::get('arbitros/listar', 'ArbitroController@mostrarArbitros');
-            Route::get('arbitros/agregar', 'ArbitroController@agregarArbitro');
-            Route::post('arbitros/formulario1', 'ArbitroController@store');
-            Route::get('arbitros/editar/{id}', 'ArbitroController@editarArbitro');
-            Route::post('arbitros/formulario2/{id}', 'ArbitroController@update');
-            Route::get('arbitros/buscar', 'ArbitroController@buscar');
-            Route::get('arbitros/eliminar/{id}', 'ArbitroController@eliminar');
-            Route::get('arbitros/porPartido', 'ArbitroPorPartidoController@mostrar');
+            Route::get('Arbitros/list.html', 'ArbitroController@index');
+            Route::get('Arbitros/insertar.html', 'ArbitroController@insertar_get');
+            Route::post('Arbitros/insertar.html', 'ArbitroController@insertar_post');
+            Route::get('Arbitros/editar/{id}', 'ArbitroController@editar_get');
+            Route::post('Arbitros/editar/{id}', 'ArbitroController@editar_post');
+            Route::get('Arbitros/eliminar/{id}', 'ArbitroController@eliminar');
             //movimientos
             Route::get('movimientos','MovimientoController@index');
             Route::get('ingresos/listar', 'MovimientoController@listaI');
@@ -163,14 +160,32 @@ Route::group(array('before'=>'organ'), function()
             Route::get('torneo/detail/{id}/{id2}','TorneoController@detail');
             Route::get('torneo/delete/{id}/{id2}','TorneoController@destroy');
             Route::resource('torneo','TorneoController');
+            //fechas
+            Route::get('fechas/detail/{id}','FechasController@detail');
+            Route::get('fechas/detail/partido/{id}', 'PartidoController@partido');
+            Route::post('fechas/detail/partido/arbitros/{id}', 'PartidoController@arbitroadd');
+            Route::post('fechas/detail/partido/jugador/add/{id}', 'PartidoController@jugadoradd');
+            Route::get('fechas/detail/partido/eliminar/{id1}/{id2}', 'PartidoController@jugadordelete');//borra a un jugador del partido
+            Route::get('fechas/detail/partido/gol/list/{id1}/{id2}', 'PartidoController@jugadorgollist');
+            Route::get('fechas/detail/partido/gol/{id1}/{id2}', 'PartidoController@jugadorgol_get');
+            Route::post('fechas/detail/partido/gol.html', 'PartidoController@jugadorgol_post');
+            Route::get('fechas/detail/partido/insidencia/{id1}/{id2}', 'PartidoController@jugadorinsidencia');
+            Route::get('fechas/detail/partido/gol/eliminar/{id1}/{id2}/{id3}', 'PartidoController@jugadorgoldelete');//elimina un gol de un jugador de un partido
 });
 
 //===================Funciones del Equipo====================
 Route::group(array('before'=>'equip'), function()
         {
-            Route::get('delegado/ver', 'DelegadoController@index');
+            //--bienvenida
+            Route::get('equipo/index.html', 'EquipoController@index');//bienvenida
             //jugador
-            Route::resource('jugador', 'JugadorController');
+            Route::get('jugador/listar.html', 'JugadorController@listar');
+            Route::get('jugadorinsertar', 'JugadorController@insertar_get');
+            Route::post('jugador/insertar.html', 'JugadorController@insertar_post');
+            Route::get('jugador/{id}/delete/.html', 'JugadorController@delete');
+            Route::get('jugador/{id}/detail/.html', 'JugadorController@detail');
+            Route::any('jugadoredit{id}', 'JugadorController@edit_get');
+            Route::post('jugador/edit.html', 'JugadorController@edit_post');
         });
            
 //===================Funciones del User Normal====================
