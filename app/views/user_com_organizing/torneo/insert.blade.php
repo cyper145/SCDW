@@ -8,6 +8,10 @@
 @stop
 
 @section('rutanavegacion')
+    <li><a href="{{ URL::to('/campeonato/listar');}}"><span class="glyphicon glyphicon-book"></span></a></li>
+    <li><a href="{{ URL::to('/campeonato/detail/'.$codcampeonato);}}">Detalle de Campeonato</a></li>
+    <li><a href="{{ URL::to('/torneo/'.$codcampeonato);}}">Torneos</a></li>
+    <li>Nuevo Torneo</li>
 @stop
 
 @section('nombrevista')

@@ -5,7 +5,8 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( '/home');}}"><span class="glyphicon glyphicon-adjust"></span></a></li>
+    <li><a href="{{ URL::to('/campeonato/listar');}}"><span class="glyphicon glyphicon-book"></span></a></li>
+    <li>Detalle de Campeonato</li>
 @stop
 
 @section('nombrevista')
@@ -39,7 +40,8 @@
                 </div>
             </div>
         </div>
-    </div><!--/.row-->
+    </div>
+    <br>
     <div class="row row-no-gutter col-no-gutter-container" id="actividades">
         <div class="col-md-12 col-no-gutter">
             <div class="panel panel-default">
@@ -72,9 +74,13 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="panel-footer">
+                    <a class="btn btn-success" href="#">Aceptar</a>
+                </div>
             </div>
-        </div><!--/.col-->
-    </div><!--/.row-->
+        </div>
+    </div>
+    <br>
     <div class="row col-no-gutter-container" id="equipos">
         <div class="col-lg-12 col-no-gutter">
             <div class="panel panel-success">
@@ -83,26 +89,26 @@
                     <table data-toggle="table" data-url="tables/data2.json">
                         <thead>
                         <tr>
-                            <th>Codigo</th>
                             <th>Nombre</th>
                             <th>logo</th>
-                            <th>uniforme</th>
-                            <th>estado</th>
+                            <th>Estado</th>
+                            <th>Uniforme(Camiseta)</th>
                             <th>Acción</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($equipos as $val)
                             <tr>
-                                <td>{{$val->codequipo}}</td>
                                 <td>{{$val->nombre}}</td>
                                 <td>
-                                    {{ HTML::image('storage/equipo/'.$val->logo,'User Image',array('class'=>'img-responsive','style'=>'width: 50px')) }}
+                                    {{ HTML::image('storage/equipo/'.$val->logo,'Logo empty',array('class'=>'img-responsive','title'=>'logo del equipo','style'=>'width: 50px'))}}
                                 </td>
-                                <td>{{$val->fotouniforme}}</td>
                                 <td>{{$val->estado}}</td>
                                 <td>
-                                    <a class="label label-success" href="equipo/detalle/{{ $val->codequipo}}" >
+                                    {{ HTML::image('storage/equipo/camiseta/'.$val->fotouniforme,'Uniforme empty',array('class'=>'img-responsive','title'=>'Uniforme del equipo','style'=>'width: 50px')) }}
+                                </td>
+                                <td>
+                                    <a class="label label-success" href="equipo/{{ $val->codequipo}}/{{$campeonato->codcampeonato}}/detalle.html" >
                                         <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                     </a><br>
                                 </td>
@@ -116,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div><!--/.row-->
+    </div>
 
 @section ('scrips')
     <script src="{{asset('/js/bootstrap-table.js')}}"></script>

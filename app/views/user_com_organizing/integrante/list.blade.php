@@ -5,7 +5,7 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( '/comision/integrantes/list.html');}}"><span > integrantes</span></a></li>
+    <li><span class="glyphicon glyphicon-user"></span></li>
 @stop
 
 @section('nombrevista')
@@ -23,7 +23,7 @@
                 <div class="form-inline">
                     <div class="form-group">
                         <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="#"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
-                        <a class="btn btn-default margin text-lowercase" type="button" href="{{URL::to('comisionintegrantesadd')}}"><span class="glyphicon glyphicon-plus"></span> Agregar Nuevo</a>
+                        <a class="btn btn-primary margin text-lowercase" type="button" href="{{URL::to('comisionintegrantesadd')}}"><span class="glyphicon glyphicon-plus"></span> Agregar Nuevo</a>
                     </div>
                 </div>
             </div>

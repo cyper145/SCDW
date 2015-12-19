@@ -5,11 +5,14 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( '/home');}}"><span class="glyphicon glyphicon-adjust"></span></a></li>
+    <li><a href="{{ URL::to('/campeonato/listar');}}"><span class="glyphicon glyphicon-book"></span></a></li>
+    <li><a href="{{ URL::to('/campeonato/detail/'.$codcampeonato);}}">Detalle de Campeonato</a></li>
+    <li>Torneos</li>
 @stop
 
 @section('nombrevista')
     @lang('Torneos')
+    <button type="submit" class="btn btn-success pull-right" onclick="history.back()">Atras</button>
 @stop
 
 @section('contenido')
@@ -48,7 +51,7 @@
                                 <a class="label label-primary" href="editar/{{ $torneo->idtorneo}}">
                                     <span class="glyphicon glyphicon-edit">&nbsp;Edit</span>
                                 </a><br>
-                                <a class="label label-success" href="{{ URL::to('torneo/detail/');}}/{{$torneo->idtorneo}}/{{$codcampeonato}}" >
+                                <a class="label label-success" href="{{ URL::to('torneo/');}}/{{$torneo->idtorneo}}/{{$codcampeonato}}/detail.html" >
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>
                                 <a class="label label-danger" href="{{ URL::to('torneo/delete/');}}/{{$torneo->idtorneo}}/{{$codcampeonato}}">

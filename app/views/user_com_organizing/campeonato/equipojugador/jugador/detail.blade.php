@@ -5,11 +5,15 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( '/home');}}"><span class="glyphicon glyphicon-adjust"></span></a></li>
+    <li><a href="{{ URL::to('/campeonato/listar');}}"><span class="glyphicon glyphicon-book"></span></a></li>
+    <li><a href="{{ URL::to('/campeonato/detail/'.$codcampeonato);}}">Detalle de Campeonato</a></li>
+    <li><a href="{{ URL::to('campeonato/detail/equipo/'.$codequipo.'/'.$codcampeonato.'/detalle.html');}}">Detalle de equipo</a></li>
+    <li>Detalle de Jugador</li>
 @stop
 
 @section('nombrevista')
-    @lang('Detalles de jugador')
+    @lang('Detalle de jugador')
+    <button type="submit" class="btn btn-success pull-right" onclick="history.back()">Atras</button>
 @stop
 
 @section('contenido')

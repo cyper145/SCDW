@@ -1,8 +1,9 @@
 <?php
-class MovimientoController extends BaseController {
+class MovimientoController extends BaseController
+{
 	public function index()
 	{
-		$movimientos = Movimiento::where('idcom_orgdor','=',Session::get('user_idcom_orgdor'))->paginate(2);
+		$movimientos = Movimiento::where('idcom_orgdor','=',Session::get('user_idcom_orgdor'))->paginate(10);
 		$ingesototal = Movimiento::where('tipo','=','ingreso')->sum('montototal');
 		$egresototal = Movimiento::where('tipo','=','egreso')->sum('montototal');
         $saldototal = $ingesototal - $egresototal;
@@ -25,11 +26,15 @@ class MovimientoController extends BaseController {
 	}
 	public function storeI()
 	{
+        date_default_timezone_set("America/Lima");
+        $tiempo = getdate();
+        $timefull = date('Y-m-d').' '.$tiempo['hours'].':'.$tiempo['minutes'].':'.$tiempo['seconds'];
+
         $idmovimiento = DB::table('tmovimiento')->insertGetId([
 							'tipo'=>"ingreso",
 							'montototal' => Input::get('montototal'),
                             'descripcion' => Input::get('descripcion'),
-							'fecha' => Input::get('fecha'),
+							'fecha' => $timefull,
                             'idcom_orgdor'=>Session::get('user_idcom_orgdor')
 							]);
 		$newingreso = new Ingreso;
@@ -44,11 +49,15 @@ class MovimientoController extends BaseController {
 	}
 	public function storeE()
 	{
+        date_default_timezone_set("America/Lima");
+        $tiempo = getdate();
+        $timefull = date('Y-m-d').' '.$tiempo['hours'].':'.$tiempo['minutes'].':'.$tiempo['seconds'];
+
 		$idmovimiento = DB::table('tmovimiento')->insertGetId([
 							'tipo'=>"Egreso",
 							'montototal' => Input::get('montototal'),
 							'descripcion' => Input::get('descripcion'),
-                            'fecha' => Input::get('fecha'),
+                            'fecha' => $timefull,
                             'idcom_orgdor'=>Session::get('user_idcom_orgdor')
 							]);
 		$newingreso = new Egreso;
@@ -56,17 +65,6 @@ class MovimientoController extends BaseController {
 		$newingreso -> save();
 		return Redirect::to('movimientos');
 	}
-	public function listaI()
-	{
-		$todoingresos = Ingreso::all();
-		return View::make('movimiento.ingresos.listar')->with('todoingresos',$todoingresos);
-	}
-	public function listaE()
-	{
-		$egresos = Egreso::all();
-		return View::make('movimiento.egresos.listar')->with('egresos',$egresos);
-	}
-
      public function editarIngreso($id)
       {
            $todoEquipos=Equipo::all();
@@ -96,11 +94,21 @@ class MovimientoController extends BaseController {
         }   
 	}
 
-	public function destroy($id)
+	public function destroy($nromovimiento)
 	{
-		
-		$movi=DB::table('tmovimiento')->where('idconcepto','=',$id)->delete();
-		return Redirect::to('Mov');
+        $movimiento = Movimiento::where('nromovimiento','=',$nromovimiento)->first();
+        if($movimiento->tipo = 'ingreso')
+        {
+            Ingreso::where('nromovimiento','=',$nromovimiento)->delete();
+        }
+        if($movimiento->tipo = 'egreso')
+        {
+            Egreso::where('nromovimiento','=',$nromovimiento)->delete();
+        }
+        Movimiento::where('nromovimiento','=',$nromovimiento)->delete();
+        return Redirect::to('movimientos');
+        //Egreso::where('nromovimiento','=',$nromovimiento)->delete();
+        //echo Egreso::where('nromovimiento','=',$nromovimiento)->first();
 	}
 
 	

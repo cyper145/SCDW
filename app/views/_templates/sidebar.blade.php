@@ -25,7 +25,7 @@
                 <!-- begin cuentas de usuarios  -->
                 <li class="parent ">
                     <a href="javascript:void(0)">
-                        <span class="glyphicon glyphicon-user"></span> Usuarios <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+                        <span class="glyphicon glyphicon-log-in"></span> Usuarios <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
                     </a>
                     <ul class="children collapse" id="sub-item-1">
                         <li>
@@ -49,7 +49,7 @@
             <!-- begin miembro comision de justicia -->
             <li class="parent ">
                 <a href="{{ URL::to( 'miembrocomjusticia/listar');}}">
-                    <span class="glyphicon glyphicon-user"></span>Comision de Justicia<span data-toggle="collapse" href="#sub-item-miembro" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+                    <span class="glyphicon glyphicon-paperclip"></span>Comision de Justicia<span data-toggle="collapse" href="#sub-item-miembro" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
                 </a>
                 <ul class="children collapse" id="sub-item-miembro">
                     <li>
@@ -79,7 +79,7 @@
             <!-- begin departamento academico -->
             <li class="parent ">
                 <a href="{{ URL::to( 'DptoAcademico/listar');}}">
-                    <span class="glyphicon glyphicon-user"></span> Departamento Academico <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+                    <span class="glyphicon glyphicon-bookmark"></span> Departamento Academico <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
                 </a>
 
                 <ul class="children collapse" id="sub-item-2">
@@ -104,38 +104,21 @@
             <!-- ////////////////////////////////////BEGIN USER COMISION ORGANIZADORA////////////////////////////////// -->
             <li><a href="{{URL::to('comision/index.html')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
             <!-- begin integrantes -->
-            <li><a href="{{URL::to('comision/integrantes/list.html')}}"><span class="glyphicon glyphicon-list"></span> Integrantes</a></li>
+            <li><a href="{{URL::to('comision/integrantes/list.html')}}"><span class="glyphicon glyphicon-user"></span> Integrantes</a></li>
             <!-- end integrantes -->
             <!-- begin Arbitro -->
-            <li><a href="{{URL::to('Arbitros/list.html')}}"><span class="glyphicon glyphicon-list"></span> Arbitros</a></li>
+            <li><a href="{{URL::to('Arbitros/list.html')}}"><span class="glyphicon glyphicon-tags"></span> Arbitros</a></li>
             <!-- end Arbitros-->
             <!-- begin campeonato -->
-            <li><a href="{{URL::to('campeonato/listar')}}"><span class="glyphicon glyphicon-list"></span> Camponatos</a></li>
+            <li><a href="{{URL::to('campeonato/listar')}}"><span class="glyphicon glyphicon-book"></span> Camponatos</a></li>
             <!-- end campeonato -->
             <!-- begin movimiento -->
-            <li class="parent ">
-                <a href="{{ URL::to( 'movimientos');}}">
-                    <span class="glyphicon glyphicon-user"></span> CAJA <span data-toggle="collapse" href="#sub-item-13" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-13">
-
-                    <li>
-                        <a class="" href="{{ URL::to( 'ingresos/listar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Ingresos
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ URL::to( 'egresos/listar');}}">
-                            <span class="glyphicon glyphicon-share-alt"></span> Egresos
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            <li><a href="{{URL::to('/movimientos')}}"><span class="glyphicon glyphicon-usd"></span> CAJA</a></li>
             <!-- end movimiento -->
              <!-- begin acta de reunion -->
             <li class="parent ">
                     <a href="{{ URL::to( 'acta/ver');}}">
-                        <span class="glyphicon glyphicon-user"></span> ACTA DE REUNIÓN 
+                        <span class="glyphicon glyphicon-file"></span> ACTA DE REUNIÓN
                         <span data-toggle="collapse" href="#sub-item-6" class="icon pull-right">
                             <em class="glyphicon glyphicon-s glyphicon-plus"></em>
                         </span> 
@@ -162,7 +145,7 @@
                     <!--//////////////////////////////////// BEGIN USER EQUIPO////////////////////////////////////-->
                     <!-- begin jugador -->
                         <li><a href="{{URL::to('equipo/index.html')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li><a href="{{URL::to('jugador/listar.html')}}"><span class="glyphicon glyphicon-list"></span> Jugadores</a></li>
+                        <li><a href="{{URL::to('jugador/listar.html')}}"><span class="glyphicon glyphicon-user"></span> Jugadores</a></li>
                     <!-- en jugador -->
                     <!-- ////////////////////////////////////END USER EQUIPO////////////////////////////////////-->
                 <?php

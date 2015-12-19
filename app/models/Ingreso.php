@@ -1,5 +1,7 @@
 <?php
-class Ingreso extends Eloquent {
+class Ingreso extends Eloquent
+{
 	protected $table = 'tingreso';
-	public $timestamps = false; 
+	public $timestamps = false;
+    protected $primaryKey = 'idingreso';
 }

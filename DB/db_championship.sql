@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2015 a las 22:02:59
+-- Tiempo de generación: 19-12-2015 a las 19:31:45
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.9
 
@@ -17,8 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `db_championship_wil`
+-- Base de datos: `db_championship`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tactividad`
+--
+
+CREATE TABLE IF NOT EXISTS `tactividad` (
+  `nroactividad` int(4) NOT NULL AUTO_INCREMENT,
+  `actividad` varchar(80) NOT NULL,
+  `fechainicio` datetime NOT NULL,
+  `fechafin` datetime NOT NULL,
+  `observaciones` varchar(100) NOT NULL,
+  `codcampeonato` varchar(8) NOT NULL,
+  PRIMARY KEY (`nroactividad`,`codcampeonato`),
+  KEY `codcampeonato` (`codcampeonato`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -40,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `tadministrador` (
 --
 
 INSERT INTO `tadministrador` (`idadministrador`, `coddocente`, `idusuario`) VALUES
-(0, '16563', 23);
+(0, '09318', 4);
 
 -- --------------------------------------------------------
 
@@ -75,11 +92,8 @@ CREATE TABLE IF NOT EXISTS `tarbitro` (
 --
 
 INSERT INTO `tarbitro` (`dni`, `nombre`, `Apellidos`, `edad`) VALUES
-('19375893', 'Ramiro', 'lucas de la Cruz', 33),
-('25463758', 'Roberto', 'Lopez Mengano', 33),
-('39238749', 'Jhon', 'Casas Lopez', 0),
-('39578375', 'Pedro', 'Torres Nina', 32),
-('76543825', 'Juan', 'Peres Cruz', 30);
+('29348750', 'carlos ', 'rodrigues calvo', 29),
+('49872903', 'jose', 'ramos espinoza', 31);
 
 -- --------------------------------------------------------
 
@@ -96,15 +110,19 @@ CREATE TABLE IF NOT EXISTS `tarbitroxpartido` (
   KEY `principal` (`principal`),
   KEY `asistente1` (`asistente1`),
   KEY `asistente2` (`asistente2`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `tarbitroxpartido`
 --
 
 INSERT INTO `tarbitroxpartido` (`idarbitroporpartido`, `principal`, `asistente1`, `asistente2`) VALUES
-(1, '19375893', '39238749', '39238749'),
-(2, '39578375', '39578375', '76543825');
+(1, '29348750', '29348750', '49872903'),
+(2, '29348750', '29348750', '49872903'),
+(6, '29348750', '29348750', '29348750'),
+(5, '49872903', '29348750', '29348750'),
+(7, '49872903', '49872903', '49872903'),
+(8, '49872903', '49872903', '49872903');
 
 -- --------------------------------------------------------
 
@@ -124,12 +142,28 @@ CREATE TABLE IF NOT EXISTS `tasistente` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tcambio`
+--
+
+CREATE TABLE IF NOT EXISTS `tcambio` (
+  `idcambio` int(11) NOT NULL AUTO_INCREMENT,
+  `minuto` int(2) DEFAULT NULL,
+  `idjugadorenjuegosaliente` int(4) NOT NULL,
+  `idjugadorenjuegoentrante` int(4) NOT NULL,
+  PRIMARY KEY (`idcambio`,`idjugadorenjuegosaliente`,`idjugadorenjuegoentrante`),
+  KEY `idjugadorenjuegosaliente` (`idjugadorenjuegosaliente`),
+  KEY `idjugadorenjuegoentrante` (`idjugadorenjuegoentrante`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tcampeonato`
 --
 
 CREATE TABLE IF NOT EXISTS `tcampeonato` (
   `codcampeonato` varchar(8) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `nombre` varchar(150) NOT NULL,
   `anioacademico` varchar(7) NOT NULL,
   `fechacreacion` date NOT NULL,
   `reglamento` varchar(100) DEFAULT NULL,
@@ -144,8 +178,7 @@ CREATE TABLE IF NOT EXISTS `tcampeonato` (
 --
 
 INSERT INTO `tcampeonato` (`codcampeonato`, `nombre`, `anioacademico`, `fechacreacion`, `reglamento`, `estado`, `idcom_orgdor`) VALUES
-('C001', 'InterDocentes 2015-II', '2015-II', '0000-00-00', 'no hay reglamento\r\n', 'habilitado', 1),
-('camp01', 'campionato apertura', '2015', '2015-11-02', 'no hay reglamento', 'habilitado', 1);
+('1', 'I CAMPEONATO DE FUTBOL INTERDOCENTES UNSAAC-2015', '2015-II', '2015-12-09', 'no hay todavia', 'habilitado', 1);
 
 -- --------------------------------------------------------
 
@@ -166,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `tcom_orgdor` (
 --
 
 INSERT INTO `tcom_orgdor` (`idcom_orgdor`, `nombre`, `idusuario`) VALUES
-(1, 'Departamento academico de informatico', 5);
+(1, 'Facultad de Ingenieria Electrica y Electronic', 5);
 
 -- --------------------------------------------------------
 
@@ -180,23 +213,6 @@ CREATE TABLE IF NOT EXISTS `tconclusion` (
   `nroagenda` int(4) NOT NULL,
   PRIMARY KEY (`nroconclusion`,`nroagenda`),
   KEY `nroagenda` (`nroagenda`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tcronograma`
---
-
-CREATE TABLE IF NOT EXISTS `tcronograma` (
-  `nroactividad` int(4) NOT NULL AUTO_INCREMENT,
-  `actividad` varchar(80) NOT NULL,
-  `fechainicio` datetime NOT NULL,
-  `fechafin` datetime NOT NULL,
-  `observaciones` varchar(100) NOT NULL,
-  `codcampeonato` varchar(8) NOT NULL,
-  PRIMARY KEY (`nroactividad`,`codcampeonato`),
-  KEY `codcampeonato` (`codcampeonato`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -226,11 +242,11 @@ CREATE TABLE IF NOT EXISTS `tdocente` (
 --
 
 INSERT INTO `tdocente` (`coddocente`, `nombre`, `apellidopaterno`, `apellidomaterno`, `categoria`, `dni`, `direccion`, `email`, `edad`, `telefono`, `coddptoacademico`) VALUES
-('14769', 'Roberto', 'Alzamora', 'Paredes', 'nombrado', 45678391, 'Av. los incas 245', 'alzamora@gmail.com', 31, '276548', 'DAI'),
-('14995', 'Rony', 'Villafuerte', 'Serna', 'nombrado', 48234567, 'A. El Sol 204', 'rony@gmail.com', 32, '275469', 'DAI'),
-('16563', 'Luis Beltran', 'Palma', 'Ttito', 'nombrado', 48325673, 'Av. La Cultura 1045', 'palma@hotmail.com', 35, '273546', 'DAI'),
-('28308', 'Lino', 'Presiliano', 'Duran', 'nombrado', 48652375, 'AV. la Cultura', 'lino@hotmail.com', 40, '973123513', 'DAI'),
-('99999', 'William', 'Zamalloa', 'Paro', 'nombrado', 23845764, 'PJ. Miraflores San Jeronimo', 'william.zamalloa@unsaac.edu.pe', 35, '293485793', 'DAI');
+('09318', 'Wilson', 'Rimache', 'Suarez', 'nombrado', 48762334, 'Av. Tomas tuyrutupa 4-A San Sebastian', 'wiliko-rs@hotmail.com', 24, '992348529', 'DAI'),
+('13428', 'Edwin', 'Carrasco', 'Poblete', 'nombrado', 24748759, 'Av. los nogales 447', 'carrasco@gmail.com', 39, '993487235', 'DAI'),
+('14769', 'Robert', 'Alzamora', 'Paredes', 'nombrado', 25987454, 'Av. Miguel Grau 345', 'alzamora@gmail.com', 38, '923456834', 'DAI'),
+('16563', 'Luis Beltran', 'Palma', 'Ttito', 'nombrado', 24879078, 'Av. ejercito 376', 'palma@unsaac.edu.pe', 39, '923845278', 'DAI'),
+('16573', 'William', 'Zamalloa', 'Paro', 'contratado', 25923485, 'Av. El Sol 234', 'zamalloa@gmail.com', 34, '934875283', 'DAI');
 
 -- --------------------------------------------------------
 
@@ -250,8 +266,7 @@ CREATE TABLE IF NOT EXISTS `tdptoacademico` (
 --
 
 INSERT INTO `tdptoacademico` (`coddptoacademico`, `nombre`, `carrera`) VALUES
-('ADM', 'Departamento Academico de Administracion', 'Ciencias Administrativas y Financieras'),
-('DAI', 'Departamento academico de infromatica', 'escuela profesional de infromatica');
+('DAI', 'Departamento Academico de Informatica', 'Escuela Profesional de Ingenieria Informatica');
 
 -- --------------------------------------------------------
 
@@ -264,7 +279,14 @@ CREATE TABLE IF NOT EXISTS `tegreso` (
   `nromovimiento` int(4) NOT NULL,
   PRIMARY KEY (`idegreso`,`nromovimiento`),
   KEY `nromovimiento` (`nromovimiento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `tegreso`
+--
+
+INSERT INTO `tegreso` (`idegreso`, `nromovimiento`) VALUES
+(6, 11);
 
 -- --------------------------------------------------------
 
@@ -273,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `tegreso` (
 --
 
 CREATE TABLE IF NOT EXISTS `tequipo` (
-  `codequipo` varchar(8) NOT NULL,
+  `codequipo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(25) NOT NULL,
   `logo` varchar(100) NOT NULL,
   `fotouniforme` varchar(100) NOT NULL,
@@ -283,15 +305,16 @@ CREATE TABLE IF NOT EXISTS `tequipo` (
   PRIMARY KEY (`codequipo`,`codcampeonato`,`idusuario`),
   KEY `codcampeonato` (`codcampeonato`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `tequipo`
 --
 
 INSERT INTO `tequipo` (`codequipo`, `nombre`, `logo`, `fotouniforme`, `estado`, `codcampeonato`, `idusuario`) VALUES
-('E0002', 'LOS Adoberos', 'no hay logo', 'NOhay uniforme ', 'habilitado', 'camp01', 5),
-('E1', 'Seleccion Info Corazon', 'direccion foto', 'direccion uniforme', '', 'camp01', 24);
+(1, 'ANDINA', '', '', 'habilitado', '1', 6),
+(2, 'INFORMATICA', '2INFORMATICA1.png', '2INFORMATICA1.jpg', 'habilitado', '1', 7),
+(3, 'CIVIL', '', '', 'habilitado', '1', 8);
 
 -- --------------------------------------------------------
 
@@ -301,11 +324,11 @@ INSERT INTO `tequipo` (`codequipo`, `nombre`, `logo`, `fotouniforme`, `estado`, 
 
 CREATE TABLE IF NOT EXISTS `tequipoenpartido` (
   `idequipoenpartido` int(4) NOT NULL AUTO_INCREMENT,
-  `puntaje` tinyint(4) NOT NULL,
+  `puntaje` int(4) NOT NULL,
   `observacion` varchar(120) NOT NULL,
   `reclamo` varchar(120) NOT NULL,
-  `codequipo` varchar(8) NOT NULL,
-  `codpartido` varchar(8) NOT NULL,
+  `codequipo` int(11) NOT NULL,
+  `codpartido` int(11) NOT NULL,
   PRIMARY KEY (`idequipoenpartido`,`codequipo`,`codpartido`),
   KEY `codequipo` (`codequipo`),
   KEY `codpartido` (`codpartido`)
@@ -314,45 +337,97 @@ CREATE TABLE IF NOT EXISTS `tequipoenpartido` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tfecha`
+-- Estructura de tabla para la tabla `tequipoxtorneo`
 --
 
-CREATE TABLE IF NOT EXISTS `tfecha` (
-  `nrofecha` int(4) NOT NULL AUTO_INCREMENT,
-  `diadefecha` date NOT NULL,
-  `observaciones` varchar(100) NOT NULL,
-  `codrueda` varchar(8) NOT NULL,
-  PRIMARY KEY (`nrofecha`,`codrueda`),
-  KEY `codrueda` (`codrueda`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS `tequipoxtorneo` (
+  `idequipoxtorneo` int(11) NOT NULL AUTO_INCREMENT,
+  `codequipo` int(11) NOT NULL,
+  `idtorneo` int(11) NOT NULL,
+  PRIMARY KEY (`idequipoxtorneo`,`codequipo`,`idtorneo`),
+  KEY `codequipo` (`codequipo`),
+  KEY `idtorneo` (`idtorneo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Volcado de datos para la tabla `tfecha`
+-- Volcado de datos para la tabla `tequipoxtorneo`
 --
 
-INSERT INTO `tfecha` (`nrofecha`, `diadefecha`, `observaciones`, `codrueda`) VALUES
-(1, '2015-11-24', 'no hay observacion', 'R0002'),
-(2, '2015-11-27', 'no hay observaciones', 'R0002');
+INSERT INTO `tequipoxtorneo` (`idequipoxtorneo`, `codequipo`, `idtorneo`) VALUES
+(1, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tincidencias`
+-- Estructura de tabla para la tabla `tfechas`
 --
 
-CREATE TABLE IF NOT EXISTS `tincidencias` (
-  `codincidencias` varchar(8) NOT NULL,
-  `incidencias` varchar(40) NOT NULL,
-  `minuto` varchar(5) NOT NULL COMMENT '00:00',
-  `tipo` enum('faul','tiro libre','penal','lateral','cambio','gol','tarjeta') DEFAULT NULL,
-  `detalle` varchar(80) DEFAULT NULL,
-  `tipotarjeta` enum('roja','amarilla') DEFAULT NULL,
-  `idjugadorenjuego1` int(4) NOT NULL,
-  `idjugadorenjuego2` int(4) NOT NULL,
-  PRIMARY KEY (`codincidencias`,`idjugadorenjuego1`,`idjugadorenjuego2`),
-  KEY `fk_tincidencias_tjugadorenjuego1_idx` (`idjugadorenjuego1`),
-  KEY `fk_tincidencias_tjugadorenjuego2_idx` (`idjugadorenjuego2`)
+CREATE TABLE IF NOT EXISTS `tfechas` (
+  `idfecha` int(11) NOT NULL,
+  `diafecha` date DEFAULT NULL,
+  `nrofecha` int(2) DEFAULT NULL,
+  `lugar` varchar(70) DEFAULT NULL,
+  `idtorneo` int(11) NOT NULL,
+  PRIMARY KEY (`idfecha`,`idtorneo`),
+  KEY `idtorneo` (`idtorneo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tfechas`
+--
+
+INSERT INTO `tfechas` (`idfecha`, `diafecha`, `nrofecha`, `lugar`, `idtorneo`) VALUES
+(1, '2015-12-18', 1, 'Estadio universitario', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tfixture`
+--
+
+CREATE TABLE IF NOT EXISTS `tfixture` (
+  `idfixture` int(11) NOT NULL AUTO_INCREMENT,
+  `nropartido` varchar(2) NOT NULL,
+  `hora` time DEFAULT NULL,
+  `equipo1` int(11) NOT NULL,
+  `equipo2` int(11) DEFAULT NULL,
+  `idfecha` int(11) NOT NULL,
+  PRIMARY KEY (`idfixture`,`idfecha`),
+  KEY `equipo1` (`equipo1`),
+  KEY `equipo2` (`equipo2`),
+  KEY `idfecha` (`idfecha`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `tfixture`
+--
+
+INSERT INTO `tfixture` (`idfixture`, `nropartido`, `hora`, `equipo1`, `equipo2`, `idfecha`) VALUES
+(1, '1', '09:00:00', 1, 2, 1),
+(2, '2', '11:00:00', 3, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tgol`
+--
+
+CREATE TABLE IF NOT EXISTS `tgol` (
+  `idgol` int(11) NOT NULL AUTO_INCREMENT,
+  `minuto` int(2) NOT NULL,
+  `idjugadorenjuego` int(4) NOT NULL,
+  PRIMARY KEY (`idgol`,`idjugadorenjuego`),
+  KEY `fk_tgol_tjugadorenjuego1_idx` (`idjugadorenjuego`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `tgol`
+--
+
+INSERT INTO `tgol` (`idgol`, `minuto`, `idjugadorenjuego`) VALUES
+(2, 12, 1),
+(3, 4, 1),
+(4, 2, 11);
 
 -- --------------------------------------------------------
 
@@ -362,12 +437,19 @@ CREATE TABLE IF NOT EXISTS `tincidencias` (
 
 CREATE TABLE IF NOT EXISTS `tingreso` (
   `idingreso` int(4) NOT NULL AUTO_INCREMENT,
-  `codequipo` varchar(8) NOT NULL,
+  `codequipo` int(11) NOT NULL,
   `nromovimiento` int(4) NOT NULL,
   PRIMARY KEY (`idingreso`,`codequipo`,`nromovimiento`),
   KEY `nromovimiento` (`nromovimiento`),
   KEY `codequipo` (`codequipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `tingreso`
+--
+
+INSERT INTO `tingreso` (`idingreso`, `codequipo`, `nromovimiento`) VALUES
+(5, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -376,23 +458,14 @@ CREATE TABLE IF NOT EXISTS `tingreso` (
 --
 
 CREATE TABLE IF NOT EXISTS `tintegrantes_c_orgdor` (
-  `idtrepresentantexcomorgan` int(11) NOT NULL AUTO_INCREMENT,
-  `rol` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rol` enum('presidente','secretario','otros') NOT NULL,
   `idcom_orgdor` int(11) NOT NULL,
   `coddocente` varchar(8) NOT NULL,
-  PRIMARY KEY (`idtrepresentantexcomorgan`,`idcom_orgdor`,`coddocente`),
+  PRIMARY KEY (`id`,`idcom_orgdor`,`coddocente`),
   KEY `fk_tintegrantes_c_orgdor_tcom_orgdor1_idx` (`idcom_orgdor`),
   KEY `fk_tintegrantes_c_orgdor_tdocente1_idx` (`coddocente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `tintegrantes_c_orgdor`
---
-
-INSERT INTO `tintegrantes_c_orgdor` (`idtrepresentantexcomorgan`, `rol`, `idcom_orgdor`, `coddocente`) VALUES
-(1, 'presidente', 1, '14769'),
-(2, 'presidente', 1, '16563'),
-(3, 'secretario', 1, '14769');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -401,25 +474,26 @@ INSERT INTO `tintegrantes_c_orgdor` (`idtrepresentantexcomorgan`, `rol`, `idcom_
 --
 
 CREATE TABLE IF NOT EXISTS `tjugador` (
-  `dni` varchar(8) NOT NULL,
+  `idjugador` int(11) NOT NULL AUTO_INCREMENT,
   `foto` varchar(100) NOT NULL,
   `estado` enum('habilitado','desabilitado') NOT NULL,
-  `codequipo` varchar(8) NOT NULL,
+  `codequipo` int(11) NOT NULL,
   `coddocente` varchar(8) NOT NULL,
-  PRIMARY KEY (`dni`,`codequipo`,`coddocente`),
+  PRIMARY KEY (`idjugador`,`codequipo`,`coddocente`),
   KEY `codequipo` (`codequipo`),
   KEY `coddocente` (`coddocente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87654333 ;
 
 --
 -- Volcado de datos para la tabla `tjugador`
 --
 
-INSERT INTO `tjugador` (`dni`, `foto`, `estado`, `codequipo`, `coddocente`) VALUES
-('11111112', 'sin_foto', 'habilitado', 'E1', '14769'),
-('12345678', 'no hay foto', 'habilitado', 'E1', '14769'),
-('87654321', 'no hay foto', 'desabilitado', 'E1', '14995'),
-('87654345', 'no hay foto', 'habilitado', 'E1', '14769');
+INSERT INTO `tjugador` (`idjugador`, `foto`, `estado`, `codequipo`, `coddocente`) VALUES
+(5, 'Zamalloa Paro William.png', 'habilitado', 1, '16573'),
+(87654321, 'William Zamalloa Paro.png', 'habilitado', 2, '16573'),
+(87654330, 'Palma Ttito Luis Beltran.png', 'habilitado', 2, '16563'),
+(87654331, 'Carrasco Poblete Edwin.png', 'habilitado', 2, '13428'),
+(87654332, 'Rimache Suarez Wilson.jpg', 'habilitado', 2, '09318');
 
 -- --------------------------------------------------------
 
@@ -430,23 +504,28 @@ INSERT INTO `tjugador` (`dni`, `foto`, `estado`, `codequipo`, `coddocente`) VALU
 CREATE TABLE IF NOT EXISTS `tjugadorenjuego` (
   `idjugadorenjuego` int(4) NOT NULL AUTO_INCREMENT,
   `nrocamiseta` varchar(2) NOT NULL,
-  `condicionenpartido` varchar(30) NOT NULL,
+  `condicionenpartido` enum('delantero','mediocampista','defensa','guardameta','suplente') NOT NULL,
   `escapitan` enum('no','si') NOT NULL DEFAULT 'no',
-  `dni` varchar(8) NOT NULL,
-  `codpartido` varchar(8) NOT NULL,
-  PRIMARY KEY (`idjugadorenjuego`,`dni`,`codpartido`),
-  KEY `fk_tjugadorenjuego_tjugador1_idx` (`dni`),
+  `idjugador` int(11) NOT NULL,
+  `codpartido` int(11) NOT NULL,
+  PRIMARY KEY (`idjugadorenjuego`,`idjugador`,`codpartido`),
+  KEY `fk_tjugadorenjuego_tjugador1_idx` (`idjugador`),
   KEY `fk_tjugadorenjuego_tpartido1_idx` (`codpartido`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `tjugadorenjuego`
 --
 
-INSERT INTO `tjugadorenjuego` (`idjugadorenjuego`, `nrocamiseta`, `condicionenpartido`, `escapitan`, `dni`, `codpartido`) VALUES
-(4, '20', 'defensa', 'no', '12345678', 'P001'),
-(9, '32', 'delantero', 'no', '11111112', 'P001'),
-(10, '3', 'medio campo', 'si', '12345678', 'P001');
+INSERT INTO `tjugadorenjuego` (`idjugadorenjuego`, `nrocamiseta`, `condicionenpartido`, `escapitan`, `idjugador`, `codpartido`) VALUES
+(1, '21', 'delantero', 'no', 5, 1),
+(3, '1', 'guardameta', 'no', 5, 1),
+(5, '7', 'mediocampista', 'no', 5, 1),
+(6, '8', 'defensa', 'no', 5, 1),
+(7, '11', 'defensa', 'no', 5, 1),
+(9, '1', 'guardameta', 'no', 5, 1),
+(10, '33', 'suplente', 'no', 5, 1),
+(11, '34', 'delantero', 'si', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -462,17 +541,7 @@ CREATE TABLE IF NOT EXISTS `tmiembrocomjusticia` (
   PRIMARY KEY (`id`,`codcampeonato`,`coddocente`),
   KEY `fk_tmiembrocomjusticia_tcampeonato1` (`codcampeonato`),
   KEY `fk_tmiembrocomjusticia_tdocente1` (`coddocente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12345682 ;
-
---
--- Volcado de datos para la tabla `tmiembrocomjusticia`
---
-
-INSERT INTO `tmiembrocomjusticia` (`id`, `rol`, `codcampeonato`, `coddocente`) VALUES
-(12345678, 'presidente', 'C001', '16563'),
-(12345679, 'secretario', 'camp01', '16563'),
-(12345680, 'vocal', 'camp01', '14995'),
-(12345681, 'Presitente', 'C001', '99999');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -489,7 +558,31 @@ CREATE TABLE IF NOT EXISTS `tmovimiento` (
   `idcom_orgdor` int(11) NOT NULL,
   PRIMARY KEY (`nromovimiento`,`idcom_orgdor`),
   KEY `fk_tmovimiento_tcom_orgdor1_idx` (`idcom_orgdor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Volcado de datos para la tabla `tmovimiento`
+--
+
+INSERT INTO `tmovimiento` (`nromovimiento`, `tipo`, `montototal`, `descripcion`, `fecha`, `idcom_orgdor`) VALUES
+(10, 'ingreso', 200, 'Inscripcion', '2015-12-19 08:38:27', 1),
+(11, 'egreso', 3, 'pago al arbitro', '2015-12-19 08:38:58', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `totrasincidencias`
+--
+
+CREATE TABLE IF NOT EXISTS `totrasincidencias` (
+  `idincidencias` int(11) NOT NULL,
+  `minuto` varchar(5) NOT NULL COMMENT '00:00',
+  `tipo` enum('faul','tiro libre','penal','lateral') NOT NULL,
+  `detalle` varchar(80) DEFAULT NULL,
+  `idjugadorenjuego` int(4) NOT NULL,
+  PRIMARY KEY (`idincidencias`,`idjugadorenjuego`),
+  KEY `fk_tincidencias_tjugadorenjuego1_idx` (`idjugadorenjuego`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -498,51 +591,25 @@ CREATE TABLE IF NOT EXISTS `tmovimiento` (
 --
 
 CREATE TABLE IF NOT EXISTS `tpartido` (
-  `codpartido` varchar(8) NOT NULL,
-  `horainicio` varchar(5) NOT NULL COMMENT '00:00',
-  `horafin` varchar(5) NOT NULL COMMENT '00:00',
-  `tipopartido` varchar(20) NOT NULL,
+  `codpartido` int(11) NOT NULL AUTO_INCREMENT,
+  `horainicio` time DEFAULT NULL COMMENT '00:00',
+  `horafin` time DEFAULT NULL COMMENT '00:00',
+  `tipopartido` enum('reprogramado','walk over','suspendido','normal') DEFAULT NULL,
   `observacion` varchar(50) NOT NULL,
-  `codprogramacion` varchar(8) NOT NULL,
-  `idarbitroporpartido` int(4) NOT NULL,
-  PRIMARY KEY (`codpartido`,`idarbitroporpartido`,`codprogramacion`),
+  `idfixture` int(11) NOT NULL,
+  `idarbitroporpartido` int(4) DEFAULT NULL,
+  PRIMARY KEY (`codpartido`,`idfixture`),
   KEY `idarbitroporpartido` (`idarbitroporpartido`),
-  KEY `codprogramacion` (`codprogramacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `codprogramacion` (`idfixture`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `tpartido`
 --
 
-INSERT INTO `tpartido` (`codpartido`, `horainicio`, `horafin`, `tipopartido`, `observacion`, `codprogramacion`, `idarbitroporpartido`) VALUES
-('P001', '7:00 ', '9:00 ', 'aminstoso', 'no hay observaciones', 'Pro001', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tprogramacionpartido`
---
-
-CREATE TABLE IF NOT EXISTS `tprogramacionpartido` (
-  `codprogramacion` varchar(8) NOT NULL,
-  `diadepartido` date NOT NULL,
-  `nropartido` varchar(2) NOT NULL,
-  `nrofecha` int(4) NOT NULL,
-  `lugar` varchar(45) NOT NULL,
-  `equipo1` varchar(8) NOT NULL,
-  `equipo2` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`codprogramacion`,`nrofecha`),
-  KEY `nrofecha` (`nrofecha`),
-  KEY `equipo1` (`equipo1`),
-  KEY `equipo2` (`equipo2`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tprogramacionpartido`
---
-
-INSERT INTO `tprogramacionpartido` (`codprogramacion`, `diadepartido`, `nropartido`, `nrofecha`, `lugar`, `equipo1`, `equipo2`) VALUES
-('Pro001', '2015-11-28', '1', 2, 'estadio univesitario', 'E1', 'E0002');
+INSERT INTO `tpartido` (`codpartido`, `horainicio`, `horafin`, `tipopartido`, `observacion`, `idfixture`, `idarbitroporpartido`) VALUES
+(1, '09:00:00', '10:00:00', 'normal', 'no hay observaciones', 1, 2),
+(4, NULL, NULL, NULL, '', 2, 8);
 
 -- --------------------------------------------------------
 
@@ -553,32 +620,8 @@ INSERT INTO `tprogramacionpartido` (`codprogramacion`, `diadepartido`, `nroparti
 CREATE TABLE IF NOT EXISTS `treunion` (
   `idreunion` int(4) NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
-  `nrofecha` int(4) NOT NULL,
-  PRIMARY KEY (`idreunion`,`nrofecha`),
-  KEY `nrofecha` (`nrofecha`)
+  PRIMARY KEY (`idreunion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `trueda`
---
-
-CREATE TABLE IF NOT EXISTS `trueda` (
-  `codrueda` varchar(8) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `fechacreacion` date NOT NULL,
-  `codcampeonato` varchar(8) NOT NULL,
-  PRIMARY KEY (`codrueda`,`codcampeonato`),
-  KEY `codcampeonato` (`codcampeonato`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `trueda`
---
-
-INSERT INTO `trueda` (`codrueda`, `nombre`, `fechacreacion`, `codcampeonato`) VALUES
-('R0002', 'Primera Rueda', '2015-11-21', 'camp01');
 
 -- --------------------------------------------------------
 
@@ -601,6 +644,46 @@ CREATE TABLE IF NOT EXISTS `tsancion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ttarjeta`
+--
+
+CREATE TABLE IF NOT EXISTS `ttarjeta` (
+  `idtarjeta` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` enum('roja','amarilla') NOT NULL,
+  `minuto` int(2) NOT NULL,
+  `idjugadorenjuego` int(4) NOT NULL,
+  PRIMARY KEY (`idtarjeta`,`idjugadorenjuego`),
+  KEY `fk_ttarjeta_tjugadorenjuego1_idx` (`idjugadorenjuego`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ttorneo`
+--
+
+CREATE TABLE IF NOT EXISTS `ttorneo` (
+  `idtorneo` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` enum('apertura','clausura','play off') NOT NULL,
+  `diainicio` date NOT NULL,
+  `nrofechas` int(11) DEFAULT NULL,
+  `codcampeonato` varchar(8) NOT NULL,
+  PRIMARY KEY (`idtorneo`),
+  KEY `codcampeonato` (`codcampeonato`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `ttorneo`
+--
+
+INSERT INTO `ttorneo` (`idtorneo`, `tipo`, `diainicio`, `nrofechas`, `codcampeonato`) VALUES
+(1, 'apertura', '2015-12-16', 0, '1'),
+(10, 'clausura', '0000-00-00', 0, '1'),
+(12, 'play off', '2015-12-25', 0, '1');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tusuarios`
 --
 
@@ -608,23 +691,31 @@ CREATE TABLE IF NOT EXISTS `tusuarios` (
   `idusuario` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `tipo` enum('administrador','comision_organizadora','equipo') NOT NULL,
+  `tipo` enum('administrador','comision organizadora','equipo') NOT NULL,
   `estado` enum('activo','desactivo','bloqueado') NOT NULL,
   PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `tusuarios`
 --
 
 INSERT INTO `tusuarios` (`idusuario`, `username`, `password`, `tipo`, `estado`) VALUES
-(5, 'EquipoCivil', '$2y$10$YHG3LeO.nI79Bq2mZC.Riev0pGn3w3cDHlPua8x94NA.P6cOhkosq', 'equipo', 'activo'),
-(23, 'admin', '$2y$10$ZJWGFU0fGoG2qNjeLCggMOPRbRW5WFPtiPgZ3OKmgo1eKmTVl8O/G', 'administrador', 'activo'),
-(24, 'equipo', '$2y$10$wmuGVVsMqgOf2ZDIdHwjduIOG9CZ3lrkwhUuZu1hIgUXTsvqeRgYK', 'equipo', 'activo');
+(4, 'wilson', '$2y$10$vv2vozwSL2Wwtnf6Wn6Dnu3D4bCkUj3zqKFn5ThTgB8plAPoW0gmy', 'administrador', 'activo'),
+(5, 'comision', '$2y$10$fLUN43Hh3AxABjrsxcsc4ev.pQ/mjKnI12/b2yIuo.dfkBVBEqiQe', 'comision organizadora', 'activo'),
+(6, 'andina', '$2y$10$X0QV8fY/zkpPErH3r5oIueyuRkD.9FcUU8IAAx/FGyqqhfE.QbFAS', 'equipo', 'activo'),
+(7, 'informatica', '$2y$10$Aq5e3ujZ46hdCysxgnwjNOra3esXDPVO3su/QQYQ40QMg5nzJkj12', 'equipo', 'activo'),
+(8, 'civil', '$2y$10$xGaeeCBtOqfwnire8DyEm.lVAjaotOOJW0AshGL2I0FN0dXlLDOU.', 'equipo', 'bloqueado');
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `tactividad`
+--
+ALTER TABLE `tactividad`
+  ADD CONSTRAINT `tcronograma_ibfk_1` FOREIGN KEY (`codcampeonato`) REFERENCES `tcampeonato` (`codcampeonato`);
 
 --
 -- Filtros para la tabla `tadministrador`
@@ -655,6 +746,13 @@ ALTER TABLE `tasistente`
   ADD CONSTRAINT `tasistente_ibfk_2` FOREIGN KEY (`idreunion`) REFERENCES `treunion` (`idreunion`);
 
 --
+-- Filtros para la tabla `tcambio`
+--
+ALTER TABLE `tcambio`
+  ADD CONSTRAINT `fk_tcambio_tjugadorenjuego1` FOREIGN KEY (`idjugadorenjuegosaliente`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tcambio_tjugadorenjuego2` FOREIGN KEY (`idjugadorenjuegoentrante`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `tcampeonato`
 --
 ALTER TABLE `tcampeonato`
@@ -673,12 +771,6 @@ ALTER TABLE `tconclusion`
   ADD CONSTRAINT `tconclusion_ibfk_1` FOREIGN KEY (`nroagenda`) REFERENCES `tagenda` (`nroagenda`);
 
 --
--- Filtros para la tabla `tcronograma`
---
-ALTER TABLE `tcronograma`
-  ADD CONSTRAINT `tcronograma_ibfk_1` FOREIGN KEY (`codcampeonato`) REFERENCES `tcampeonato` (`codcampeonato`);
-
---
 -- Filtros para la tabla `tdocente`
 --
 ALTER TABLE `tdocente`
@@ -688,7 +780,7 @@ ALTER TABLE `tdocente`
 -- Filtros para la tabla `tegreso`
 --
 ALTER TABLE `tegreso`
-  ADD CONSTRAINT `tegreso_ibfk_1` FOREIGN KEY (`nromovimiento`) REFERENCES `tmovimiento` (`nromovimiento`);
+  ADD CONSTRAINT `nromovimiento` FOREIGN KEY (`nromovimiento`) REFERENCES `tmovimiento` (`nromovimiento`);
 
 --
 -- Filtros para la tabla `tequipo`
@@ -705,17 +797,31 @@ ALTER TABLE `tequipoenpartido`
   ADD CONSTRAINT `tequipoenpartido_ibfk_2` FOREIGN KEY (`codpartido`) REFERENCES `tpartido` (`codpartido`);
 
 --
--- Filtros para la tabla `tfecha`
+-- Filtros para la tabla `tequipoxtorneo`
 --
-ALTER TABLE `tfecha`
-  ADD CONSTRAINT `tfecha_ibfk_1` FOREIGN KEY (`codrueda`) REFERENCES `trueda` (`codrueda`);
+ALTER TABLE `tequipoxtorneo`
+  ADD CONSTRAINT `codequipo` FOREIGN KEY (`codequipo`) REFERENCES `tequipo` (`codequipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tequipoxtorneo_ttorneo1` FOREIGN KEY (`idtorneo`) REFERENCES `ttorneo` (`idtorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tincidencias`
+-- Filtros para la tabla `tfechas`
 --
-ALTER TABLE `tincidencias`
-  ADD CONSTRAINT `fk_tincidencias_tjugadorenjuego1` FOREIGN KEY (`idjugadorenjuego1`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tincidencias_tjugadorenjuego2` FOREIGN KEY (`idjugadorenjuego2`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tfechas`
+  ADD CONSTRAINT `idtorneo` FOREIGN KEY (`idtorneo`) REFERENCES `ttorneo` (`idtorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tfixture`
+--
+ALTER TABLE `tfixture`
+  ADD CONSTRAINT `equipo1` FOREIGN KEY (`equipo1`) REFERENCES `tequipo` (`codequipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `equipo2` FOREIGN KEY (`equipo2`) REFERENCES `tequipo` (`codequipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `idfecha` FOREIGN KEY (`idfecha`) REFERENCES `tfechas` (`idfecha`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tgol`
+--
+ALTER TABLE `tgol`
+  ADD CONSTRAINT `fk_tgol_tjugadorenjuego1` FOREIGN KEY (`idjugadorenjuego`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tingreso`
@@ -742,7 +848,7 @@ ALTER TABLE `tjugador`
 -- Filtros para la tabla `tjugadorenjuego`
 --
 ALTER TABLE `tjugadorenjuego`
-  ADD CONSTRAINT `fk_tjugadorenjuego_tjugador1` FOREIGN KEY (`dni`) REFERENCES `tjugador` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tjugadorenjuego_tjugador1` FOREIGN KEY (`idjugador`) REFERENCES `tjugador` (`idjugador`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tjugadorenjuego_tpartido1` FOREIGN KEY (`codpartido`) REFERENCES `tpartido` (`codpartido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -759,31 +865,17 @@ ALTER TABLE `tmovimiento`
   ADD CONSTRAINT `fk_tmovimiento_tcom_orgdor1` FOREIGN KEY (`idcom_orgdor`) REFERENCES `tcom_orgdor` (`idcom_orgdor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `totrasincidencias`
+--
+ALTER TABLE `totrasincidencias`
+  ADD CONSTRAINT `fk_tincidencias_tjugadorenjuego1` FOREIGN KEY (`idjugadorenjuego`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `tpartido`
 --
 ALTER TABLE `tpartido`
-  ADD CONSTRAINT `codprogramacion` FOREIGN KEY (`codprogramacion`) REFERENCES `tprogramacionpartido` (`codprogramacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `codprogramacion` FOREIGN KEY (`idfixture`) REFERENCES `tfixture` (`idfixture`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `tpartido_ibfk_1` FOREIGN KEY (`idarbitroporpartido`) REFERENCES `tarbitroxpartido` (`idarbitroporpartido`);
-
---
--- Filtros para la tabla `tprogramacionpartido`
---
-ALTER TABLE `tprogramacionpartido`
-  ADD CONSTRAINT `equipo1` FOREIGN KEY (`equipo1`) REFERENCES `tequipo` (`codequipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `equipo2` FOREIGN KEY (`equipo2`) REFERENCES `tequipo` (`codequipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `nrofecha` FOREIGN KEY (`nrofecha`) REFERENCES `tfecha` (`nrofecha`);
-
---
--- Filtros para la tabla `treunion`
---
-ALTER TABLE `treunion`
-  ADD CONSTRAINT `treunion_ibfk_1` FOREIGN KEY (`nrofecha`) REFERENCES `tfecha` (`nrofecha`);
-
---
--- Filtros para la tabla `trueda`
---
-ALTER TABLE `trueda`
-  ADD CONSTRAINT `trueda_ibfk_1` FOREIGN KEY (`codcampeonato`) REFERENCES `tcampeonato` (`codcampeonato`);
 
 --
 -- Filtros para la tabla `tsancion`
@@ -792,6 +884,18 @@ ALTER TABLE `tsancion`
   ADD CONSTRAINT `tsancion_ibfk_1` FOREIGN KEY (`nroconclusion`) REFERENCES `tconclusion` (`nroconclusion`),
   ADD CONSTRAINT `tsancion_ibfk_2` FOREIGN KEY (`idjugadorenjuego`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`),
   ADD CONSTRAINT `tsancion_ibfk_3` FOREIGN KEY (`idequipoenpartido`) REFERENCES `tequipoenpartido` (`idequipoenpartido`);
+
+--
+-- Filtros para la tabla `ttarjeta`
+--
+ALTER TABLE `ttarjeta`
+  ADD CONSTRAINT `fk_ttarjeta_tjugadorenjuego1` FOREIGN KEY (`idjugadorenjuego`) REFERENCES `tjugadorenjuego` (`idjugadorenjuego`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `ttorneo`
+--
+ALTER TABLE `ttorneo`
+  ADD CONSTRAINT `codcampeonato` FOREIGN KEY (`codcampeonato`) REFERENCES `tcampeonato` (`codcampeonato`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

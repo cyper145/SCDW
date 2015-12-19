@@ -24,19 +24,22 @@ class CampeonatoController extends \BaseController {
             ->with('equipos',$equipos);
     }
 
-    public function detalleequipojugador($codequipo)
+    public function detalleequipojugador($codequipo,$codcampeonato)
     {
         $equipo = Equipo::where('codequipo','=',$codequipo)->first();
         $jugadoresdelequipo = Jugador::where('codequipo','=',$codequipo)->get();
         return View::make('user_com_organizing.campeonato.equipojugador.detail')
             ->with('equipo',$equipo)
+            ->with('codcampeonato',$codcampeonato)
             ->with('jugadoresdelequipo',$jugadoresdelequipo);
     }
 
-    public function detallejugador($idjugador)
+    public function detallejugador($codequipo,$codcampeonato,$idjugador)
     {
         $jugador = Jugador::where('idjugador','=',$idjugador)->first();
         return View::make('user_com_organizing.campeonato.equipojugador.jugador.detail')
+            ->with('codequipo',$codequipo)
+            ->with('codcampeonato',$codcampeonato)
             ->with('jugador',$jugador);
     }
 

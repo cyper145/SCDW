@@ -1,5 +1,7 @@
 <?php
-class Movimiento extends Eloquent {
+class Movimiento extends Eloquent
+{
 	protected $table = 'tmovimiento';
-	public $timestamps = false; 
+	public $timestamps = false;
+    protected $primaryKey = 'nromovimiento';
 }

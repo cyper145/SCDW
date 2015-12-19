@@ -5,7 +5,7 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( '/movimientos');}}"><span class="glyphicon glyphicon-adjust"></span>Movimientos</a></li>
+    <li><span class="glyphicon glyphicon-usd"></span></li>
 @stop
 
 @section('nombrevista')
@@ -51,7 +51,7 @@
                                 <a class="label label-primary" href="movimientos/editar/{{$mov->nromovimiento}}">
                                     <span class="glyphicon glyphicon-edit">&nbsp;Edit</span>
                                 </a><br>
-                                <a class="label label-danger" href="eliminar/{{ $mov->iddepartamento}}">
+                                <a class="label label-danger" href="{{URL::to('movimientos/'.$mov->nromovimiento.'/delete.html')}}">
                                     <span class="glyphicon glyphicon-trash">&nbsp;Delete</span>
                                 </a>
                             </td>

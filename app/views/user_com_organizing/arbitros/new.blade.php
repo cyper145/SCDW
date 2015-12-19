@@ -9,7 +9,8 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( 'usuariocorgcrear');}}"><span > nuevo arbitro</span></a></li>
+    <li><a href="{{ URL::to( '/Arbitros/list.html');}}"><span class="glyphicon glyphicon-tags"></span></a></li>
+    <li><span > nuevo arbitro</span></li>
 @stop
 
 @section('nombrevista')

@@ -102,6 +102,7 @@ class TorneoController extends \BaseController {
         $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
         return View::make('user_com_organizing.torneo.detail',compact('fechasdeltorneo'))
             ->with('campeonato',$campeonato)
+            ->with('codcampeonato',$codcampeonato)
             ->with('equipos',$equipos)
             ->with('fechas',$fechas)
             ->with('torneo',$torneo);

@@ -9,7 +9,8 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( 'usuariocorgcrear');}}"><span > nuevo integrante</span></a></li>
+    <li><a href="{{ URL::to( '/comision/integrantes/list.html');}}"><span class="glyphicon glyphicon-user"></span></a></li>
+    <li>Nuevo integrante</li>
 @stop
 
 @section('nombrevista')
@@ -43,8 +44,10 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-default">Limpiar</button>
-                    <button type="submit" class="btn btn-danger" onclick="history.back()">Cancelar</button>
                     {{ Form::close()}}
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-danger" onclick="history.back()">Cancelar</button>
+                    </div>
                         <!-- END CONTENIDO DEL FORMULARIO -->
                 </div>
             </div>

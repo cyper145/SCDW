@@ -89,10 +89,10 @@ Route::group(array('before'=>'organ'), function()
             Route::get('Arbitros/eliminar/{id}', 'ArbitroController@eliminar');
             //movimientos
             Route::get('movimientos','MovimientoController@index');
-            Route::get('ingresos/listar', 'MovimientoController@listaI');
-            Route::get('egresos/listar', 'MovimientoController@listaE');
-            Route::post('NuevoMov/addIngreso','MovimientoController@storeI');
             Route::get('NuevoMov/addIngreso','MovimientoController@createI');
+            Route::post('NuevoMov/addIngreso','MovimientoController@storeI');
+            Route::get('movimientos/{id}/delete.html','MovimientoController@destroy');
+
             Route::get('movimientos/editar/{id}', 'MovimientoController@editarIngreso');
             Route::post('ingreso/formulario2/{id}', 'MovimientoController@update');
             Route::get('NuevoMov/addEgreso','MovimientoController@createE');
@@ -132,8 +132,8 @@ Route::group(array('before'=>'organ'), function()
             Route::post('campeonato/formulario1', 'CampeonatoController@store');
             Route::post('campeonato/formulario2/{id}', 'CampeonatoController@update');
             Route::get('campeonato/eliminar/{id}', 'CampeonatoController@delete');
-            Route::get('campeonato/detail/equipo/detalle/{id}', 'CampeonatoController@detalleequipojugador');
-            Route::get('campeonato/detail/equipo/detalle/jugador/detail/{id}', 'CampeonatoController@detallejugador');
+            Route::get('campeonato/detail/equipo/{id1}/{id2}/detalle.html', 'CampeonatoController@detalleequipojugador');
+            Route::get('campeonato/detail/equipo/{id1}/{id2}/jugador/{id3}/detail.html', 'CampeonatoController@detallejugador');
             //acta de reunion
             Route::get('acta/ver', 'ActaController@index');  
             Route::get('acta/verc', 'ActaController@conclusiones_all'); 
@@ -157,7 +157,7 @@ Route::group(array('before'=>'organ'), function()
             Route::get('partido/cambios/delete/{id}', 'PartidoController@partido_delete');
             //torneos
             Route::get('torneo/create/{id}','TorneoController@create');
-            Route::get('torneo/detail/{id}/{id2}','TorneoController@detail');
+            Route::get('torneo/{id}/{id2}/detail.html','TorneoController@detail');
             Route::get('torneo/delete/{id}/{id2}','TorneoController@destroy');
             Route::resource('torneo','TorneoController');
             //fechas
@@ -186,6 +186,14 @@ Route::group(array('before'=>'equip'), function()
             Route::get('jugador/{id}/detail/.html', 'JugadorController@detail');
             Route::any('jugadoredit{id}', 'JugadorController@edit_get');
             Route::post('jugador/edit.html', 'JugadorController@edit_post');
+            //--equipo
+            Route::get('jugador/camiseta.html','EquipoController@camisetaadd_get');
+            Route::post('jugador/camiseta.html','EquipoController@camisetaadd_post');
+            Route::get('jugador/camiseta/delete.html','EquipoController@camisetadelete');
+
+            Route::get('jugador/logo.html','EquipoController@logoadd_get');
+            Route::post('jugador/logo.html','EquipoController@logoadd_post');
+            Route::get('jugador/logo/delete.html','EquipoController@logodelete');
         });
            
 //===================Funciones del User Normal====================

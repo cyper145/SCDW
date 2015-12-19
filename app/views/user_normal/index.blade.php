@@ -8,9 +8,9 @@
 @stop
 
 @section('nombrevista')
-    @lang('INICIO. Bienvenido al sistema de campeonato de docentes UNSAAC')
+    @lang('Bienvenido al Campeonato de Futbol Inter Docentes UNSAAC')
 @stop
 
 @section('contenido')
-    {{ $tablaposiones }}
+    {{HTML::image('bg/campeonato.png','imagen uniforme',['class'=>'img-responsive','title'=>'uniforme','style'=>'width: 1000px'])}}
 @stop

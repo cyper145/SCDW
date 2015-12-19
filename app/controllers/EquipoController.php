@@ -17,9 +17,75 @@ class EquipoController extends \BaseController {
             ->with('nrojugadores',$nrojugadores);
     }
 
+    //CAMISETA
+    public function camisetaadd_get()
+    {
+        return View::make('user_equipo.camiseta');
+    }
 
+    public function camisetaadd_post()
+    {
+        $equipo = Equipo::where('codequipo','=',Session::get('user_codequipo'))->first();
+        if(Input::hasFile('uniforme'))//hay foto
+        {
+            $fullnamefile = $equipo->codequipo.$equipo->nombre.$equipo->codcampeonato;
+            $file = Input::file('uniforme');
+            $extension = $file->getClientOriginalExtension();
+            $namefotocomplete = $fullnamefile.'.'.$extension;
+            $file->move('storage/equipo/camiseta', $namefotocomplete);
+            Equipo::where('codequipo','=',$equipo->codequipo)->update(['fotouniforme'=>$namefotocomplete]);
 
+            Session::flash('message','Uniforme agregado correctamente');
+            return Redirect::to('equipo/index.html');
+        }
+        else
+        {
+            $error = ['wilson'=>'Seleccione una foto'];
+            return Redirect::back()->withInput()->withErrors($error);
+        }
+    }
 
+    public function camisetadelete()
+    {
+        Equipo::where('codequipo','=',Session::get('user_codequipo'))->update(['fotouniforme'=>'']);
+        Session::flash('message','Uniforme Eliminado correctamente');
+        return Redirect::to('equipo/index.html');
+    }
+
+    //LOGO
+    public function logoadd_get()
+    {
+        return View::make('user_equipo.logo');
+    }
+
+    public function logoadd_post()
+    {
+        $equipo = Equipo::where('codequipo','=',Session::get('user_codequipo'))->first();
+        if(Input::hasFile('logo'))//hay foto
+        {
+            $fullnamefile = $equipo->codequipo.$equipo->nombre.$equipo->codcampeonato;
+            $file = Input::file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $namefotocomplete = $fullnamefile.'.'.$extension;
+            $file->move('storage/equipo', $namefotocomplete);
+            Equipo::where('codequipo','=',$equipo->codequipo)->update(['logo'=>$namefotocomplete]);
+
+            Session::flash('message','Logo agregado correctamente');
+            return Redirect::to('equipo/index.html');
+        }
+        else
+        {
+            $error = ['wilson'=>'Seleccione una foto'];
+            return Redirect::back()->withInput()->withErrors($error);
+        }
+    }
+
+    public function logodelete()
+    {
+        Equipo::where('codequipo','=',Session::get('user_codequipo'))->update(['logo'=>'']);
+        Session::flash('message','logo Eliminado correctamente');
+        return Redirect::to('equipo/index.html');
+    }
 
 
 
@@ -28,10 +94,6 @@ class EquipoController extends \BaseController {
 
 
 
-    public function addintegrante_get()
-    {
-        return View::make('user_com_organizing.integrante.add');
-    }
     public function addintegrante_post()
     {
         $input = Input::all();
