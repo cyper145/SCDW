@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-12-2015 a las 19:31:45
+-- Tiempo de generación: 20-12-2015 a las 17:24:42
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.9
 
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `tarbitroxpartido` (
   KEY `principal` (`principal`),
   KEY `asistente1` (`asistente1`),
   KEY `asistente2` (`asistente2`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `tarbitroxpartido`
@@ -120,6 +120,8 @@ INSERT INTO `tarbitroxpartido` (`idarbitroporpartido`, `principal`, `asistente1`
 (1, '29348750', '29348750', '49872903'),
 (2, '29348750', '29348750', '49872903'),
 (6, '29348750', '29348750', '29348750'),
+(9, '29348750', '29348750', '29348750'),
+(10, '29348750', '49872903', '29348750'),
 (5, '49872903', '29348750', '29348750'),
 (7, '49872903', '49872903', '49872903'),
 (8, '49872903', '49872903', '49872903');
@@ -312,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `tequipo` (
 --
 
 INSERT INTO `tequipo` (`codequipo`, `nombre`, `logo`, `fotouniforme`, `estado`, `codcampeonato`, `idusuario`) VALUES
-(1, 'ANDINA', '', '', 'habilitado', '1', 6),
+(1, 'ANDINA', '1ANDINA1.png', '1ANDINA1.jpg', 'habilitado', '1', 6),
 (2, 'INFORMATICA', '2INFORMATICA1.png', '2INFORMATICA1.jpg', 'habilitado', '1', 7),
 (3, 'CIVIL', '', '', 'habilitado', '1', 8);
 
@@ -418,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `tgol` (
   `idjugadorenjuego` int(4) NOT NULL,
   PRIMARY KEY (`idgol`,`idjugadorenjuego`),
   KEY `fk_tgol_tjugadorenjuego1_idx` (`idjugadorenjuego`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `tgol`
@@ -427,7 +429,8 @@ CREATE TABLE IF NOT EXISTS `tgol` (
 INSERT INTO `tgol` (`idgol`, `minuto`, `idjugadorenjuego`) VALUES
 (2, 12, 1),
 (3, 4, 1),
-(4, 2, 11);
+(4, 2, 11),
+(5, 90, 14);
 
 -- --------------------------------------------------------
 
@@ -482,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `tjugador` (
   PRIMARY KEY (`idjugador`,`codequipo`,`coddocente`),
   KEY `codequipo` (`codequipo`),
   KEY `coddocente` (`coddocente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87654333 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87654334 ;
 
 --
 -- Volcado de datos para la tabla `tjugador`
@@ -493,7 +496,8 @@ INSERT INTO `tjugador` (`idjugador`, `foto`, `estado`, `codequipo`, `coddocente`
 (87654321, 'William Zamalloa Paro.png', 'habilitado', 2, '16573'),
 (87654330, 'Palma Ttito Luis Beltran.png', 'habilitado', 2, '16563'),
 (87654331, 'Carrasco Poblete Edwin.png', 'habilitado', 2, '13428'),
-(87654332, 'Rimache Suarez Wilson.jpg', 'habilitado', 2, '09318');
+(87654332, 'Rimache Suarez Wilson.jpg', 'habilitado', 2, '09318'),
+(87654333, 'Rimache Suarez Wilson.jpg', 'habilitado', 1, '09318');
 
 -- --------------------------------------------------------
 
@@ -511,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `tjugadorenjuego` (
   PRIMARY KEY (`idjugadorenjuego`,`idjugador`,`codpartido`),
   KEY `fk_tjugadorenjuego_tjugador1_idx` (`idjugador`),
   KEY `fk_tjugadorenjuego_tpartido1_idx` (`codpartido`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `tjugadorenjuego`
@@ -523,9 +527,10 @@ INSERT INTO `tjugadorenjuego` (`idjugadorenjuego`, `nrocamiseta`, `condicionenpa
 (5, '7', 'mediocampista', 'no', 5, 1),
 (6, '8', 'defensa', 'no', 5, 1),
 (7, '11', 'defensa', 'no', 5, 1),
-(9, '1', 'guardameta', 'no', 5, 1),
 (10, '33', 'suplente', 'no', 5, 1),
-(11, '34', 'delantero', 'si', 5, 1);
+(11, '34', 'delantero', 'si', 5, 1),
+(13, '4', 'suplente', 'si', 87654333, 1),
+(14, '67', 'delantero', 'no', 87654333, 1);
 
 -- --------------------------------------------------------
 
@@ -609,7 +614,7 @@ CREATE TABLE IF NOT EXISTS `tpartido` (
 
 INSERT INTO `tpartido` (`codpartido`, `horainicio`, `horafin`, `tipopartido`, `observacion`, `idfixture`, `idarbitroporpartido`) VALUES
 (1, '09:00:00', '10:00:00', 'normal', 'no hay observaciones', 1, 2),
-(4, NULL, NULL, NULL, '', 2, 8);
+(4, NULL, NULL, NULL, '', 2, NULL);
 
 -- --------------------------------------------------------
 

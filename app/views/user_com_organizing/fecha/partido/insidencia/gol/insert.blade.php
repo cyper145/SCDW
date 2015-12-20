@@ -8,11 +8,11 @@
 @stop
 
 @section('rutanavegacion')
-    <li><a href="{{ URL::to( 'usuariocorgcrear');}}"><span > nuevo arbitro</span></a></li>
 @stop
 
 @section('nombrevista')
     @lang('Gol')
+    <button type="submit" class="btn btn-success pull-right" onclick="history.back()">Atras</button>
 @stop
 
 @section('contenido')
@@ -28,8 +28,11 @@
                     <div class="col-md-12">
                         {{ Form::open(array('url'=>'fechas/detail/partido/gol.html','autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
                         <!-- BEGIN CONTENIDO DEL FORMULARIO -->
+                        {{ Form::hidden('idtorneo',$idtorneo) }}
+                        {{ Form::hidden('codcampeonato',$codcampeonato) }}
+                        {{ Form::hidden('idfecha',$idfecha )}}
+                        {{ Form::hidden('idfixture',$idfixture) }}
                         {{ Form::hidden('idjugadorenjuego',$idjugadorenjuego)}}
-                        {{ Form::hidden('idfixture',$idfixture)}}
                        <div class="form-group">
                            <label>Minuto</label>
                            <input class="form-control" placeholder="24" name="minuto" required maxlength="2">

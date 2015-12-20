@@ -160,17 +160,18 @@ Route::group(array('before'=>'organ'), function()
             Route::get('torneo/{id}/{id2}/detail.html','TorneoController@detail');
             Route::get('torneo/delete/{id}/{id2}','TorneoController@destroy');
             Route::resource('torneo','TorneoController');
-            //fechas
-            Route::get('fechas/detail/{id}','FechasController@detail');
-            Route::get('fechas/detail/partido/{id}', 'PartidoController@partido');
-            Route::post('fechas/detail/partido/arbitros/{id}', 'PartidoController@arbitroadd');
-            Route::post('fechas/detail/partido/jugador/add/{id}', 'PartidoController@jugadoradd');
-            Route::get('fechas/detail/partido/eliminar/{id1}/{id2}', 'PartidoController@jugadordelete');//borra a un jugador del partido
-            Route::get('fechas/detail/partido/gol/list/{id1}/{id2}', 'PartidoController@jugadorgollist');
-            Route::get('fechas/detail/partido/gol/{id1}/{id2}', 'PartidoController@jugadorgol_get');
+            //fechas y partido
+            Route::get('fechas/{id1}/{id2}/{id3}/detail.html','FechasController@detail');
+            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/partido.html','PartidoController@partido');
+            Route::post('fechas/detail/partido/arbitros/add.html', 'PartidoController@arbitroadd');
+            Route::post('fechas/detail/partido/jugador/add.html', 'PartidoController@jugadoradd');
+            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/eliminar.html', 'PartidoController@jugadordelete');//borra a un jugador del partido
+            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/goles.html', 'PartidoController@jugadorgollist');
+            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/goles/add.html', 'PartidoController@jugadorgol_get');
             Route::post('fechas/detail/partido/gol.html', 'PartidoController@jugadorgol_post');
+            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/delete.html', 'PartidoController@jugadorgoldelete');//elimina un gol de un jugador de un partido
+
             Route::get('fechas/detail/partido/insidencia/{id1}/{id2}', 'PartidoController@jugadorinsidencia');
-            Route::get('fechas/detail/partido/gol/eliminar/{id1}/{id2}/{id3}', 'PartidoController@jugadorgoldelete');//elimina un gol de un jugador de un partido
 });
 
 //===================Funciones del Equipo====================

@@ -2,43 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09103633-f4d3-4bd2-b2bf-a3360e2d5214" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/user_equipo/camiseta.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/user_equipo/logo.blade.php" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\movimiento\egresos\listar.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\movimiento\ingresos\listar.blade.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\public\storage\equipo\agronomia.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\public\storage\equipo\economia.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\public\storage\equipo\educacion.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\public\storage\equipo\informatica.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\public\storage\equipo\mecanica.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CampeonatoController.php" afterPath="$PROJECT_DIR$/app/controllers/CampeonatoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Egreso.php" afterPath="$PROJECT_DIR$/app/models/Egreso.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/EquipoController.php" afterPath="$PROJECT_DIR$/app/controllers/EquipoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Ingreso.php" afterPath="$PROJECT_DIR$/app/models/Ingreso.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Movimiento.php" afterPath="$PROJECT_DIR$/app/models/Movimiento.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/MovimientoController.php" afterPath="$PROJECT_DIR$/app/controllers/MovimientoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/TorneoController.php" afterPath="$PROJECT_DIR$/app/controllers/TorneoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/integrante/add.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/integrante/add.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/movimiento/egresos/agregar.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/movimiento/egresos/agregar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/movimiento/ingresos/agregar.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/movimiento/ingresos/agregar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/_templates/apptemp.blade.php" afterPath="$PROJECT_DIR$/app/views/_templates/apptemp.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab1.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab3.blade.php" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\gol\editar.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\gol\insertar.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\gol\lista.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\incidencia\editar.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\incidencia\insertar.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\xampp\htdocs\SCDW\app\views\user_com_organizing\incidencia\listar.blade.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/FechasController.php" afterPath="$PROJECT_DIR$/app/controllers/FechasController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/PartidoController.php" afterPath="$PROJECT_DIR$/app/controllers/PartidoController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/detail.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/jugador/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/jugador/detail.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/detail.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/movimiento/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/movimiento/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_equipo/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_equipo/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_normal/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_normal/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/insert.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/insert.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/insertar.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/insertar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/arbitros/list.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/arbitros/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/integrante/list.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/integrante/list.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/listar.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/listar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/arbitros/new.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/arbitros/new.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/list.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/list.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/_templates/sidebar.blade.php" afterPath="$PROJECT_DIR$/app/views/_templates/sidebar.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="system_championship_wil.iws" />
@@ -73,8 +54,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.730769" vertical-offset="2450" max-vertical-offset="3570">
-              <caret line="159" column="82" selection-start-line="159" selection-start-column="82" selection-end-line="159" selection-end-column="82" />
+            <state vertical-scroll-proportion="-3.0545454" vertical-offset="2637" max-vertical-offset="3587">
+              <caret line="165" column="96" selection-start-line="165" selection-start-column="86" selection-end-line="165" selection-end-column="96" />
               <folding>
                 <element signature="e#7#392#0#PHP" expanded="true" />
               </folding>
@@ -82,94 +63,90 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TorneoController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/TorneoController.php">
+      <file leaf-file-name="PartidoController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/PartidoController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.836364" vertical-offset="1447" max-vertical-offset="1972">
-              <caret line="104" column="50" selection-start-line="104" selection-start-column="50" selection-end-line="104" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="2295">
-              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CampeonatoController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/CampeonatoController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5272727" vertical-offset="393" max-vertical-offset="2720">
-              <caret line="41" column="50" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/jugador/detail.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42307693" vertical-offset="487" max-vertical-offset="1020">
-              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/detail.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.327273" vertical-offset="0" max-vertical-offset="1309">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="100" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385" vertical-offset="612" max-vertical-offset="1343">
-              <caret line="53" column="88" selection-start-line="53" selection-start-column="88" selection-end-line="53" selection-end-column="88" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="insertar.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/insertar.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.423077" vertical-offset="572" max-vertical-offset="1105">
-              <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.478424" vertical-offset="0" max-vertical-offset="3655">
-              <caret line="15" column="100" selection-start-line="15" selection-start-column="100" selection-end-line="15" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.25992063" vertical-offset="3405" max-vertical-offset="4964">
+              <caret line="297" column="62" selection-start-line="297" selection-start-column="62" selection-end-line="297" selection-end-column="62" />
               <folding>
-                <element signature="e#1718#3055#0#HTML" expanded="false" />
-                <element signature="e#3061#4042#0#HTML" expanded="false" />
+                <element signature="n#partido#0;n#PartidoController#0;n#!!top" expanded="false" />
+                <element signature="e#4631#8223#0#PHP" expanded="false" />
+                <element signature="e#8050#8223#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="insert.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/insert.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="1207">
-              <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+            <state vertical-scroll-proportion="-14.384615" vertical-offset="204" max-vertical-offset="1003">
+              <caret line="34" column="79" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/list.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.1153846" vertical-offset="28" max-vertical-offset="1139">
+              <caret line="11" column="100" selection-start-line="11" selection-start-column="100" selection-end-line="11" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JugadorEnJuego.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/JugadorEnJuego.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.230769" vertical-offset="204" max-vertical-offset="884">
+              <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.9454546" vertical-offset="0" max-vertical-offset="1479">
+              <caret line="16" column="95" selection-start-line="16" selection-start-column="95" selection-end-line="16" selection-end-column="95" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tab3.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab3.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="918">
+              <caret line="7" column="91" selection-start-line="7" selection-start-column="91" selection-end-line="7" selection-end-column="91" />
+              <folding>
+                <element signature="e#2651#4476#0#HTML" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tab1.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab1.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.290909" vertical-offset="3933" max-vertical-offset="4947">
+              <caret line="242" column="59" selection-start-line="238" selection-start-column="7" selection-end-line="242" selection-end-column="59" />
+              <folding>
+                <marker date="1450586826751" expanded="true" signature="396:584" placeholder="..." />
+                <marker date="1450586826751" expanded="true" signature="981:1190" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Jugador.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/Jugador.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="442">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -183,18 +160,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/ArbitroController.php" />
-        <option value="$PROJECT_DIR$/app/models/Arbitro.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/Addarbitro.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/ArbitroxpartidoController.php" />
         <option value="$PROJECT_DIR$/app/models/ArbitroPorPartido.php" />
-        <option value="$PROJECT_DIR$/app/controllers/FechasController.php" />
         <option value="$PROJECT_DIR$/app/models/JugadorEnJuego.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/insert.blade.php" />
         <option value="$PROJECT_DIR$/app/models/Gol.php" />
-        <option value="$PROJECT_DIR$/app/controllers/PartidoController.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/list.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/JugadorControllerrichar.php" />
         <option value="$PROJECT_DIR$/app/models/Jugador.php" />
         <option value="$PROJECT_DIR$/app/views/alerts/success.blade.php" />
@@ -225,15 +194,23 @@
         <option value="$PROJECT_DIR$/app/controllers/MovimientoController.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/listar.blade.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/insertar.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/CampeonatoController.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/jugador/detail.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/controllers/TorneoController.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/equipojugador/detail.blade.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/FechasController.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/detail.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab1.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/list.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/insert.blade.php" />
+        <option value="$PROJECT_DIR$/app/routes.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab3.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/PartidoController.php" />
       </list>
     </option>
   </component>
@@ -283,6 +260,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SCDW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system_championship_wil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCDW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Lumino Pro wilson (ejecuten el index)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -545,6 +536,134 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="integrante" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system_championship_wil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCDW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user_com_organizing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fecha" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system_championship_wil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCDW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user_com_organizing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fecha" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partido" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system_championship_wil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCDW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user_com_organizing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fecha" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partido" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tabs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system_championship_wil" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCDW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user_com_organizing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fecha" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partido" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="insidencia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gol" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -874,110 +993,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/Jugador.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="442">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/editar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39285713" vertical-offset="669" max-vertical-offset="1173">
-          <caret line="51" column="74" selection-start-line="51" selection-start-column="71" selection-end-line="51" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8076925" vertical-offset="4830" max-vertical-offset="8823">
-          <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_administrator/docente/insertar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="255" max-vertical-offset="2057">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/MiembroComJusticiaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537" vertical-offset="510" max-vertical-offset="2584">
-          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/alerts/success.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21794872" vertical-offset="0" max-vertical-offset="546">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/alerts/allsuccess.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031894933" vertical-offset="0" max-vertical-offset="533">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/JugadorControllerrichar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.9615383" vertical-offset="1579" max-vertical-offset="2431">
-          <caret line="102" column="60" selection-start-line="102" selection-start-column="60" selection-end-line="102" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/DocenteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077" vertical-offset="1224" max-vertical-offset="2890">
-          <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_administrator/docente/editar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6378987" vertical-offset="153" max-vertical-offset="1870">
-          <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ComisionOrganizadorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="1462">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/UserallController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9454546" vertical-offset="714" max-vertical-offset="3196">
-          <caret line="58" column="81" selection-start-line="58" selection-start-column="81" selection-end-line="58" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_equipo/jugador/detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8292683" vertical-offset="204" max-vertical-offset="918">
-          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lumino Pro wilson (ejecuten el index)/buttons.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.6" vertical-offset="6241" max-vertical-offset="7191">
@@ -1009,14 +1024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22326455" vertical-offset="1326" max-vertical-offset="6511">
           <caret line="85" column="62" selection-start-line="85" selection-start-column="62" selection-end-line="85" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_equipo/jugador/list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38273922" vertical-offset="0" max-vertical-offset="1326">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1154,26 +1161,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/movimiento/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.576923" vertical-offset="0" max-vertical-offset="1343">
-          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/MovimientoController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.192307" vertical-offset="1460" max-vertical-offset="2040">
           <caret line="103" column="40" selection-start-line="103" selection-start-column="40" selection-end-line="103" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/listar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308" vertical-offset="17" max-vertical-offset="1326">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1234,44 +1225,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="2295">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.115385" vertical-offset="612" max-vertical-offset="1343">
           <caret line="53" column="88" selection-start-line="53" selection-start-column="88" selection-end-line="53" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.730769" vertical-offset="2450" max-vertical-offset="3570">
-          <caret line="159" column="82" selection-start-line="159" selection-start-column="82" selection-end-line="159" selection-end-column="82" />
-          <folding>
-            <element signature="e#7#392#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/TorneoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.836364" vertical-offset="1447" max-vertical-offset="1972">
-          <caret line="104" column="50" selection-start-line="104" selection-start-column="50" selection-end-line="104" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="1207">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -1284,13 +1241,187 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Torneo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.031135531" vertical-offset="0" max-vertical-offset="697">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/TorneoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0545454" vertical-offset="1447" max-vertical-offset="1972">
+          <caret line="95" column="52" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/FechasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.884615" vertical-offset="1171" max-vertical-offset="1717">
+          <caret line="84" column="62" selection-start-line="84" selection-start-column="62" selection-end-line="84" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="18" column="100" selection-start-line="18" selection-start-column="100" selection-end-line="18" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/movimiento/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1153846" vertical-offset="19" max-vertical-offset="1343">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/detail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31894934" vertical-offset="0" max-vertical-offset="2312">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.478424" vertical-offset="0" max-vertical-offset="3655">
-          <caret line="15" column="100" selection-start-line="15" selection-start-column="100" selection-end-line="15" selection-end-column="100" />
+        <state vertical-scroll-proportion="0.4465291" vertical-offset="0" max-vertical-offset="4182">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
           <folding>
-            <element signature="e#1718#3055#0#HTML" expanded="false" />
-            <element signature="e#3061#4042#0#HTML" expanded="false" />
+            <element signature="e#3131#4112#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/detail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538" vertical-offset="255" max-vertical-offset="1309">
+          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_equipo/jugador/list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.115385" vertical-offset="204" max-vertical-offset="1326">
+          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/campeonato/listar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="459">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding>
+            <element signature="e#275#2928#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lumino Pro wilson (ejecuten el index)/charts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40079364" vertical-offset="3878" max-vertical-offset="5168">
+          <caret line="240" column="8" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="8" />
+          <folding>
+            <element signature="n#div#6;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Jugador.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="442">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/JugadorEnJuego.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.230769" vertical-offset="204" max-vertical-offset="884">
+          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.9454546" vertical-offset="0" max-vertical-offset="1479">
+          <caret line="16" column="95" selection-start-line="16" selection-start-column="95" selection-end-line="16" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.1153846" vertical-offset="28" max-vertical-offset="1139">
+          <caret line="11" column="100" selection-start-line="11" selection-start-column="100" selection-end-line="11" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/insidencia/gol/insert.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.384615" vertical-offset="204" max-vertical-offset="1003">
+          <caret line="34" column="79" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab1.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.290909" vertical-offset="3933" max-vertical-offset="4947">
+          <caret line="242" column="59" selection-start-line="238" selection-start-column="7" selection-end-line="242" selection-end-column="59" />
+          <folding>
+            <marker date="1450586826751" expanded="true" signature="396:584" placeholder="..." />
+            <marker date="1450586826751" expanded="true" signature="981:1190" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/fecha/partido/tabs/tab3.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="918">
+          <caret line="7" column="91" selection-start-line="7" selection-start-column="91" selection-end-line="7" selection-end-column="91" />
+          <folding>
+            <element signature="e#2651#4476#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0545454" vertical-offset="2637" max-vertical-offset="3587">
+          <caret line="165" column="96" selection-start-line="165" selection-start-column="86" selection-end-line="165" selection-end-column="96" />
+          <folding>
+            <element signature="e#7#392#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/ArbitroPorPartido.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/PartidoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25992063" vertical-offset="3405" max-vertical-offset="4964">
+          <caret line="297" column="62" selection-start-line="297" selection-start-column="62" selection-end-line="297" selection-end-column="62" />
+          <folding>
+            <element signature="n#partido#0;n#PartidoController#0;n#!!top" expanded="false" />
+            <element signature="e#4631#8223#0#PHP" expanded="false" />
+            <element signature="e#8050#8223#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

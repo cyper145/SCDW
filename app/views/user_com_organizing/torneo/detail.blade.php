@@ -8,7 +8,7 @@
     <li><a href="{{ URL::to('/campeonato/listar');}}"><span class="glyphicon glyphicon-book"></span></a></li>
     <li><a href="{{ URL::to('/campeonato/detail/'.$codcampeonato);}}">Detalle de Campeonato</a></li>
     <li><a href="{{ URL::to('/torneo/'.$codcampeonato);}}">Torneos</a></li>
-    <li>Torneo detalle</li>
+    <li>Detalle del torneo {{$torneo->tipo}}</li>
 @stop
 
 @section('nombrevista')
@@ -53,7 +53,7 @@
                             <td>{{$val->nrofecha}}°fecha</td>
                             <td>{{$val->diafecha}}</td>
                             <td>
-                                <a class="label label-success" href="{{ URL::to( 'fechas/detail/'.$val->idfecha);}}">
+                                <a class="label label-success" href="{{URL::to( 'fechas/'.$val->idfecha.'/'.$codcampeonato.'/'.$torneo->idtorneo.'/detail.html');}}">
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>
                             </td>

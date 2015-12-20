@@ -16,6 +16,7 @@
 
 @section('nombrevista')
     @lang('Torneos')
+    <button type="submit" class="btn btn-success pull-right" onclick="history.back()">Atras</button>
 @stop
 
 @section('contenido')

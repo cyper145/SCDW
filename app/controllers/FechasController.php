@@ -82,11 +82,14 @@ class FechasController extends \BaseController {
 		//
 	}
 
-    public  function detail($idfecha)
+    public  function detail($idfecha,$codcampeonato,$idtorneo)
     {
+        $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
         $fecha = Fechas::where('idfecha','=',$idfecha)->first();
         $fixture = Fixture::where('idfecha','=',$idfecha)->get();
         return View::make('user_com_organizing.fecha.detail',compact('fecha'))
-            ->with('fixture',$fixture);
+            ->with('fixture',$fixture)
+            ->with('torneo',$torneo)
+            ->with('codcampeonato',$codcampeonato);
     }
 }
