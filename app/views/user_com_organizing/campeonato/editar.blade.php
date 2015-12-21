@@ -6,12 +6,13 @@
 
 
 @section('rutanavegacion')
-	<li><a href="{{ URL::to( '/home');}}"><span class="glyphicon glyphicon-home"></span></a></li>
-	   
+    <li><a href="{{ URL::to('/campeonato/listar');}}"><span class="glyphicon glyphicon-book"></span></a></li>
+    <li>Nuevo campeonato</li>
 @stop
 
 @section('nombrevista')
     @lang('insertar campeonato')
+    <button type="submit" class="btn btn-success pull-right" onclick="history.back()">Atras</button>
 @stop
 
 @section('contenido')

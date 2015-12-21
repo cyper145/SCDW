@@ -18,10 +18,12 @@ class CampeonatoController extends \BaseController {
         $equipos = Equipo::where('codcampeonato','=',$codcampeonato)->get();
         $campeonato = Campeonato::where("codcampeonato",'=',$codcampeonato)->where('idcom_orgdor','=',Session::get('user_idcom_orgdor'))->first();
         $Actividades = Actividad::where('codcampeonato','=',$codcampeonato)->get();
+        $configuracion=Configuracion::where('codcampeonato','=',$codcampeonato)->get();
         return View::make('user_com_organizing.campeonato.detail')
             ->with('campeonato',$campeonato)
             ->with('Actividades',$Actividades)
-            ->with('equipos',$equipos);
+            ->with('equipos',$equipos)
+            ->with('configuracion', $configuracion);
     }
 
     public function detalleequipojugador($codequipo,$codcampeonato)
@@ -47,6 +49,99 @@ class CampeonatoController extends \BaseController {
 	{
         return View::make('user_com_organizing.campeonato.insertar');
 	}
+
+	public function  actividad($codcampeonato)
+    {
+        $campeonato = Campeonato::where('codcampeonato','=',$codcampeonato)->first();
+        return  View::make('user_com_organizing.campeonato.actividad')
+        ->with('codcampeonato',$codcampeonato)
+        ->with('campeonato',$campeonato);
+
+    }
+    public function addacti($id)
+    {
+        $acti1=new Actividad();
+        $acti1->actividad=Input::get('actividad');
+        $acti1->fechainicio=Input::get('fechaI');
+        $acti1->fechafin=Input::get('fechaf');
+        $acti1->observaciones=Input::get('observacion');;
+        $acti1->codcampeonato=$id;
+        $acti1->save();
+        return Redirect::to('campeonato/detail/'.$id);
+    }
+
+    public function  configuracion($codcampeonato)
+    {
+        $campeonato = Campeonato::where('codcampeonato','=',$codcampeonato)->first();
+       return  View::make('user_com_organizing.campeonato.configuraciones')
+       ->with('codcampeonato',$codcampeonato)
+       ->with('campeonato',$campeonato);
+
+    }
+
+    public function addconfig($id)
+    {
+        $all=Input::all();
+        $configguracion1 = new Configuracion;
+        $configguracion1->descripcion="nro de ruedas";
+        $configguracion1->valor=Input::get('ruedas');
+        $configguracion1->codcampeonato=$id;
+        $configguracion1->save();
+
+        $acti1=new Actividad();
+        $acti1->actividad="limite inscriones";
+        $acti1->fechainicio=Input::get('fechaI');
+        $acti1->fechafin=Input::get('fechaf');
+        $acti1->observaciones="pasada esta fecha no habra mas inscripciones";
+        $acti1->codcampeonato=$id;
+        $acti1->save();
+
+        $acti3=new Actividad();
+        $acti3->actividad="tentativa de apertura";
+        $acti3->fechainicio=Input::get('apertura');
+        $acti3->codcampeonato=$id;
+        $acti3->save();
+
+        $acti2=new Actividad();
+        $acti2->actividad="tentativa de clausura";
+        $acti2->fechainicio=Input::get('clausura');
+        $acti2->codcampeonato=$id;
+        $acti2->save();
+
+
+        $configguracion2 = new Configuracion;
+        $configguracion2->descripcion="maximo nro de dptacademicos por equipo";
+        $configguracion2->valor=Input::get('maximo');
+        $configguracion2->codcampeonato=$id;
+        $configguracion2->save();
+
+        $configguracion3 = new Configuracion;
+        $configguracion3->descripcion="maximo nro de lugadores libres";
+        $configguracion3->valor=Input::get('maximo');
+        $configguracion3->codcampeonato=$id;
+        $configguracion3->save();
+
+        $configguracion4 = new Configuracion;
+        $configguracion4->descripcion="duracion de tiempos";
+        $configguracion4->valor=Input::get('duracion');
+        $configguracion4->codcampeonato=$id;
+        $configguracion4->save();
+
+        $configguracion5 = new Configuracion;
+        $configguracion5->descripcion="tiempo de descanso";
+        $configguracion5->valor=Input::get('descanso');
+        $configguracion5->codcampeonato=$id;
+        $configguracion5->save();
+
+        $configguracion6 = new Configuracion;
+        $configguracion6->descripcion="maximo de juagadores menores de 25 años";
+        $configguracion6->valor=Input::get('maximoM');
+        $configguracion6->codcampeonato=$id;
+        $configguracion6->save();
+
+        return Redirect::to('campeonato/detail/'.$id);
+    }
+
 
 
 	/**

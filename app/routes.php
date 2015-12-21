@@ -134,6 +134,14 @@ Route::group(array('before'=>'organ'), function()
             Route::get('campeonato/eliminar/{id}', 'CampeonatoController@delete');
             Route::get('campeonato/detail/equipo/{id1}/{id2}/detalle.html', 'CampeonatoController@detalleequipojugador');
             Route::get('campeonato/detail/equipo/{id1}/{id2}/jugador/{id3}/detail.html', 'CampeonatoController@detallejugador');
+
+            Route::get('campeonato/detail/{id}/configuracion.html', 'CampeonatoController@configuracion');
+            Route::post('campeonato/detail/{id}/configuracion/add.html', 'CampeonatoController@addconfig');
+
+            Route::get('campeonato/detail/{id}/actividad.html', 'CampeonatoController@actividad');
+            Route::post('campeonato/detail/{id}/actividad/add.html', 'CampeonatoController@addacti');
+
+
             //acta de reunion
             Route::get('acta/ver', 'ActaController@index');  
             Route::get('acta/verc', 'ActaController@conclusiones_all'); 
@@ -158,11 +166,14 @@ Route::group(array('before'=>'organ'), function()
             //torneos
             Route::get('torneo/create/{id}','TorneoController@create');
             Route::get('torneo/{id}/{id2}/detail.html','TorneoController@detail');
+            Route::get('torneo/detail/{id}/{id2}/fixture.html','TorneoController@fixture');
             Route::get('torneo/delete/{id}/{id2}','TorneoController@destroy');
             Route::resource('torneo','TorneoController');
             //fechas y partido
             Route::get('fechas/{id1}/{id2}/{id3}/detail.html','FechasController@detail');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/partido.html','PartidoController@partido');
+            Route::get('fecha/edit/{id}/{id2}', 'FechasController@actualizarfechas');
+            Route::post('fecha/edit/{id}/{id2}/add', 'FechasController@add');
             Route::post('fechas/detail/partido/arbitros/add.html', 'PartidoController@arbitroadd');
             Route::post('fechas/detail/partido/jugador/add.html', 'PartidoController@jugadoradd');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/eliminar.html', 'PartidoController@jugadordelete');//borra a un jugador del partido

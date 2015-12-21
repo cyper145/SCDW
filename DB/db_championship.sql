@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2015 a las 17:24:42
+-- Tiempo de generación: 22-12-2015 a las 00:36:30
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.9
 
@@ -20,6 +20,231 @@ SET time_zone = "+00:00";
 -- Base de datos: `db_championship`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `encuentros`(in partido varchar(8))
+begin
+   
+    create temporary table resumen(
+        codequipo varchar(8) NOT NULL,
+        idequipoenpartido int(4) NOT NULL,
+        codpartido varchar(8) NOT NULL,
+        nombreEquipo varchar(25) NOT NULL
+        
+    );
+    -- inserto datos en la tabla resumen
+    insert into resumen(codequipo ,idequipoenpartido, codpartido ,nombreEquipo )
+        select O.codequipo,E.idequipoenpartido,P.codpartido, O.nombre
+            from tequipoenpartido as E
+            join tpartido as P on E.codpartidoo = P.codpartido
+            join tequipo as O on E.codequipo = O.codequipo
+            where P.codpartido=partido
+            ;
+ select * from resumen;
+      drop table resumen;
+ end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listaequipo`(IN `idtorneo` INT(11))
+begin
+   
+    create temporary table resumen(
+        codequipo int(11) NOT NULL,
+        nombre varchar(25) NOT NULL,
+        logo varchar(100) NOT NULL
+        
+        
+    );
+    -- inserto datos en la tabla resumen
+    insert into resumen(codequipo ,nombre, logo)
+select E.codequipo,E.nombre, E.logo from tequipoxtorneo as p join ttorneo as O on P.idtorneo = O.idtorneo join tequipo as E on P.codequipo = E.codequipo;
+ select * from resumen;
+      drop table resumen;
+ end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `resumen_asistente`(in pid_reunion int(4) )
+begin
+   
+    create temporary table resumen(
+        id_asistente int(4) NOT NULL,
+        id_docente varchar(8) NOT NULL,
+        id_reunion int(4) NOT NULL,
+        nombre varchar(25) NOT NULL,
+        apellidopaterno varchar(25) NOT NULL,
+        apellidomaterno varchar(25) NOT NULL
+        
+    );
+    -- inserto datos en la tabla resumen
+    insert into resumen(id_asistente,id_docente ,id_reunion, nombre  ,apellidopaterno,apellidomaterno)
+        select a.idasistente,d.coddocente ,r.idreunion, d.nombre  ,d.apellidopaterno,d.apellidomaterno
+            from tasistente as a
+            join tdocente as d on a.coddocente = d.coddocente
+            join treunion as r on a.idreunion = r.idreunion
+            where a.idreunion=pid_reunion;
+      select * from resumen;
+      drop table resumen;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `resumen_conclusion`(in pid_reunion int(4) )
+begin
+   
+    create temporary table resumen(
+        id_conclusion int(4) NOT NULL ,
+        id_agenda int(4) NOT NULL,
+        id_reunion int(4) NOT NULL,
+        conclusion varchar(120) NOT NULL,
+        fecha date NOT NULL
+    
+    );
+    -- inserto datos en la tabla resumen
+    insert into resumen(id_conclusion,id_agenda ,id_reunion , conclusion ,fecha  )
+            
+            select c.nroconclusion,a.nroagenda ,r.idreunion , c.conclusion ,r.fecha 
+            from tconclusion as c
+            join tagenda as a on c.nroagenda = a.nroagenda
+            join treunion as r on a.idreunion = r.idreunion
+            where r.idreunion=pid_reunion;
+      select * from resumen;
+      drop table resumen;
+end$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fixtureaux`
+--
+
+CREATE TABLE IF NOT EXISTS `fixtureaux` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nropartido` int(11) NOT NULL,
+  `equipo1` int(11) DEFAULT NULL,
+  `equipo2` int(11) DEFAULT NULL,
+  `idfecha` int(11) NOT NULL,
+  `hora` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=144 ;
+
+--
+-- Volcado de datos para la tabla `fixtureaux`
+--
+
+INSERT INTO `fixtureaux` (`id`, `nropartido`, `equipo1`, `equipo2`, `idfecha`, `hora`) VALUES
+(14, 2, 0, 1, 1, '00:00:00'),
+(16, 4, 3, 0, 2, '00:00:00'),
+(17, 5, 2, 0, 3, '00:00:00'),
+(19, 2, 0, 2, 1, '00:00:00'),
+(21, 4, 1, 0, 2, '00:00:00'),
+(22, 5, 3, 0, 3, '00:00:00'),
+(25, 2, 0, 2, 1, '00:00:00'),
+(27, 4, 3, 0, 2, '00:00:00'),
+(28, 5, 1, 0, 3, '00:00:00'),
+(31, 2, 0, 3, 1, '00:00:00'),
+(33, 4, 1, 0, 2, '00:00:00'),
+(34, 5, 2, 0, 3, '00:00:00'),
+(36, 2, 0, 1, 1, '00:00:00'),
+(38, 4, 3, 0, 2, '00:00:00'),
+(39, 5, 2, 0, 3, '00:00:00'),
+(42, 2, 0, 3, 1, '00:00:00'),
+(44, 4, 1, 0, 2, '00:00:00'),
+(45, 5, 2, 0, 3, '00:00:00'),
+(48, 2, 0, 2, 1, '00:00:00'),
+(50, 4, 1, 0, 2, '00:00:00'),
+(51, 5, 3, 0, 3, '00:00:00'),
+(53, 1, 1, 0, 1, '00:00:00'),
+(54, 1, 1, 0, 1, '00:00:00'),
+(55, 1, 1, 0, 1, '00:00:00'),
+(56, 1, 1, 0, 1, '00:00:00'),
+(57, 1, 1, 0, 1, '00:00:00'),
+(58, 1, 1, 0, 1, '00:00:00'),
+(59, 1, 1, 0, 1, '00:00:00'),
+(60, 1, 1, 0, 1, '00:00:00'),
+(61, 1, 1, 0, 1, '00:00:00'),
+(62, 1, 1, 0, 1, '00:00:00'),
+(63, 1, 1, 0, 1, '00:00:00'),
+(64, 1, 1, 0, 1, '00:00:00'),
+(65, 1, 1, 0, 1, '00:00:00'),
+(66, 1, 1, 0, 1, '00:00:00'),
+(67, 1, 1, 0, 1, '00:00:00'),
+(68, 1, 1, 0, 1, '00:00:00'),
+(69, 1, 1, 0, 1, '00:00:00'),
+(70, 1, 1, 0, 1, '00:00:00'),
+(71, 1, 1, 0, 1, '00:00:00'),
+(72, 1, 1, 0, 1, '00:00:00'),
+(73, 1, 1, 0, 1, '00:00:00'),
+(74, 1, 1, 0, 1, '00:00:00'),
+(75, 1, 1, 0, 1, '00:00:00'),
+(76, 1, 1, 0, 1, '00:00:00'),
+(77, 1, 1, 0, 1, '00:00:00'),
+(78, 1, 1, 0, 1, '00:00:00'),
+(79, 1, 1, 0, 1, '00:00:00'),
+(80, 1, 1, 0, 1, '00:00:00'),
+(81, 1, 1, 0, 1, '00:00:00'),
+(82, 1, 1, 0, 1, '00:00:00'),
+(83, 1, 1, 0, 1, '00:00:00'),
+(84, 1, 1, 0, 1, '00:00:00'),
+(85, 1, 1, 0, 1, '00:00:00'),
+(86, 1, 1, 0, 1, '00:00:00'),
+(87, 1, 1, 0, 1, '00:00:00'),
+(88, 1, 1, 0, 1, '00:00:00'),
+(89, 1, 1, 0, 1, '00:00:00'),
+(90, 1, 1, 0, 1, '00:00:00'),
+(91, 1, 1, 0, 1, '00:00:00'),
+(92, 1, 1, 0, 1, '00:00:00'),
+(93, 1, 1, 0, 1, '00:00:00'),
+(94, 1, 1, 0, 1, '00:00:00'),
+(95, 1, 1, 0, 1, '00:00:00'),
+(96, 1, 1, 0, 1, '00:00:00'),
+(97, 1, 1, 0, 1, '00:00:00'),
+(98, 1, 1, 0, 1, '00:00:00'),
+(99, 1, 1, 0, 1, '00:00:00'),
+(100, 1, 1, 0, 1, '00:00:00'),
+(101, 1, 1, 0, 1, '00:00:00'),
+(102, 1, 1, 0, 1, '00:00:00'),
+(103, 1, 1, 0, 1, '00:00:00'),
+(104, 1, 1, 0, 1, '00:00:00'),
+(105, 1, 1, 0, 1, '00:00:00'),
+(106, 1, 1, 0, 1, '00:00:00'),
+(107, 1, 1, 0, 1, '00:00:00'),
+(108, 1, 1, 0, 1, '00:00:00'),
+(109, 1, 1, 0, 1, '00:00:00'),
+(110, 1, 1, 0, 1, '00:00:00'),
+(111, 1, 1, 0, 1, '00:00:00'),
+(112, 1, 1, 0, 1, '00:00:00'),
+(113, 1, 1, 0, 1, '00:00:00'),
+(114, 1, 1, 0, 1, '00:00:00'),
+(115, 1, 1, 0, 1, '00:00:00'),
+(116, 1, 1, 0, 1, '00:00:00'),
+(117, 1, 1, 0, 1, '00:00:00'),
+(118, 1, 1, 0, 1, '00:00:00'),
+(119, 1, 1, 0, 1, '00:00:00'),
+(120, 1, 1, 0, 1, '00:00:00'),
+(121, 1, 1, 0, 1, '00:00:00'),
+(122, 1, 1, 0, 1, '00:00:00'),
+(123, 1, 1, 0, 1, '00:00:00'),
+(124, 1, 1, 0, 1, '00:00:00'),
+(125, 1, 1, 0, 1, '00:00:00'),
+(126, 1, 1, 0, 1, '00:00:00'),
+(127, 1, 1, 0, 1, '00:00:00'),
+(128, 1, 1, 0, 1, '00:00:00'),
+(129, 1, 1, 0, 1, '00:00:00'),
+(130, 1, 1, 0, 1, '00:00:00'),
+(131, 1, 1, 0, 1, '00:00:00'),
+(132, 1, 1, 0, 1, '00:00:00'),
+(133, 1, 1, 0, 1, '00:00:00'),
+(134, 1, 1, 0, 1, '00:00:00'),
+(135, 1, 1, 0, 1, '00:00:00'),
+(136, 1, 1, 0, 1, '00:00:00'),
+(137, 1, 1, 0, 1, '00:00:00'),
+(138, 1, 1, 0, 1, '00:00:00'),
+(139, 1, 1, 0, 1, '00:00:00'),
+(140, 1, 1, 0, 1, '00:00:00'),
+(141, 1, 1, 0, 1, '00:00:00'),
+(142, 1, 1, 0, 1, '00:00:00'),
+(143, 1, 1, 0, 1, '00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -35,7 +260,18 @@ CREATE TABLE IF NOT EXISTS `tactividad` (
   `codcampeonato` varchar(8) NOT NULL,
   PRIMARY KEY (`nroactividad`,`codcampeonato`),
   KEY `codcampeonato` (`codcampeonato`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `tactividad`
+--
+
+INSERT INTO `tactividad` (`nroactividad`, `actividad`, `fechainicio`, `fechafin`, `observaciones`, `codcampeonato`) VALUES
+(1, 'inicio del campeonato', '2015-12-21 00:00:00', '2015-12-22 00:00:00', 'no hay obs', '1'),
+(2, 'test de wilson', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'no hay obserbacines ', '1'),
+(3, 'limite inscriones', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'pasada esta fecha no habra mas inscripciones', '1'),
+(4, 'tentativa de apertura', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
+(5, 'tentativa de clausura', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1');
 
 -- --------------------------------------------------------
 
@@ -220,6 +456,38 @@ CREATE TABLE IF NOT EXISTS `tconclusion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tconfiguracion`
+--
+
+CREATE TABLE IF NOT EXISTS `tconfiguracion` (
+  `idconfiguracion` int(4) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
+  `valor` int(4) NOT NULL,
+  `codcampeonato` varchar(8) NOT NULL,
+  PRIMARY KEY (`idconfiguracion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Volcado de datos para la tabla `tconfiguracion`
+--
+
+INSERT INTO `tconfiguracion` (`idconfiguracion`, `descripcion`, `valor`, `codcampeonato`) VALUES
+(2, 'nro de ruedas', 2, '1'),
+(3, 'maximo nro de dptacademicos por equipo', 2, '1'),
+(4, 'maximo nro de lugadores libres', 2, '1'),
+(5, 'duracion de tiempos', 30, '1'),
+(6, 'tiempo de descanso', 5, '1'),
+(7, 'maximo de juagadores menores de 25 años', 2, '1'),
+(8, 'nro de ruedas', 44, '1'),
+(9, 'maximo nro de dptacademicos por equipo', 44, '1'),
+(10, 'maximo nro de lugadores libres', 44, '1'),
+(11, 'duracion de tiempos', 44, '1'),
+(12, 'tiempo de descanso', 44, '1'),
+(13, 'maximo de juagadores menores de 25 años', 44, '1');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tdocente`
 --
 
@@ -379,7 +647,8 @@ CREATE TABLE IF NOT EXISTS `tfechas` (
 --
 
 INSERT INTO `tfechas` (`idfecha`, `diafecha`, `nrofecha`, `lugar`, `idtorneo`) VALUES
-(1, '2015-12-18', 1, 'Estadio universitario', 1);
+(1, '2015-12-18', 1, 'Estadio universitario', 1),
+(1101, '0000-00-00', 1, 'nose', 1);
 
 -- --------------------------------------------------------
 
@@ -405,8 +674,8 @@ CREATE TABLE IF NOT EXISTS `tfixture` (
 --
 
 INSERT INTO `tfixture` (`idfixture`, `nropartido`, `hora`, `equipo1`, `equipo2`, `idfecha`) VALUES
-(1, '1', '09:00:00', 1, 2, 1),
-(2, '2', '11:00:00', 3, 2, 1);
+(1, '1', '08:30:00', 1, 2, 1),
+(2, '2', '10:00:00', 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -420,7 +689,7 @@ CREATE TABLE IF NOT EXISTS `tgol` (
   `idjugadorenjuego` int(4) NOT NULL,
   PRIMARY KEY (`idgol`,`idjugadorenjuego`),
   KEY `fk_tgol_tjugadorenjuego1_idx` (`idjugadorenjuego`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tgol`

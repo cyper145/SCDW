@@ -29,6 +29,8 @@
                     <a class="btn btn-info" href="#">Bases del campeonato</a>
                     <a class="btn btn-info" href="#equipos">Ver Equipos</a>
                     <a class="btn btn-info" href="#actividades">Actividades</a>
+                    <a class="btn btn-info" href="#configuracion">configuracion</a>
+                    <a class="btn btn-info" href="/SCDW/public/acta/ver">acta de reuniones</a>
                     <div class="panel-tools pull-right">
                         <div class="form-inline">
                             {{ Form::open(['route'=> ['torneo.show',$campeonato->codcampeonato], 'method'=>'get']) }}
@@ -46,7 +48,15 @@
     <div class="row row-no-gutter col-no-gutter-container" id="actividades">
         <div class="col-md-12 col-no-gutter">
             <div class="panel panel-default">
-                <div class="panel-heading">Actividades</div>
+                <div class="panel-heading">Actividades
+                    <div class="panel-tools pull-right">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <a class="btn btn-info margin text-lowercase" type="button" href="{{$campeonato->codcampeonato}}/actividad.html"><span class="glyphicon glyphicon-plus"></span>Nueva Actividad</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <table data-toggle="table" data-url="tables/data2.json">
                         <thead>
@@ -55,7 +65,6 @@
                             <th>Fecha Inicio</th>
                             <th>Fecha Fin</th>
                             <th>Observaciones</th>
-                            <th>Acción</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -65,11 +74,6 @@
                                 <td>{{$val->fechainicio}}</td>
                                 <td>{{$val->fechafin}}</td>
                                 <td>{{$val->observaciones}}</td>
-                                <td>
-                                    <a class="label label-success" href="jugador/detail/{{ $val->nroactividad}}" >
-                                        <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
-                                    </a><br>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -82,6 +86,45 @@
         </div>
     </div>
     <br>
+
+    <div class="row row-no-gutter col-no-gutter-container" id="configuracion">
+            <div class="col-md-12 col-no-gutter">
+            <div class="panel panel-default">
+                <div class="panel-heading">configuracion
+                    <div class="panel-tools pull-right">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <a class="btn btn-info margin text-lowercase" type="button" href="{{$campeonato->codcampeonato}}/configuracion.html"><span class="glyphicon glyphicon-plus"></span>Agregar Configuracion</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table data-toggle="table" data-url="tables/data2.json">
+                        <thead>
+                        <tr>
+                            <th>descripcion</th>
+                            <th>valor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($configuracion as $val)
+                            <tr>
+                                <td>{{$val->descripcion}}</td>
+                                <td>{{$val->valor}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <a class="btn btn-success" href="#">Aceptar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
     <div class="row col-no-gutter-container" id="equipos">
         <div class="col-lg-12 col-no-gutter">
             <div class="panel panel-success">

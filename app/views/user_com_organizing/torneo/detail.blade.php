@@ -29,8 +29,8 @@
                 <a class="btn btn-danger" href="#posiciones">Tabla de posiciones</a>
                 <a class="btn btn-info" href="#goleadores">Tabla de goleadores</a>
                 <a class="btn btn-success" href="#equipos">Ver Equipos</a>
-                <a class="btn btn-primary" href="#fixture">Generar Fixture</a>
-                <a class="btn btn-primary" href="#fixture">Ver Fixture</a>
+                <a class="btn btn-primary" href="{{ URL::to('torneo/detail/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/fixture.html');}}">Generar Fixture</a>
+                <a class="btn btn-primary" href="#fixture">Ver Fixture del {{$torneo->tipo}}</a>
             </div>
         </div>
     </div>
@@ -39,6 +39,9 @@
         <div class="panel panel-warning">
             <div class="panel-heading">Fechas</div>
             <div class="panel-body color-orange">
+                <div class="panel-footer">
+                    <a class="btn btn-info" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo);}}">actulizar la fechas</a>
+                </div>
                 <table data-toggle="table" data-url="tables/data2.json">
                     <thead>
                     <tr>
@@ -164,6 +167,79 @@
             <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span> Fixtures del torneo {{$torneo->tipo}}</div>
             <div class="panel-body color-orange">
                 <!-- aqui se pondra el fixture del torneo -->
+                   <div class="panel panel-footer">
+                    <a class="btn btn-info" href={{"/SCDW/public/fixture/detalle/".$campeonato->codcampeonato."/".$torneo->idtorneo}}>editar fixture</a></div>
+
+                <?php
+                if($nroequipos % 2!=0)
+                    $nroequipos++;
+                $nrofechas=$nroequipos-1;
+                ?>
+
+                <?php for ($i=0;$i<$nrofechas;$i++){?>
+                <?php $fecha=$i+1;?>
+
+                <div class="panel-info" id="{{$fecha}}">
+                    <div class="panel-heading">
+                        FECHA {{$fecha}}
+                    </div>
+                    <div class="panel-body">
+                        <table data-toggle="table" data-url="tables/data1.json">
+                            <thead>
+                            <tr>
+                                <th>primer equipo </th>
+                                <th>segundo equipo</th>
+                                <th>fecha</th>
+                                <th>hora </th>
+                                <th>acciones</th>
+                            </tr>
+                            </thead>
+                            <?php $fixturefecha=Fixture::where('idfecha', '=',$fecha )->get();?>
+                            <?php $fixture=Fixtureaux::where('idfecha', '=',$fecha )->get();?>
+                            <tbody>
+                            <?php $descansa=0; ?>
+                            @foreach($fixture as $value)
+                                <?php if($value->equipo1==0){?>
+                                <?php $descansa=$value->equipo2;?>
+                                <?php }?>
+                                <?php if($value->equipo2==0){?>
+                                <?php $descansa=$value->equipo1;?>
+                                <?php }?>
+                            @endforeach
+
+                            @foreach($fixturefecha as $val)
+                                <tr>
+                                    <td>{{Equipo::find($val->equipo1)->nombre}}</td>
+                                    <td>{{Equipo::find($val->equipo2)->nombre}}</td>
+                                    <td>{{$val->idfecha}}</td>
+                                    <td>{{$val->hora}}</td>
+                                    <td>
+                                        <a class="label label-success" href="/SCDW/public/fixture/detalle/{{ $campeonato->codcampeonato}}/{{ $torneo->idtorneo}}/{{ $val->idfecha}}" >
+                                            <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
+                                        </a><br>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <table class="table" data-align="table">
+                            <thead>
+                            @if($descansa!=0)
+                                <tr>
+                                    <th>
+                                        {{ "descansa ".Equipo::find($descansa)->nombre}}
+                                    </th>
+                                </tr>
+                            @endif
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <?php }?>
+
             </div>
             <div class="panel-footer">
                 <a class="btn btn-primary" href="#">Aceptar</a>

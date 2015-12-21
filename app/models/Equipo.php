@@ -3,6 +3,7 @@
 class Equipo extends Eloquent{
     protected $table = 'tequipo';
     public $timestamps= false;
+    protected $primaryKey = 'codequipo';
     
     public static function editar($idusuario,$input)
     {
