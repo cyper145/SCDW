@@ -59,7 +59,7 @@ class PDF extends baseFpdf
         $this->SetLineWidth(.3);
         $this->SetFont('','B');
 
-        $w = array(13, 23,28,33,38,43,48,53,58,63 );
+        $w = array(13,40,13,13,13,13,13,13,13,30 );
         for($i=0;$i<count($header);$i++)
             $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
         $this->Ln();
@@ -96,7 +96,7 @@ class PDF extends baseFpdf
         $this->SetLineWidth(.3);
         $this->SetFont('','B');
 
-        $w = array(13,28,43 );
+        $w = array(13,80,53,50 );
         for($i=0;$i<count($header);$i++)
             $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
         $this->Ln();
@@ -113,7 +113,7 @@ class PDF extends baseFpdf
             $docente=Docente::find($jugador);
             $this->Cell($w[0],6,$gg++,'LR',0,'L',$fill);
             $this->Cell($w[1],6,$docente->nombre." ".$docente->apellidopaterno." ".$docente->apellidomaterno,'LR',0,'L',$fill);
-            $this->Cell($w[2],6,$row->codicion,'LR',0,'L',$fill);
+            $this->Cell($w[2],6,$row->condicion,'LR',0,'L',$fill);
             $this->Cell($w[3],6,$row->nombre,'LR',0,'L',$fill);
 
             $this->Ln();

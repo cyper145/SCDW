@@ -416,6 +416,8 @@ class TorneoController extends \BaseController {
     }
     public function reportes($idcampeonato,$idtorneo)
     {
+        //$pdf=new PDF('P', 'mm', '200, 300');
+        //$pdf=new FPDF('L','mm','A4');
         $fpdf = new PDF();
         $tabla= DB::select('call TABLAPOSICIONES');
         $columnas = ['NRO','EQUIPO','PJ','PG','PE','PP','GF','GE','DG','PUNTAJE'];

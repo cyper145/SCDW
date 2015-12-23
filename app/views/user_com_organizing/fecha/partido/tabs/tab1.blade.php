@@ -26,7 +26,13 @@
             <div class="panel-tools pull-right">
                 <div class="form-inline">
                     <div class="form-group">
-                        <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="#"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
+                        {{Form::open(array('method' => 'POST', 'url' => '/fechas/'.$codcampeonato.'/'.$torneo->idtorneo.'/'.$idfecha.'/'.$partido->codpartido.'/partido.html/planilla/'.$fixture->dataEquipo1[0]->codequipo, 'role' => 'form'))}}
+
+                        <div class="form-group">
+                            <p>{{Form::submit('PDF', array('class' => 'btn btn-primary'))}}</p>
+                        </div>
+
+                        {{Form::close()}}
                     </div>
                 </div>
             </div>

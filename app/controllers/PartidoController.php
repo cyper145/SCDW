@@ -132,7 +132,23 @@ public function partido_all()
 	{
 		//
 	}
+    public function planilla($codcampeonato,$idtorneo,$idfecha,$codpartido,$codequipo)
+    {
+        //$pdf=new PDF('P', 'mm', '200, 300');
+        $fpdf = new PDF();
+        $tabla= DB::select('call plantilla(?,?,?)',array($idtorneo,$codpartido,$codequipo));
+        $columnas = ['NRO','nombre y apellidos','condicion','equipo'];
+        $fpdf->AddPage();
+        $fpdf->Cell(80);
+        $fpdf->Cell(30,5,'planilla de jugadores',0,1,'C');
+        $fpdf->SetFont('Arial','B',9);
+        $fpdf->Ln(2);
+        $fpdf->SetFont('Arial','B',16);
 
+        $fpdf->planilla($columnas,$tabla);
+        $fpdf->Output();
+        exit;
+    }
 
 	/**
 	 * Store a newly created resource in storage.
