@@ -87,4 +87,39 @@ class PDF extends baseFpdf
         }
         $this->Cell(array_sum($w),0,'','T');
     }
+
+    function planilla($header, $data)
+    {
+        $this->SetFillColor(100,100,100);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(0,0,0);
+        $this->SetLineWidth(.3);
+        $this->SetFont('','B');
+
+        $w = array(13,28,43 );
+        for($i=0;$i<count($header);$i++)
+            $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
+        $this->Ln();
+
+        $this->SetFillColor(224,235,255);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+
+        $fill = false;
+        $gg=1;
+        foreach($data as $row)
+        {
+            $jugador=Jugador::find($row->idjugador)->coddocente;
+            $docente=Docente::find($jugador);
+            $this->Cell($w[0],6,$gg++,'LR',0,'L',$fill);
+            $this->Cell($w[1],6,$docente->nombre." ".$docente->apellidopaterno." ".$docente->apellidomaterno,'LR',0,'L',$fill);
+            $this->Cell($w[2],6,$row->codicion,'LR',0,'L',$fill);
+            $this->Cell($w[3],6,$row->nombre,'LR',0,'L',$fill);
+
+            $this->Ln();
+            $fill = !$fill;
+        }
+        $this->Cell(array_sum($w),0,'','T');
+    }
+
 }
