@@ -11,7 +11,7 @@
     @if(!Session::has('user_id'))<!-- si no hay ninguna sesion iniciada-->
     
         <!-- ////////////////////////////////////BEGIN USER NORMAL////////////////////////////////////-->
-        
+
         <li><a href="{{URL::to('tablaposicion/ver.html')}}"><span class="glyphicon glyphicon-stats"></span> Ver Tabla de posiciones</a></li>
 
         <!-- ////////////////////////////////////END USER NORMAL////////////////////////////////////-->

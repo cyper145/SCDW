@@ -90,6 +90,8 @@ class UsernormalController extends \BaseController {
 
     public function tablaposiciones()
     {
+
+        $tabla= DB::select('call TABLAPOSICIONES');
         $ultimafecha = Campeonato::max('fechacreacion');
         $campeonatoactual = Campeonato::where('fechacreacion','=',$ultimafecha)->first();
         $idcomision = $campeonatoactual->idcom_orgdor;
@@ -97,7 +99,8 @@ class UsernormalController extends \BaseController {
         $estadocampeonato = $campeonatoactual->estado;
         //echo $campeonatoactual->idcom_orgdor;
         //print_r($campeonatoactual->nombre);
-        return View::make('user_normal.tablaposicion')->with('campeonatoactual',$campeonatoactual);
+        return View::make('user_normal.tablaposicion')->with('campeonatoactual',$campeonatoactual)
+            ->with('tabla',$tabla);
     }
 
 }

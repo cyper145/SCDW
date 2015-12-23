@@ -34,12 +34,59 @@
 				</div>
 			</div>
 		</div><!--/.row-->
-        <?php $d = 4;
-        echo $d;?>
+
 
 
 	</div>	<!--/.main-->
+    <div class="col-md-12" id="posiciones">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Tabla de Colocaciones </div>
+            <div class="panel-body color-orange">
+
+                <table data-toggle="table" data-url="tables/data2.json">
+                    <thead>
+                    <tr>
+                        <th>nro</th>
+                        <th>Equipos</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PE</th>
+                        <th>PP</th>
+                        <th>GF</th>
+                        <th>GE</th>
+                        <th>DG</th>
+                        <th>Puntos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $nro=1;?>
+                    @foreach($tabla as $value)
+                        <tr>
+                            <td>{{$nro++}}</td>
+                            <td>{{$value->equipo}}</td>
+                            <td>{{$value->PJ}}</td>
+                            <td>{{$value->PG}}</td>
+                            <td>{{$value->PE}}</td>
+                            <td>{{$value->PP}}</td>
+                            <td> {{$value->GF}}</td>
+                            <td>{{$value->GE}}</td>
+                            <td>{{$value->DG}}</td>
+                            <td>{{$value->puntaje}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-danger" href="#">Aceptar</a>
+            </div>
+        </div>
+    </div>
+
+
+
 @section ('scrips')
+    <script src="{{asset('/js/bootstrap-table.js')}}"></script>
     <script type="text/javascript">
         // nombre de equipos            // valor de
         var a = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
