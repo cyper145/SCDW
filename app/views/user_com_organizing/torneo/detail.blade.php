@@ -25,48 +25,11 @@
                 <strong class="primary-font">Dia de Inicio: </strong><span class="text-primary">{{$torneo->diainicio}}</span><br>
             </div>
             <div class="panel panel-footer">
-                <a class="btn btn-warning" href="#fechas">Ver Fechas</a>
                 <a class="btn btn-danger" href="#posiciones">Tabla de posiciones</a>
                 <a class="btn btn-info" href="#goleadores">Tabla de goleadores</a>
                 <a class="btn btn-success" href="#equipos">Ver Equipos</a>
                 <a class="btn btn-primary" href="{{ URL::to('torneo/detail/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/fixture.html');}}">Generar Fixture</a>
                 <a class="btn btn-primary" href="#fixture">Ver Fixture del {{$torneo->tipo}}</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-12" id="fechas">
-        <div class="panel panel-warning">
-            <div class="panel-heading">Fechas</div>
-            <div class="panel-body color-orange">
-                <div class="panel-footer">
-                    <a class="btn btn-info" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo);}}">actulizar la fechas</a>
-                </div>
-                <table data-toggle="table" data-url="tables/data2.json">
-                    <thead>
-                    <tr>
-                        <th>Numero de fecha</th>
-                        <th>Dia de ejecucion de la fecha</th>
-                        <th>Acción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($fechas as $val)
-                        <tr>
-                            <td>{{$val->nrofecha}}°fecha</td>
-                            <td>{{$val->diafecha}}</td>
-                            <td>
-                                <a class="label label-success" href="{{URL::to( 'fechas/'.$val->idfecha.'/'.$codcampeonato.'/'.$torneo->idtorneo.'/detail.html');}}">
-                                    <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
-                                </a><br>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer">
-                <a class="btn btn-warning" href="#">Aceptar</a>
             </div>
         </div>
     </div>
@@ -192,8 +155,6 @@
             <div class="panel-body color-orange">
                 <!-- aqui se pondra el fixture del torneo -->
                    <div class="panel panel-footer">
-                    <a class="btn btn-info" href={{"/SCDW/public/fixture/detalle/".$campeonato->codcampeonato."/".$torneo->idtorneo}}>editar fixture</a></div>
-
                 <?php
                 if($nroequipos % 2!=0)
                     $nroequipos++;
@@ -206,6 +167,10 @@
                 <div class="panel-info" id="{{$fecha}}">
                     <div class="panel-heading">
                         FECHA {{$fecha}}
+                        <div class="pull-right">
+                            <a class="btn btn-success" href="{{URL::to( 'fechas/1101/'.$codcampeonato.'/'.$torneo->idtorneo.'/detail.html');}}">detalle</a>
+                            <a class="btn btn-success" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo);}}">Programar dia y hora de la Fecha</a>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <table data-toggle="table" data-url="tables/data1.json">
@@ -260,10 +225,8 @@
                     </div>
 
                 </div>
-
-
                 <?php }?>
-
+                    </div>
             </div>
             <div class="panel-footer">
                 <a class="btn btn-primary" href="#">Aceptar</a>
