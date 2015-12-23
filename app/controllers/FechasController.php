@@ -49,21 +49,23 @@ class FechasController extends \BaseController
         $cod=$nro2;
         return $cod;
     }
-    public function actualizarfechas($idcampeonato,$idtorneo)
+    public function actualizarfechas($idcampeonato,$idtorneo,$nrofecha)
     {
         $campeonato = Campeonato::where('codcampeonato','=',$idcampeonato)->first();
         $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
         $fixture=Fixture::all();
-        return View::make('user_com_organizing.fecha.actualizar')->with('fixture',$fixture)->with('torneo',$torneo)->with('campeonato',$campeonato);
-
+        return View::make('user_com_organizing.fecha.actualizar')
+            ->with('fixture',$fixture)
+            ->with('torneo',$torneo)
+            ->with('nrofecha',$nrofecha)
+            ->with('idtorneo',$idtorneo)
+            ->with('idcampeonato',$idcampeonato)
+            ->with('campeonato',$campeonato);
     }
     public function add($idcampeonato,$idtorneo)
     {
         $input = Input::all();
-
         $rules = array(
-
-            'nrofecha' => 'required',
             'fecha' => 'required',
             'horainicio' => 'required',
             'lugar' => 'required'
@@ -75,23 +77,22 @@ class FechasController extends \BaseController
         }
         else
         {
-            $cadena = Input::get('nrofecha');
+            $nrofecha = Input::get('nrofecha');
+            //recuperamos la fecha ingresada y lo acomodamos para ingresar a la base de datos
             $fecha = Input::get('fecha');
+            $mes = substr($fecha,0,2);
+            $dia = substr($fecha,3,2);
+            $año = substr($fecha,6,4);
+            $fecha = $año.'-'.$mes.'-'.$dia;
             $horaincio = Input::get('horainicio');
             $lugar=input::get('lugar');
             $hora=substr($horaincio,0,2);
-
             $min=substr($horaincio,4,2);
             $horaI=(int)$hora;
             $minI=(int)$min;
 
-            $nrofecha=$this->obtener1($cadena);
-            $cod=$this->obtener2($cadena);
-
-            //$nropartidos = Fixture::all()->max('idfecha');
-            $fixturefecha=Fixture::where('idfecha','=',$nrofecha)->get();;
+            $fixturefecha=Fixture::where('idfecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->get();;
             $i=1;
-
             foreach( $fixturefecha as $value)
             {
                 $mas=0;
@@ -109,15 +110,14 @@ class FechasController extends \BaseController
                 $i++;
             }
 
-            $category = new Fechas;
-            $category->idfecha= $cod;
+            $category = new Fechas();
             $category->nrofecha = $nrofecha;
             $category->lugar = $lugar;
             $category->diafecha = $fecha;
             $category->idtorneo=$idtorneo;
-
             $category->save();
-            return Redirect::to('fecha/edit/'.$idcampeonato.'/'.$idtorneo);
+
+            return Redirect::to('torneo/'.$idtorneo.'/'.$idcampeonato.'/detail.html');
         }
     }
     
@@ -202,14 +202,28 @@ class FechasController extends \BaseController
 		//
 	}
 
-    public  function detail($idfecha,$codcampeonato,$idtorneo)
+    public  function detail($nrofecha,$codcampeonato,$idtorneo)
     {
         $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
-        $fecha = Fechas::where('idfecha','=',$idfecha)->first();
-        $fixture = Fixture::where('idfecha','=',$idfecha)->get();
+        $fecha = Fechas::where('nrofecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->first();
+        $fixture = Fixture::where('idfecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->get();
+        $fixturedeequipoqueescansa = Fixtureaux::where('idfecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->first();
+        $equipoquedescansa = '';
+        if($fixturedeequipoqueescansa != '')
+        {
+            if($fixturedeequipoqueescansa->equipo1 == '')
+            {
+                $equipoquedescansa = Equipo::where('codequipo','=',$fixturedeequipoqueescansa->equipo2)->first();
+            }
+            else
+            {
+                $equipoquedescansa = Equipo::where('codequipo','=',$fixturedeequipoqueescansa->equipo1)->first();
+            }
+        }
         return View::make('user_com_organizing.fecha.detail',compact('fecha'))
             ->with('fixture',$fixture)
             ->with('torneo',$torneo)
+            ->with('equipoquedescansa',$equipoquedescansa)
             ->with('codcampeonato',$codcampeonato);
     }
 }

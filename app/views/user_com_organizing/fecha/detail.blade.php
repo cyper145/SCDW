@@ -62,7 +62,9 @@
                 </table>
             </div>
             <div class="panel-footer">
-                Descansa:
+                @if($equipoquedescansa !='')
+                    Descansa: {{$equipoquedescansa->nombre}}
+                @endif
             </div>
         </div>
     </div>

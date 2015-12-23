@@ -173,7 +173,7 @@ Route::group(array('before'=>'organ'), function()
             //fechas y partido
             Route::get('fechas/{id1}/{id2}/{id3}/detail.html','FechasController@detail');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/partido.html','PartidoController@partido');
-            Route::get('fecha/edit/{id}/{id2}', 'FechasController@actualizarfechas');
+            Route::get('fecha/edit/{id}/{id2}/{id3}', 'FechasController@actualizarfechas');
             Route::post('fecha/edit/{id}/{id2}/add', 'FechasController@add');
             Route::post('fechas/detail/partido/arbitros/add.html', 'PartidoController@arbitroadd');
             Route::post('fechas/detail/partido/jugador/add.html', 'PartidoController@jugadoradd');

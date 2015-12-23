@@ -168,8 +168,8 @@
                     <div class="panel-heading">
                         FECHA {{$fecha}}
                         <div class="pull-right">
-                            <a class="btn btn-success" href="{{URL::to( 'fechas/1101/'.$codcampeonato.'/'.$torneo->idtorneo.'/detail.html');}}">detalle</a>
-                            <a class="btn btn-success" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo);}}">Programar dia y hora de la Fecha</a>
+                            <a class="btn btn-success" href="{{URL::to( 'fechas/'.$fecha.'/'.$codcampeonato.'/'.$torneo->idtorneo.'/detail.html');}}">detalle</a>
+                            <a class="btn btn-success" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha);}}">Programar dia y hora de la Fecha</a>
                         </div>
                     </div>
                     <div class="panel-body">
