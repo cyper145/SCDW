@@ -59,7 +59,7 @@ class PDF extends baseFpdf
         $this->SetLineWidth(.3);
         $this->SetFont('','B');
 
-        $w = array(13,40,13,13,13,13,13,13,13,30 );
+        $w = array(13,40,13,13,13,13,13,13,13,28 );
         for($i=0;$i<count($header);$i++)
             $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
         $this->Ln();
@@ -81,7 +81,7 @@ class PDF extends baseFpdf
             $this->Cell($w[5],6,$row->GF,'LR',0,'L',$fill);
             $this->Cell($w[6],6,$row->GE,'LR',0,'L',$fill);
             $this->Cell($w[7],6,$row->DG,'LR',0,'L',$fill);
-            $this->Cell($w[8],6,$row->puntaje,'LR',0,'L',$fill);
+            $this->Cell($w[8],6,$row->puntaje,'LR',0,'c',$fill);
             $this->Ln();
             $fill = !$fill;
         }
