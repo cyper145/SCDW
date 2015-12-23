@@ -337,6 +337,7 @@ public function partido_all()
         return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/partido.html')->withErrors($respuesta['mensaje']);
     }
 
+    // para lod GOLES
     public function jugadorgollist($idfecha,$codcampeonato,$idtorneo,$idfixture,$idjugadorenjuego)
     {
         $golesdeljugadorenjuego = Gol::where('idjugadorenjuego','=',$idjugadorenjuego)->get();
@@ -384,6 +385,56 @@ public function partido_all()
         $respuesta['mensaje'] = 'Gol eliminado correctamente';
         return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/'.$idjugadorenjuego.'/goles.html')->withErrors($respuesta['mensaje']);
     }
+     //para las TARJETAS
+    public function jugadortarjetalist($idfecha,$codcampeonato,$idtorneo,$idfixture,$idjugadorenjuego)
+    {
+        $tarjetasdeljugadorenjuego = Tarjeta::where('idjugadorenjuego','=',$idjugadorenjuego)->get();
+        $jugadorenjuego = JugadorEnJuego::where('idjugadorenjuego','=',$idjugadorenjuego)->first();
+        $jugador = Jugador::where('idjugador','=',$jugadorenjuego->idjugador)->first();
+        return View::make('user_com_organizing.fecha.partido.insidencia.tarjeta.list')
+            ->with('idfecha',$idfecha)
+            ->with('codcampeonato',$codcampeonato)
+            ->with('idtorneo',$idtorneo)
+            ->with('idfixture',$idfixture)
+            ->with('idjugadorenjuego',$idjugadorenjuego)
+            ->with('jugador',$jugador)
+            ->with('tarjetasdeljugadorenjuego',$tarjetasdeljugadorenjuego);
+    }
+    public function jugadortarjeta_get($idfecha,$codcampeonato,$idtorneo,$idfixture,$idjugadorenjuego)
+    {
+        return View::make('user_com_organizing.fecha.partido.insidencia.tarjeta.insert')
+            ->with('idfecha',$idfecha)
+            ->with('codcampeonato',$codcampeonato)
+            ->with('idtorneo',$idtorneo)
+            ->with('idfixture',$idfixture)
+            ->with('idjugadorenjuego',$idjugadorenjuego);
+    }
+
+    public  function jugadortarjeta_post()
+    {
+        $idfecha = Input::get('idfecha');
+        $codcampeonato = Input::get('codcampeonato');
+        $idtorneo = Input::get('idtorneo');
+        $idfixture = Input::get('idfixture');
+        $idjugadorenjuego = Input::get('idjugadorenjuego');
+
+        $newtarjeta = new Tarjeta();
+        $newtarjeta->tipo = Input::get('tipo');
+        $newtarjeta->minuto = Input::get('minuto');
+        $newtarjeta->idjugadorenjuego = $idjugadorenjuego;
+        $newtarjeta->save();
+        $respuesta['mensaje'] = 'Tarjeta agregado correctamente';
+        return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/'.$idjugadorenjuego.'/tarjeta.html')->withErrors($respuesta['mensaje']);
+    }
+
+    public function jugadortarjetadelete($idfecha,$codcampeonato,$idtorneo,$idfixture,$idjugadorenjuego,$idtarjeta)
+    {
+        Tarjeta::find($idtarjeta)->delete();
+        $respuesta['mensaje'] = 'Tarjeta eliminado correctamente';
+        return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/'.$idjugadorenjuego.'/tarjeta.html')->withErrors($respuesta['mensaje']);
+    }
+
+    
     public function jugadorinsidencia($idjugadorenjuego,$idfixture)
     {
       echo 'falta';

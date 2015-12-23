@@ -179,12 +179,18 @@ Route::group(array('before'=>'organ'), function()
             Route::post('fechas/detail/partido/arbitros/add.html', 'PartidoController@arbitroadd');
             Route::post('fechas/detail/partido/jugador/add.html', 'PartidoController@jugadoradd');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/eliminar.html', 'PartidoController@jugadordelete');//borra a un jugador del partido
-            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/goles.html', 'PartidoController@jugadorgollist');
-            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/goles/add.html', 'PartidoController@jugadorgol_get');
-            Route::post('fechas/detail/partido/gol.html', 'PartidoController@jugadorgol_post');
-            Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/delete.html', 'PartidoController@jugadorgoldelete');//elimina un gol de un jugador de un partido
-
-            Route::get('fechas/detail/partido/insidencia/{id1}/{id2}', 'PartidoController@jugadorinsidencia');
+            //gol
+                Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/goles.html', 'PartidoController@jugadorgollist');
+                Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/goles/add.html', 'PartidoController@jugadorgol_get');
+                Route::post('fechas/detail/partido/gol.html', 'PartidoController@jugadorgol_post');
+                Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/delete.html', 'PartidoController@jugadorgoldelete');//elimina un gol de un jugador de un partido
+                //tarjeta
+                Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/tarjeta.html', 'PartidoController@jugadortarjetalist');
+                Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/tarjeta/add.html', 'PartidoController@jugadortarjeta_get');
+                Route::post('fechas/detail/partido/tarjeta.html', 'PartidoController@jugadortarjeta_post');
+                Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/tarjeta/delete.html', 'PartidoController@jugadortarjetadelete');//elimina un gol de un jugador de un partido
+                //insidencias
+                Route::get('fechas/detail/partido/insidencia/{id1}/{id2}', 'PartidoController@jugadorinsidencia');
 });
 
 //===================Funciones del Equipo====================

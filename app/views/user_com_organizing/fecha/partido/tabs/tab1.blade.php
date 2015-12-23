@@ -61,7 +61,7 @@
                                     <a class="label label-primary" href="{{$jugadorenjuego->idjugadorenjuego}}/goles.html" >
                                         <span class="glyphicon glyphicon-list"></span> &nbsp;Gol
                                     </a><br>
-                                    <a class="label label-warning" href="#" >
+                                    <a class="label label-warning" href="{{$jugadorenjuego->idjugadorenjuego}}/tarjeta.html" >
                                         <span class="glyphicon glyphicon-list"></span> &nbsp;Tarjeta
                                     </a><br>
                                     <a class="label label-info" href="#" >
