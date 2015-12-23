@@ -26,10 +26,11 @@
                     <strong class="primary-font">Estado: </strong><span class="text-primary">{{$campeonato->estado}}</span><br>
                 </div>
                 <div class="panel panel-footer">
-                    <a class="btn btn-info" href="#">Bases del campeonato</a>
+
                     <a class="btn btn-info" href="#equipos">Ver Equipos</a>
                     <a class="btn btn-info" href="#actividades">Actividades</a>
-                    <a class="btn btn-info" href="#configuracion">configuracion</a>
+                    <!--
+                    <a class="btn btn-info" href="#configuracion">configuracion</a>-->
                     <a class="btn btn-info" href="/SCDW/public/acta/ver">acta de reuniones</a>
                     <div class="panel-tools pull-right">
                         <div class="form-inline">
@@ -86,7 +87,7 @@
         </div>
     </div>
     <br>
-
+    <!--
     <div class="row row-no-gutter col-no-gutter-container" id="configuracion">
             <div class="col-md-12 col-no-gutter">
             <div class="panel panel-default">
@@ -124,7 +125,7 @@
         </div>
     </div>
     <br>
-
+    -->
     <div class="row col-no-gutter-container" id="equipos">
         <div class="col-lg-12 col-no-gutter">
             <div class="panel panel-success">

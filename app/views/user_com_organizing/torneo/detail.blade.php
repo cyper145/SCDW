@@ -26,7 +26,13 @@
             </div>
             <div class="panel panel-footer">
                 <a class="btn btn-danger" href="#posiciones">Tabla de posiciones</a>
-                <a class="btn btn-primary" href="{{ URL::to('torneo/detail/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/fixture.html');}}">Generar Fixture</a>
+
+                <?php $fixturefechaexiste=Fixture::where('idtorneo','=',$torneo->idtorneo)->first();?>
+                @if($fixturefechaexiste == '')
+                    <a class="btn btn-primary" href="{{ URL::to('torneo/detail/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/fixture.html');}}">Generar Fixture</a>
+                @endif
+
+
                 <a class="btn btn-primary" href="#fixture">Ver Fixture del {{$torneo->tipo}}</a>
                 {{Form::open(array('method' => 'POST', 'url' => '/torneo/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/agregarE', 'role' => 'form'))}}
 
@@ -114,8 +120,15 @@
                     <div class="panel-heading">
                         FECHA {{$fecha}}
                         <div class="pull-right">
-                            <a class="btn btn-success" href="{{URL::to( 'fechas/'.$codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha.'/detail.html');}}">detalle</a>
-                            <a class="btn btn-success" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha);}}">Programar dia y hora de la Fecha</a>
+
+                            <?php $fechaexiste = Fechas::where('nrofecha', '=',$fecha )->where('idtorneo','=',$torneo->idtorneo)->first();?>
+                            @if($fechaexiste != '')
+                                <a class="btn btn-success" href="{{URL::to( 'fechas/'.$codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha.'/detail.html');}}">detalle</a>
+                            @else
+                                <a class="btn btn-success" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha);}}">Programar dia y hora de la Fecha</a>
+                            @endif
+
+
                         </div>
                     </div>
                     <div class="panel-body">

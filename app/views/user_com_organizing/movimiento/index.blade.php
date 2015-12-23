@@ -19,7 +19,7 @@
                 <div class="panel-tools pull-right">
                     <div class="form-inline">
                         <div class="form-group">
-                            <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="#"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
+
                             <a class="btn btn-info margin text-lowercase" type="button" href="{{URL::to('NuevoMov/addIngreso')}}"><span class="glyphicon glyphicon-plus"></span> Nuevo Ingreso</a>
                             <a class="btn btn-info margin text-lowercase" type="button" href="{{URL::to('NuevoMov/addEgreso')}}"><span class="glyphicon glyphicon-plus"></span> Nuevo Egreso</a>
                         </div>
@@ -48,9 +48,7 @@
                             <td>{{$mov->fecha}}</td>
                             <td>{{$mov->descripcion}}</td>
                             <td>
-                                <a class="label label-primary" href="movimientos/editar/{{$mov->nromovimiento}}">
-                                    <span class="glyphicon glyphicon-edit">&nbsp;Edit</span>
-                                </a><br>
+
                                 <a class="label label-danger" href="{{URL::to('movimientos/'.$mov->nromovimiento.'/delete.html')}}">
                                     <span class="glyphicon glyphicon-trash">&nbsp;Delete</span>
                                 </a>

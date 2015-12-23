@@ -23,8 +23,7 @@
                         {{ Form::open(array('url' => '#','method' => 'post')) }}
                         <div class="form-group">
                             <a class="btn btn-default margin text-lowercase" type="button" href="{{ URL::to( 'miembrocomjusticiainsertar');}}"><span class="glyphicon glyphicon-plus"></span> Add New</a>
-                            <label class="label"><span class="glyphicon glyphicon-search"></span></label>
-                            <input type="text" class="form-control" name="valor" placeholder="Buscar por DNI" maxlength="5">
+
                         </div>
                         {{Form::close()}}
                     </div>

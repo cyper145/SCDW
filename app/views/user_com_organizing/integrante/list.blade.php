@@ -22,7 +22,7 @@
             <div style="float: right">
                 <div class="form-inline">
                     <div class="form-group">
-                        <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="#"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
+
                         <a class="btn btn-primary margin text-lowercase" type="button" href="{{URL::to('comisionintegrantesadd')}}"><span class="glyphicon glyphicon-plus"></span> Agregar Nuevo</a>
                     </div>
                 </div>

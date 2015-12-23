@@ -92,7 +92,7 @@
                 </ul>
             </li>
             <!-- end departamento academico -->
-            <li><a href="{{URL::to('#')}}"><span class="glyphicon glyphicon-hand-up"></span> Importar docentes</a></li>
+            
                 
             <!-- ////////////////////////////////////END USER ADMINISTRADOR ////////////////////////////////////-->
         <?php 
