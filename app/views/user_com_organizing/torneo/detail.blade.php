@@ -28,13 +28,20 @@
                 <a class="btn btn-danger" href="#posiciones">Tabla de posiciones</a>
                 <a class="btn btn-primary" href="{{ URL::to('torneo/detail/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/fixture.html');}}">Generar Fixture</a>
                 <a class="btn btn-primary" href="#fixture">Ver Fixture del {{$torneo->tipo}}</a>
+                {{Form::open(array('method' => 'POST', 'url' => '/torneo/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/agregarE', 'role' => 'form'))}}
+
+                <div class="form-group">
+                    <p>{{Form::submit('agregar equipos a torneo', array('class' => 'btn btn-primary'))}}</p>
+                </div>
+
+                {{Form::close()}}
             </div>
         </div>
     </div>
 
     <div class="col-md-12" id="posiciones">
         <div class="panel panel-danger">
-            <div class="panel-heading">Tabla de Colocaciones cumplida la 1° fecha</div>
+            <div class="panel-heading">Tabla de Colocaciones </div>
             <div class="panel-body color-orange">
                 {{Form::open(array('method' => 'POST', 'url' => '/torneo/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/detail.html/reportes', 'role' => 'form'))}}
 

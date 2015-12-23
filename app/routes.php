@@ -167,6 +167,8 @@ Route::group(array('before'=>'organ'), function()
             Route::get('torneo/create/{id}','TorneoController@create');
             Route::get('torneo/{id}/{id2}/detail.html','TorneoController@detail');
             Route::get('torneo/detail/{id}/{id2}/fixture.html','TorneoController@fixture');
+            Route::post('torneo/{id}/{id2}/agregarE','TorneoController@agregarE');
+
             Route::get('torneo/delete/{id}/{id2}','TorneoController@destroy');
             Route::resource('torneo','TorneoController');
             Route::post('torneo/{id}/{id2}/detail.html/reportes','TorneoController@reportes');

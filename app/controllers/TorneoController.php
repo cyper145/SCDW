@@ -414,6 +414,25 @@ class TorneoController extends \BaseController {
             ->with('tabla',$tabla)
             ->with('nroequipos',$nroequipos);
     }
+
+    public function agregarE($idcampeonato,$idtorneo)
+    {
+        $equipo=Equipo::where('estado', '=', 'habilitado')->get();
+        foreach($equipo as $value)
+        {
+            $cod=$value->codequipo;
+
+            if(!Equipoxtorneo::where('codequipo', '=', $cod)->first())
+            {
+                $nuevo= new Equipoxtorneo();
+                $nuevo->codequipo=$cod;
+                $nuevo->idtorneo=$idtorneo;
+                $nuevo->save();
+            }
+        }
+        return Redirect::to('torneo/'.$idtorneo.'/'.$idcampeonato.'/detail.html');
+
+    }
     public function reportes($idcampeonato,$idtorneo)
     {
         //$pdf=new PDF('P', 'mm', '200, 300');
