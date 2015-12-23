@@ -26,8 +26,6 @@
             </div>
             <div class="panel panel-footer">
                 <a class="btn btn-danger" href="#posiciones">Tabla de posiciones</a>
-                <a class="btn btn-info" href="#goleadores">Tabla de goleadores</a>
-                <a class="btn btn-success" href="#equipos">Ver Equipos</a>
                 <a class="btn btn-primary" href="{{ URL::to('torneo/detail/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/fixture.html');}}">Generar Fixture</a>
                 <a class="btn btn-primary" href="#fixture">Ver Fixture del {{$torneo->tipo}}</a>
             </div>
