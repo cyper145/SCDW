@@ -397,7 +397,7 @@ class TorneoController extends \BaseController {
     public  function detail($idtorneo,$codcampeonato)
     {
         $tabla= DB::select('call TABLAPOSICIONES');
-        $fixture=Fixture::all();
+        $fixture=Fixture::where('idtorneo','=',$idtorneo);
         $fechas = Fechas::where('idtorneo','=',$idtorneo)->get();
         $equipos = Equipoxtorneo::where('idtorneo','=',$idtorneo)->get();
         $fechasdeltorneo = Fechas::where('idtorneo','=',$idtorneo)->get();

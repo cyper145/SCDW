@@ -218,8 +218,8 @@
                                 <th>acciones</th>
                             </tr>
                             </thead>
-                            <?php $fixturefecha=Fixture::where('idfecha', '=',$fecha )->get();?>
-                            <?php $fixture=Fixtureaux::where('idfecha', '=',$fecha )->get();?>
+                            <?php $fixturefecha=Fixture::where('idfecha', '=',$fecha )->where('idtorneo','=',$torneo->idtorneo)->get();?>
+                            <?php $fixture=Fixtureaux::where('idfecha', '=',$fecha )->where('idtorneo','=',$torneo->idtorneo)->get();?>
                             <tbody>
                             <?php $descansa=0; ?>
                             @foreach($fixture as $value)
@@ -267,97 +267,6 @@
             </div>
             <div class="panel-footer">
                 <a class="btn btn-primary" href="#">Aceptar</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row col-no-gutter-container">
-        <div class="col-xs-6 col-md-3 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">Insidencias</div>
-                <div class="panel-body easypiechart-panel">
-                    <div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">goleadores</div>
-                <div class="panel-body easypiechart-panel">
-                    <div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">tabla de posisiones</div>
-                <div class="panel-body easypiechart-panel">
-                    <div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">tabla de goleadores</div>
-                <div class="panel-body easypiechart-panel">
-                    <div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-    <div class="row row-no-gutter col-no-gutter-container">
-        <div class="col-md-6 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">otros</div>
-                <div class="panel-body">
-                    <div class="canvas-wrapper">
-                        <canvas class="chart" id="bar-chart" ></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">Partidos</div>
-                <div class="panel-body">
-                    <div class="canvas-wrapper">
-                        <canvas class="chart" id="bar-chart" ></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">Sancionados</div>
-                <div class="panel-body">
-                    <div class="canvas-wrapper">
-                        <canvas class="chart" id="radar-chart" ></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-no-gutter">
-            <div class="panel panel-default">
-                <div class="panel-heading">otros</div>
-                <div class="panel-body">
-                    <div class="canvas-wrapper">
-                        <canvas class="chart" id="radar-chart" ></canvas>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09103633-f4d3-4bd2-b2bf-a3360e2d5214" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Fixture.php" afterPath="$PROJECT_DIR$/app/models/Fixture.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/PDF.php" afterPath="$PROJECT_DIR$/app/models/PDF.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Torneo.php" afterPath="$PROJECT_DIR$/app/models/Torneo.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/TorneoController.php" afterPath="$PROJECT_DIR$/app/controllers/TorneoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/fecha/detail.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" afterPath="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="system_championship_wil.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.884615" vertical-offset="1490" max-vertical-offset="6324">
-              <caret line="115" column="31" selection-start-line="115" selection-start-column="31" selection-end-line="115" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.6213235" vertical-offset="3181" max-vertical-offset="4777">
+              <caret line="207" column="40" selection-start-line="207" selection-start-column="40" selection-end-line="207" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -72,10 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fixture.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Fixture.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/Fixture.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20307167" vertical-offset="0" max-vertical-offset="586">
+            <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="391">
               <caret line="7" column="98" selection-start-line="7" selection-start-column="98" selection-end-line="7" selection-end-column="98" />
               <folding />
             </state>
@@ -95,8 +87,8 @@
       <file leaf-file-name="TorneoController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/TorneoController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.8545456" vertical-offset="5794" max-vertical-offset="7463">
-              <caret line="363" column="41" selection-start-line="363" selection-start-column="41" selection-end-line="363" selection-end-column="41" />
+            <state vertical-scroll-proportion="-3.9818182" vertical-offset="6581" max-vertical-offset="7463">
+              <caret line="400" column="65" selection-start-line="400" selection-start-column="65" selection-end-line="400" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -201,10 +193,10 @@
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/insert.blade.php" />
         <option value="$PROJECT_DIR$/app/models/PDF.php" />
         <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" />
         <option value="$PROJECT_DIR$/app/routes.php" />
-        <option value="$PROJECT_DIR$/app/controllers/TorneoController.php" />
         <option value="$PROJECT_DIR$/app/models/Fixture.php" />
+        <option value="$PROJECT_DIR$/app/controllers/TorneoController.php" />
+        <option value="$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php" />
       </list>
     </option>
   </component>
@@ -894,14 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.884615" vertical-offset="1490" max-vertical-offset="6324">
-          <caret line="115" column="31" selection-start-line="115" selection-start-column="31" selection-end-line="115" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.846153" vertical-offset="2467" max-vertical-offset="3791">
@@ -912,18 +896,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/TorneoController.php">
+    <entry file="file://$PROJECT_DIR$/app/models/Fixture.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8545456" vertical-offset="5794" max-vertical-offset="7463">
-          <caret line="363" column="41" selection-start-line="363" selection-start-column="41" selection-end-line="363" selection-end-column="41" />
+        <state vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="391">
+          <caret line="7" column="98" selection-start-line="7" selection-start-column="98" selection-end-line="7" selection-end-column="98" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Fixture.php">
+    <entry file="file://$PROJECT_DIR$/app/controllers/TorneoController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20307167" vertical-offset="0" max-vertical-offset="586">
-          <caret line="7" column="98" selection-start-line="7" selection-start-column="98" selection-end-line="7" selection-end-column="98" />
+        <state vertical-scroll-proportion="-3.9818182" vertical-offset="6581" max-vertical-offset="7463">
+          <caret line="400" column="65" selection-start-line="400" selection-start-column="65" selection-end-line="400" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/user_com_organizing/torneo/detail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6213235" vertical-offset="3181" max-vertical-offset="4777">
+          <caret line="207" column="40" selection-start-line="207" selection-start-column="40" selection-end-line="207" selection-end-column="40" />
           <folding />
         </state>
       </provider>
