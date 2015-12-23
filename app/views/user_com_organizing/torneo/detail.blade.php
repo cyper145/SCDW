@@ -86,68 +86,9 @@
         </div>
     </div>
 
-    <div class="col-md-12" id="goleadores">
-        <div class="panel panel-info">
-            <div class="panel-heading">Tabla de Goleadores cumplida la 1° fecha</div>
-            <div class="panel-body color-orange">
-                <table data-toggle="table" data-url="tables/data2.json">
-                    <thead>
-                    <tr>
-                        <th>Nombre y Apellidos</th>
-                        <th>Equipos</th>
-                        <th>Goles</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer">
-                <a class="btn btn-info" href="#">Aceptar</a>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-md-12" id="equipos">
-        <div class="panel panel-success">
-            <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span> Lista de equipos de del torneo: apertura</div>
-            <div class="panel-body color-orange">
-                <table data-toggle="table" data-url="tables/data2.json">
-                    <thead>
-                    <tr>
-                        <th>Codigo</th>
-                        <th>Nombre</th>
-                        <th>logo</th>
-                        <th>uniforme</th>
-                        <th>estado</th>
-                        <th>Acción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($equipos as $val)
-                        <tr>
-                            <td>{{$val->codequipo}}</td>
-                            <td>{{$val->DataEquipo[0]->nombre}}</td>
-                            <td>
-                                {{ HTML::image('storage/equipo/'.$val->DataEquipo[0]->logo,'User Image',array('class'=>'img-responsive','style'=>'width: 50px')) }}
-                            </td>
-                            <td>{{$val->DataEquipo[0]->fotouniforme}}</td>
-                            <td>{{$val->DataEquipo[0]->estado}}</td>
-                            <td>
-                                <a class="label label-success" href="equipo/detalle/{{ $val->codequipo}}" >
-                                    <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
-                                </a><br>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer">
-                <a class="btn btn-success" href="#">Aceptar</a>
-            </div>
-        </div>
-    </div>
+
+
 
     <div class="col-md-12" id="fixture">
         <div class="panel panel-primary">
@@ -168,7 +109,7 @@
                     <div class="panel-heading">
                         FECHA {{$fecha}}
                         <div class="pull-right">
-                            <a class="btn btn-success" href="{{URL::to( 'fechas/'.$fecha.'/'.$codcampeonato.'/'.$torneo->idtorneo.'/detail.html');}}">detalle</a>
+                            <a class="btn btn-success" href="{{URL::to( 'fechas/'.$codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha.'/detail.html');}}">detalle</a>
                             <a class="btn btn-success" href="{{ URL::to('fecha/edit/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/'.$fecha);}}">Programar dia y hora de la Fecha</a>
                         </div>
                     </div>
@@ -180,7 +121,7 @@
                                 <th>segundo equipo</th>
                                 <th>fecha</th>
                                 <th>hora </th>
-                                <th>acciones</th>
+
                             </tr>
                             </thead>
                             <?php $fixturefecha=Fixture::where('idfecha', '=',$fecha )->where('idtorneo','=',$torneo->idtorneo)->get();?>
@@ -202,11 +143,7 @@
                                     <td>{{Equipo::find($val->equipo2)->nombre}}</td>
                                     <td>{{$val->idfecha}}</td>
                                     <td>{{$val->hora}}</td>
-                                    <td>
-                                        <a class="label label-success" href="/SCDW/public/fixture/detalle/{{ $campeonato->codcampeonato}}/{{ $torneo->idtorneo}}/{{ $val->idfecha}}" >
-                                            <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
-                                        </a><br>
-                                    </td>
+
                                 </tr>
                             @endforeach
                             </tbody>

@@ -202,13 +202,15 @@ class FechasController extends \BaseController
 		//
 	}
 
-    public  function detail($nrofecha,$codcampeonato,$idtorneo)
+    public  function detail($codcampeonato,$idtorneo,$nrofecha)
     {
         $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
         $fecha = Fechas::where('nrofecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->first();
         $fixture = Fixture::where('idfecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->get();
         $fixturedeequipoqueescansa = Fixtureaux::where('idfecha','=',$nrofecha)->where('idtorneo','=',$idtorneo)->first();
         $equipoquedescansa = '';
+        $todoConclusion = Cambio::all();
+
         if($fixturedeequipoqueescansa != '')
         {
             if($fixturedeequipoqueescansa->equipo1 == '')
@@ -224,6 +226,6 @@ class FechasController extends \BaseController
             ->with('fixture',$fixture)
             ->with('torneo',$torneo)
             ->with('equipoquedescansa',$equipoquedescansa)
-            ->with('codcampeonato',$codcampeonato);
+            ->with('codcampeonato',$codcampeonato)->with('todoConclusion', $todoConclusion);
     }
 }

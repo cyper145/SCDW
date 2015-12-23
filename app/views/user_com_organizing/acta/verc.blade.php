@@ -20,12 +20,12 @@ $price = DB::table('treunion')->max('idreunion');
 //$cod=DB::select('SELECT max(`id`) FROM `treunion` WHERE 1').get();
 $nuevo =(int)$price+1;
 //echo $nuevo;
-$price2 = DB::table('tfecha')->select('nrofecha', 'diadefecha')->get();
+$price2 = DB::table('tfechas')->select('nrofecha', 'diafecha')->get();
 
 $arr=array();
 foreach ($price2 as $user)
 {
-    $arr[$user->nrofecha] = $user->diadefecha;
+    $arr[$user->nrofecha] = $user->diafecha;
 }
 
 ?>
@@ -132,10 +132,11 @@ foreach ($price2 as $user)
 						</td>
 
 						<td>
-							<a href="/system_championship_wil/public/acta/verc/edit/{{$cat->idreunion}}" class="btn btn-default">
+
+							<a href= "{{ URL::to( '/acta/verc/edit/'.$cat->idreunion);}}"  class="btn btn-default">
 							<span class="glyphicon glyphicon-edit"></span> Editar
 							</a>
-							<a href="/system_championship_wil/public/acta/verc/delete/{{$cat->idreunion}}" class="btn btn-default">
+							<a href="/SCDW/public/acta/verc/delete/{{$cat->idreunion}}" class="btn btn-default">
 							<span class="glyphicon glyphicon-remove"></span> Eliminar
 							</a>
 						</td>

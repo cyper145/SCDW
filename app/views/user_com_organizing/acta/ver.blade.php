@@ -113,11 +113,11 @@
 							@if($mayor==0)
 
 							<td>
-								<a href="/system_championship_wil/public/acta/verAs/{{$cat->idreunion}}" class="btn btn-default">
+								<a href="/SCDW/public/acta/verAs/{{$cat->idreunion}}" class="btn btn-default">
 								<span class="glyphicon glyphicon-list"></span> ver
 								</a>
 
-								<a href="/system_championship_wil/public/acta/verA/{{$cat->idreunion}}" class="btn btn-default">
+								<a href="/SCDW/public/acta/verA/{{$cat->idreunion}}" class="btn btn-default">
 								<span class="glyphicon glyphicon-edit"></span> editar
 								</a>
 
@@ -126,7 +126,7 @@
 							@else
 								<td>
 						
-									<a href="/system_championship_wil/public/acta/verAs/{{$cat->idreunion}}" class="btn btn-default">
+									<a href="/SCDW/public/acta/verAs/{{$cat->idreunion}}" class="btn btn-default">
 									<span class="glyphicon glyphicon-th-list"></span> ver
 									</a>
 									

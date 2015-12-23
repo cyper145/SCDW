@@ -153,10 +153,10 @@ foreach ($part as $user)
 						<td>{{$cat->minuto }}</td>
 						<td>{{$arr2[$cat->codpartido]}}</td>
 						<td>
-							<a href="/system_championship_wil/public/partido/cambios/edit/{{$cat->idcambio}}" class="btn btn-default">
+							<a href="/SCWD/partido/cambios/edit/{{$cat->idcambio}}" class="btn btn-default">
 							<span class="glyphicon glyphicon-edit"></span> Editar
 							</a>
-							<a href="/system_championship_wil/public//partido/cambios/delete/{{$cat->idcambio}}" class="btn btn-default">
+							<a href="/SCWD//partido/cambios/delete/{{$cat->idcambio}}" class="btn btn-default">
 							<span class="glyphicon glyphicon-remove"></span> Eliminar
 							</a>
 						</td>

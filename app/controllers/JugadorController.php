@@ -25,21 +25,36 @@ class JugadorController extends \BaseController
             {
                 if(Input::hasFile('foto'))
                 {
-                    $fullnamedocente = $docente->apellidopaterno.' '.$docente->apellidomaterno.' '.$docente->nombre;
-                    $file = Input::file('foto');
-                    $extension = $file->getClientOriginalExtension();
-                    $namefotocomplete = $fullnamedocente.'.'.$extension;
-                    $file->move('storage/jugador', $namefotocomplete);
+                    $equipo = Equipo::where('codequipo','=',Session::get('user_codequipo'))->first();
+                    $codcampeonato = $equipo->codcampeonato;
+                    $jugadorenequipo = DB::table('tjugador')
+                        ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
+                        ->where('tequipo.codcampeonato','=',$codcampeonato)
+                        ->where('tjugador.coddocente','=',$coddocente)
+                        ->First();
+                    if($jugadorenequipo == '')
+                    {
+                        $fullnamedocente = $docente->apellidopaterno.' '.$docente->apellidomaterno.' '.$docente->nombre;
+                        $file = Input::file('foto');
+                        $extension = $file->getClientOriginalExtension();
+                        $namefotocomplete = $fullnamedocente.'.'.$extension;
+                        $file->move('storage/jugador', $namefotocomplete);
 
-                    $newjugador = new Jugador();
-                    $newjugador->foto = $namefotocomplete;
-                    $newjugador->estado = 'habilitado';//el jugador se crea por defecto en habilitado
-                    $newjugador->codequipo = Session::get('user_codequipo');
-                    $newjugador->coddocente = $coddocente;
-                    $newjugador->save();
+                        $newjugador = new Jugador();
+                        $newjugador->foto = $namefotocomplete;
+                        $newjugador->estado = 'habilitado';//el jugador se crea por defecto en habilitado
+                        $newjugador->codequipo = Session::get('user_codequipo');
+                        $newjugador->coddocente = $coddocente;
+                        $newjugador->save();
 
-                    Session::flash('message','Jugador agregado correctamente');
-                    return Redirect::to('jugador/listar.html');
+                        Session::flash('message','Jugador agregado correctamente');
+                        return Redirect::to('jugador/listar.html');
+                    }
+                    else
+                    {
+                        $error = ['wilson'=>'Este jugador ya es de otro equipo por favor ingrese otro jugador'];
+                        return Redirect::back()->withInput()->withErrors($error);
+                    }
                 }
                 else
                 {

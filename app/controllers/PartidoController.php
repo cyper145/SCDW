@@ -9,17 +9,20 @@ public function partido_all()
 		return View::make('partido.cambios')->with('todoConclusion', $todoConclusion);
 	}
 
-	public function partido_add()
+	public function partido_add($codcampeonato,$idtorneo,$idfecha,$idfixture,$codpartido)
 	{
+
+
+
 		$input = Input::all();
 
 		$rules = array(
 
-			'idcambios' => 'required',
+
 			'entra' => 'required',
 			'sale' => 'required',
 			'minuto' => 'required',
-			'id_partido' => 'required'
+
 			
 		);
 
@@ -32,15 +35,15 @@ public function partido_all()
 		else
 		{
 			$category = new Cambio;
-				$category->idcambio = Input::get('idcambios');
-				$category->idjugadorenjuego1 = Input::get('entra');
-				$category->idjugadorenjuego2 = Input::get('sale');
+
+				$category->idjugadorenjuegoentrante = Input::get('entra');
+				$category->idjugadorenjuegosaliente = Input::get('sale');
 				$category->minuto = Input::get('minuto');
-				$category->codpartido = Input::get('id_partido');
+				$category->codpartido = $codpartido;
 
 			$category->save();
 
-			return Redirect::to('/partido/cambios');
+			return Redirect::to('/fechas/'.$codcampeonato.'/'.$idtorneo.'/'.$idfecha.'/'.$idfixture.'/partido.html');
 		}
 	}
 
@@ -213,14 +216,17 @@ public function partido_all()
 		//
 	}
 
-    public  function partido($idfecha,$codcampeonato,$idtorneo,$idfixture)
+    public  function partido($codcampeonato,$idtorneo,$idfecha,$idfixture)
     {
+        $todoConclusion = Cambio::all();
+
         $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
         $fixture = Fixture::where('idfixture','=',$idfixture)->first();
         $jugadoresequipo1 = Jugador::where('codequipo','=',$fixture->equipo1)->get();
         $jugadoresequipo2 = Jugador::where('codequipo','=',$fixture->equipo2)->get();
         $arbitros = Arbitro::all();
-        //todos los jugadores de este partido
+        //todos los jugadores de este partido  $torneo $idtorneo,$idfecha,$idfixture)
+
         $Delanteros1 = '';
         $Mediocampistas1 = '';
         $Defensas1 = '';
@@ -301,7 +307,8 @@ public function partido_all()
             ->with('Guardameta1',$Guardameta1)
             ->with('suplentes1',$suplentes1)
             ->with('jugadoresdeunpartido2',$jugadoresdeunpartido2)
-            ->with('arbitros',$arbitros);
+            ->with('arbitros',$arbitros)
+            ->with('todoConclusion', $todoConclusion);
     }
 
     public  function arbitroadd()

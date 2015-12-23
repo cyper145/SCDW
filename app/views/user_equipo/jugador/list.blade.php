@@ -24,7 +24,7 @@
                 <div class="panel-tools pull-right">
                     <div class="form-inline">
                         <div class="form-group">
-                            <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="#"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
+
                             <a class="btn btn-info margin text-lowercase" type="button" href="{{URL::to('jugadorinsertar')}}"><span class="glyphicon glyphicon-plus"></span>Ingresar Nuevo jugador</a>
                         </div>
                     </div>

@@ -48,7 +48,7 @@
                     <tbody>
                     @foreach($fixture as $val)
                         <tr>
-                            <td>{{$val->nropartido}}°</td>
+                            <td>{{$val->nropartido}}</td>
                             <td>{{$val->hora}}</td>
                             <td class="text-center">{{$val->dataEquipo1[0]->nombre.' <----> '.$val->dataEquipo2[0]->nombre}}</td>
                             <td>

@@ -68,7 +68,7 @@
                         </div>
                         <div class="tab-pane fade" id="tab5">
                             <h4>Tab 3</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget rutrum purus. Donec hendrerit ante ac metus sagittis elementum. Mauris feugiat nisl sit amet neque luctus, a tincidunt odio auctor. </p>
+                            @include('user_com_organizing.fecha.partido.tabs.tab5')
                         </div>
                     </div>
                 </div>

@@ -159,7 +159,7 @@ Route::group(array('before'=>'organ'), function()
             Route::get('acta/verAs/{id}', 'ActaController@actare_all');   
            //cambios
             Route::get('partido/cambios', 'PartidoController@partido_all');  
-            Route::post('partido/cambios/add', 'PartidoController@partido_add');
+            Route::post('partido/cambios/add/{id}/{id2}/{id3}/{id4}/{id5}', 'PartidoController@partido_add');
             Route::get('partido/cambios/edit/{id}', 'PartidoController@partido_get_edit');
             Route::post('partido/cambios/edit/{id}', 'PartidoController@partido_post_edit');
             Route::get('partido/cambios/delete/{id}', 'PartidoController@partido_delete');

@@ -99,7 +99,7 @@ $nuevo2 =(int)$price2+1;
 						<td>delegado</td>
 						<td>
 						
-								<a href="/system_championship_wil/public/acta/verA/{{$buscar}}/delete1/{{$cat->id_asistente}}" class="btn btn-default">
+								<a href="/SCDW/public/acta/verA/{{$buscar}}/delete1/{{$cat->id_asistente}}" class="btn btn-default">
 								<span class="glyphicon glyphicon-remove"></span> Eliminar 
 								
 						</td>
