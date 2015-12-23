@@ -5,7 +5,7 @@ class Fixture extends Eloquent
     public $timestamps = false;
     protected $primaryKey = 'idfixture';
 
-    protected $fillable = ['idfixture','nropartido','hora','equipo1','equipo2','idfecha'];
+    protected $fillable = ['idfixture','nropartido','hora','equipo1','equipo2','idfecha','idtorneo'];
 
 
     public function dataEquipo1() {

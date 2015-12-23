@@ -331,7 +331,7 @@ class TorneoController extends \BaseController {
                 //$rueda->equipo2 =$this->obtenercodigo($arr,$s);
                 //$rueda->partido=$this->generar();
                 $rueda->nropartido=$codigo++;// generar
-
+                $rueda->idtorneo = $idtorneo;
                 $rueda->save();
                 $k++;
 
@@ -351,6 +351,7 @@ class TorneoController extends \BaseController {
                 $nropartido=$val->nropartido;
                 $fecha=$val->idfecha;
                 $hora=$val->hora;
+                $torneo = $val->idtorneo;
                 $elemento=Fixtureaux::find($id);
                 $elemento->delete();
                 $nuevo=new Fixture();
@@ -360,6 +361,7 @@ class TorneoController extends \BaseController {
                 $nuevo->nropartido=$nropartido;
                 $nuevo->idfecha=$fecha;
                 $nuevo->hora=$hora;
+                $nuevo->idtorneo=$torneo;
                 $nuevo->save();
             }
         }
@@ -394,6 +396,7 @@ class TorneoController extends \BaseController {
 
     public  function detail($idtorneo,$codcampeonato)
     {
+        $tabla= DB::select('call TABLAPOSICIONES');
         $fixture=Fixture::all();
         $fechas = Fechas::where('idtorneo','=',$idtorneo)->get();
         $equipos = Equipoxtorneo::where('idtorneo','=',$idtorneo)->get();
@@ -408,6 +411,23 @@ class TorneoController extends \BaseController {
             ->with('fechas',$fechas)
             ->with('torneo',$torneo)
             ->with('fixture',$fixture)
+            ->with('tabla',$tabla)
             ->with('nroequipos',$nroequipos);
+    }
+    public function reportes($idcampeonato,$idtorneo)
+    {
+        $fpdf = new PDF();
+        $tabla= DB::select('call TABLAPOSICIONES');
+        $columnas = ['NRO','EQUIPO','PJ','PG','PE','PP','GF','GE','DG','PUNTAJE'];
+        $fpdf->AddPage();
+        $fpdf->Cell(80);
+        $fpdf->Cell(30,5,'TABLA DE POSICIONES',0,1,'C');
+        $fpdf->SetFont('Arial','B',9);
+        $fpdf->Ln(2);
+        $fpdf->SetFont('Arial','B',16);
+
+        $fpdf->reportes($columnas,$tabla);
+        $fpdf->Output();
+        exit;
     }
 }

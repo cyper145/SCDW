@@ -22,7 +22,6 @@
                 <div class="panel-tools pull-right">
                     <div class="form-inline">
                         <div class="form-group">
-                            <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="#"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
                             <a class="btn btn-info margin text-lowercase" type="button" href="{{ URL::to('/torneo/create');}}/{{$codcampeonato}}"><span class="glyphicon glyphicon-plus"></span> Crear Nuevo Torneo</a>
                         </div>
                     </div>
@@ -48,9 +47,6 @@
                             <td>{{$torneo->diainicio}}</td>
                             <td>{{$torneo->nrofechas}}</td>
                             <td>
-                                <a class="label label-primary" href="editar/{{ $torneo->idtorneo}}">
-                                    <span class="glyphicon glyphicon-edit">&nbsp;Edit</span>
-                                </a><br>
                                 <a class="label label-success" href="{{ URL::to('torneo/');}}/{{$torneo->idtorneo}}/{{$codcampeonato}}/detail.html" >
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>

@@ -50,4 +50,41 @@ class PDF extends baseFpdf
         }
         $this->Cell(array_sum($w),0,'','T');
     }
+
+    function reportes($header, $data)
+    {
+        $this->SetFillColor(100,100,100);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(0,0,0);
+        $this->SetLineWidth(.3);
+        $this->SetFont('','B');
+
+        $w = array(13, 23,28,33,38,43,48,53,58,63 );
+        for($i=0;$i<count($header);$i++)
+            $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
+        $this->Ln();
+
+        $this->SetFillColor(224,235,255);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+
+        $fill = false;
+        $gg=1;
+        foreach($data as $row)
+        {
+            $this->Cell($w[0],6,$gg++,'LR',0,'L',$fill);
+            $this->Cell($w[1],6,Equipo::find($row->equipo)->nombre,'LR',0,'L',$fill);
+            $this->Cell($w[2],6,$row->PJ,'LR',0,'L',$fill);
+            $this->Cell($w[3],6,$row->PG,'LR',0,'L',$fill);
+            $this->Cell($w[4],6,$row->PE,'LR',0,'L',$fill);
+            $this->Cell($w[5],6,$row->PP,'LR',0,'L',$fill);
+            $this->Cell($w[5],6,$row->GF,'LR',0,'L',$fill);
+            $this->Cell($w[6],6,$row->GE,'LR',0,'L',$fill);
+            $this->Cell($w[7],6,$row->DG,'LR',0,'L',$fill);
+            $this->Cell($w[8],6,$row->puntaje,'LR',0,'L',$fill);
+            $this->Ln();
+            $fill = !$fill;
+        }
+        $this->Cell(array_sum($w),0,'','T');
+    }
 }

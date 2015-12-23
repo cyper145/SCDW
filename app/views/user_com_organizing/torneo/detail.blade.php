@@ -75,6 +75,14 @@
         <div class="panel panel-danger">
             <div class="panel-heading">Tabla de Colocaciones cumplida la 1° fecha</div>
             <div class="panel-body color-orange">
+                {{Form::open(array('method' => 'POST', 'url' => '/torneo/'.$campeonato->codcampeonato.'/'.$torneo->idtorneo.'/detail.html/reportes', 'role' => 'form'))}}
+
+                <div class="form-group">
+                    <p>{{Form::submit('PDF', array('class' => 'btn btn-primary'))}}</p>
+                </div>
+
+                {{Form::close()}}
+
                 <table data-toggle="table" data-url="tables/data2.json">
                     <thead>
                     <tr>
@@ -85,11 +93,27 @@
                         <th>PE</th>
                         <th>PP</th>
                         <th>GF</th>
+                        <th>GE</th>
                         <th>DG</th>
                         <th>Puntos</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php $nro=1;?>
+                    @foreach($tabla as $value)
+                        <tr>
+                            <td>{{$nro++}}</td>
+                            <td>{{$value->equipo}}</td>
+                            <td>{{$value->PJ}}</td>
+                            <td>{{$value->PG}}</td>
+                            <td>{{$value->PE}}</td>
+                            <td>{{$value->PP}}</td>
+                            <td> {{$value->GF}}</td>
+                            <td>{{$value->GE}}</td>
+                            <td>{{$value->DG}}</td>
+                            <td>{{$value->puntaje}}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

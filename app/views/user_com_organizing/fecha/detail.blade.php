@@ -28,6 +28,9 @@
             </div>
             <div class="panel panel-footer">
                 <a class="btn btn-success" href="#fixture">Ver Fixture</a>
+                <div class="pull-right">
+                    <a class="btn btn-info" href="{{ URL::to('fecha/edit/'.$codcampeonato.'/'.$torneo->idtorneo);}}">actulizar la fechas</a>
+                </div>
             </div>
         </div>
     </div>

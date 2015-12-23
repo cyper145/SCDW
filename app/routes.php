@@ -169,6 +169,7 @@ Route::group(array('before'=>'organ'), function()
             Route::get('torneo/detail/{id}/{id2}/fixture.html','TorneoController@fixture');
             Route::get('torneo/delete/{id}/{id2}','TorneoController@destroy');
             Route::resource('torneo','TorneoController');
+            Route::post('torneo/{id}/{id2}/detail.html/reportes','TorneoController@reportes');
             //fechas y partido
             Route::get('fechas/{id1}/{id2}/{id3}/detail.html','FechasController@detail');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/partido.html','PartidoController@partido');

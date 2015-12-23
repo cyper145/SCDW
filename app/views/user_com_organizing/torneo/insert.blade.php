@@ -35,7 +35,7 @@
                         {{Form::hidden('codcampeonato',$codcampeonato)}}
                         <div class="form-group">
                             <label>Tipo de Torneo</label>
-                            <select  class="form-control" name="tipo">
+                            <select  class="form-control" name="tipo" required>
                                 <option class="form-control" value="apertura">Apertura</option>
                                 <option class="form-control" value="clausura">Clausura</option>
                                 <option class="form-control" value="play off">Play off</option>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('lbltipo','Dia Inicio')}}
-                            {{Form::text('diainicio',null,['class'=>'form-control','placeholder'=>'2015-12-21','id'=>'docenteauto'])}}
+                            {{ Form::text('diainicio', null, array('type' => 'text','required', 'class' => 'form-control datepicker','placeholder' => '2015-12-21', 'id' => 'calendar')) }}
                         </div>
                         <div class="form-group">
                             {{Form::hidden('nrofechas',0,['class'=>'form-control','placeholder'=>'5','id'=>'docenteauto'])}}
