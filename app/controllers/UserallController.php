@@ -31,7 +31,7 @@ class UserallController extends \BaseController {
                 {
                     if(Hash::check($password, $user->password))
                     {
-                        Session::put('user_id', $user->idusuario);
+                        Session::put('user_id', $user->idUsuario);
                         Session::put('user_username', $user->username);
                         Session::put('user_type', $user->tipo);
                         Session::put('user_estado',$user->estado);
@@ -47,7 +47,7 @@ class UserallController extends \BaseController {
                                 if(User::isOrganizingCommittee())
                                 {
                                     Session::put('user_name',$user->DataComision[0]->nombre);
-                                    Session::put('user_idcom_orgdor',$user->DataComision[0]->idcom_orgdor);
+                                    Session::put('user_idcom_orgdor',$user->DataComision[0]->codCom_Org);
                                     return Redirect::to('comision/index.html');
                                 }
                                 else
@@ -55,7 +55,7 @@ class UserallController extends \BaseController {
                                     if(User::isEquipo())
                                     {
                                         Session::put('user_name',$user->DataEquipo[0]->nombre);
-                                        Session::put('user_codequipo',$user->DataEquipo[0]->codequipo);
+                                        Session::put('user_codequipo',$user->DataEquipo[0]->codEquipo);
                                         return Redirect::to('equipo/index.html');
                                     }
                                     else

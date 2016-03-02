@@ -5,39 +5,35 @@
 @stop
 
 @section('rutanavegacion')        
-        <li><a href="{{ URL::to( '/acta/verc');}}"><span class="glyphicon glyphicon-th-list"></span></a></li>
+
 	   
 @stop
 
 @section('nombrevista')
     @lang('reunion')
+    <button type="submit" class="btn btn-success pull-right" onclick="history.back()">Atras</button>
 @stop
 
 @section('contenido')
 
 <?php 
-$price = DB::table('treunion')->max('idreunion');
+$pricef = DB::table('tfecha')->max('nroFecha');
+$pricer = DB::table('treunion')->count();
 //$cod=DB::select('SELECT max(`id`) FROM `treunion` WHERE 1').get();
-$nuevo =(int)$price+1;
+//$nuevo =(int)$price+1;
+$cod="RE0".($pricef).($pricer+1);
 //echo $nuevo;
-$price2 = DB::table('tfechas')->select('nrofecha', 'diafecha')->get();
+$price2 = DB::table('tfecha')->select('idFecha', 'nroFecha')->get();
 
 $arr=array();
 foreach ($price2 as $user)
 {
-    $arr[$user->nrofecha] = $user->diafecha;
+    $arr[$user->idFecha] = "fecha ".$user->nroFecha;
 }
 
 ?>
 
 
-
-
-
-
-
-
-				
 
 <div class="row col-no-gutter-container row-margin-top">
 			<div class="col-lg-12 col-no-gutter">
@@ -45,16 +41,15 @@ foreach ($price2 as $user)
 
 
 					<div class="panel-heading">
-						<h2>asistencia</h2>	
+						<h2>Programar reuniones de Fechas</h2>
 					</div>	
 				<div class="col-lg-3">
 			@if(!isset($category))
-				{{Form::open(array('method' => 'POST', 'url' => '/acta/verc/add/', 'role' => 'form'))}}
-
+				{{Form::open(array('method' => 'POST', 'url' => 'campeonato/detail/'.$codcampeonato.'/actaagregar', 'role' => 'form'))}}
 				<div class="form-group">
 
 					{{Form::label('idreunion')}}
-					{{Form::text('idreunion', $nuevo, array('class' => 'form-control'))}}
+					{{Form::text('idreunion', $cod, array('class' => 'form-control'))}}
 					<span class="help-block">{{ $errors->first('idreunion') }}</span>
 				</div>
 				<div class="form-group">
@@ -76,7 +71,7 @@ foreach ($price2 as $user)
 
 				{{Form::close()}}
 			@else
-				{{Form::open(array('method' => 'POST', 'url' => '/acta/verc/edit/'.$category->idreunion, 'role' => 'form'))}}
+				{{Form::open(array('method' => 'POST', 'url' => 'campeonato/detail/'.$codcampeonato.'/actaedit/'.$category->codReunion, 'role' => 'form'))}}
 
 				<div class="form-group">
 					{{ Form::label('fecha')}}
@@ -101,12 +96,7 @@ foreach ($price2 as $user)
 
 
 <div class="row">
-
 		<div class="col-lg-6">
-	
-
-
-
 			<table class="table">
 				<thead>
 					<tr>
@@ -118,12 +108,12 @@ foreach ($price2 as $user)
 				<tbody>
 					@foreach($todoConclusion as $cat)
 					<tr class="no-records-found">
-						<td>{{$cat->idreunion}}</td>
+						<td>{{$cat->codReunion}}</td>
 						<td>{{$cat->fecha}}</td>
 						<td>
 						<?php
 
-						$count = Asistente::where('idreunion', '=', $cat->idreunion)->count();
+						$count = Asistente::where('codReunion', '=', $cat->codReunion)->count();
 
 						?>	
 						{{$count}}
@@ -133,10 +123,10 @@ foreach ($price2 as $user)
 
 						<td>
 
-							<a href= "{{ URL::to( '/acta/verc/edit/'.$cat->idreunion);}}"  class="btn btn-default">
+							<a href= "{{ URL::to( 'campeonato/detail/'.$codcampeonato.'/actaedit/'.$cat->codReunion)}}"  class="btn btn-default">
 							<span class="glyphicon glyphicon-edit"></span> Editar
 							</a>
-							<a href="/SCDW/public/acta/verc/delete/{{$cat->idreunion}}" class="btn btn-default">
+							<a href= "{{ URL::to( 'campeonato/detail/'.$codcampeonato.'/actadelete/'.$cat->codReunion)}}" class="btn btn-default">
 							<span class="glyphicon glyphicon-remove"></span> Eliminar
 							</a>
 						</td>

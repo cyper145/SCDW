@@ -5,7 +5,7 @@ class JugadorController extends \BaseController
     public function listar()
     {
         $codequipo = Session::get('user_codequipo');
-        $jugadores = Jugador::where('codequipo','=',$codequipo)->get();
+        $jugadores = Jugador::where('codEquipo','=',$codequipo)->get();
         return View::make('user_equipo.jugador.list')
             ->with('jugadores',$jugadores);
     }
@@ -17,20 +17,20 @@ class JugadorController extends \BaseController
 
     public function insertar_post()
     {
-        $coddocente = substr(Input::get('Nombre'), 0,5);
-        if($docente = Docente::where('coddocente', '=', $coddocente)->first())
+        $coddocente = substr(Input::get('Nombre'), 0,6);
+        if($docente = Docente::where('codDocente', '=', $coddocente)->first())
         {
-            $haydocenteenequipo = Jugador::where('coddocente','=',$coddocente)->where('codequipo','=',Session::get('user_codequipo'))->first();
+            $haydocenteenequipo = Jugador::where('codDocente','=',$coddocente)->where('codEquipo','=',Session::get('user_codequipo'))->first();
             if($haydocenteenequipo == '')//no hay todavia este jugador
             {
                 if(Input::hasFile('foto'))
                 {
-                    $equipo = Equipo::where('codequipo','=',Session::get('user_codequipo'))->first();
-                    $codcampeonato = $equipo->codcampeonato;
+                    $equipo = Equipo::where('codEquipo','=',Session::get('user_codequipo'))->first();
+                    $codcampeonato = $equipo->codCampeonato;
                     $jugadorenequipo = DB::table('tjugador')
-                        ->join('tequipo','tequipo.codequipo','=','tjugador.codequipo')
-                        ->where('tequipo.codcampeonato','=',$codcampeonato)
-                        ->where('tjugador.coddocente','=',$coddocente)
+                        ->join('tequipo','tequipo.codEquipo','=','tjugador.codEquipo')
+                        ->where('tequipo.codCampeonato','=',$codcampeonato)
+                        ->where('tjugador.codDocente','=',$coddocente)
                         ->First();
                     if($jugadorenequipo == '')
                     {
@@ -41,10 +41,14 @@ class JugadorController extends \BaseController
                         $file->move('storage/jugador', $namefotocomplete);
 
                         $newjugador = new Jugador();
+                        $newjugador->dni=Input::get('DNI');
+                        $newjugador->direccion=Input::get('direccion');
+                        $newjugador->telefono=Input::get('telefono');
+                        $newjugador->edad=Input::get('edad');
                         $newjugador->foto = $namefotocomplete;
                         $newjugador->estado = 'habilitado';//el jugador se crea por defecto en habilitado
-                        $newjugador->codequipo = Session::get('user_codequipo');
-                        $newjugador->coddocente = $coddocente;
+                        $newjugador->codEquipo = Session::get('user_codequipo');
+                        $newjugador->codDocente = $coddocente;
                         $newjugador->save();
 
                         Session::flash('message','Jugador agregado correctamente');
@@ -85,24 +89,24 @@ class JugadorController extends \BaseController
 
     public function detail($idjugador)
     {
-        $jugador = Jugador::where('idjugador','=',$idjugador)->first();
+        $jugador = Jugador::where('dni','=',$idjugador)->first();
         return View::make('user_equipo.jugador.detail')
             ->with('jugador',$jugador);
     }
 
     public function edit_get($idjugador)
     {
-        $jugadoraeditar = Jugador::where('idjugador','=',$idjugador)->first();
+        $jugadoraeditar = Jugador::where('dni','=',$idjugador)->first();
         return View::make('user_equipo.jugador.edit')->with('jugadoraeditar',$jugadoraeditar);
     }
 
     public function edit_post()
     {
         $idjugador = Input::get('idjugador');
-        $coddocente = substr(Input::get('Nombre'), 0,5);
-        if($docente = Docente::where('coddocente', '=', $coddocente)->first())//el docente es valido
+        $coddocente = substr(Input::get('Nombre'), 0,6);
+        if($docente = Docente::where('codDocente', '=', $coddocente)->first())//el docente es valido
         {
-            if($haydocenteenequipo = Jugador::where('idjugador','=',$idjugador)->first())
+            if($haydocenteenequipo = Jugador::where('dni','=',$idjugador)->first())
             {
                 if(Input::hasFile('foto'))//hay foto
                 {
@@ -110,21 +114,27 @@ class JugadorController extends \BaseController
                     $file = Input::file('foto');
                     $extension = $file->getClientOriginalExtension();
                     $namefotocomplete = $fullnamedocente.'.'.$extension;
-                    if($haydocenteenequipo->coddocente == $coddocente)//no se ha cambiado el nombre del jugador
+                    if($haydocenteenequipo->codDocente == $coddocente)//no se ha cambiado el nombre del jugador
                     {
                         $file->move('storage/jugador', $namefotocomplete);
-                        Jugador::where('idjugador','=',$idjugador)->update(['foto'=>$namefotocomplete]);
+                        $direccion=Input::get('direccion');
+                        $telefono=Input::get('telefono');
+                        $edad=Input::get('edad');
+                        Jugador::where('dni','=',$idjugador)->update(['foto'=>$namefotocomplete,
+                            'direccion'=>$direccion,'telefono'=>$telefono,'edad'=>$edad
 
-                        Session::flash('message','Jugador agregado correctamente');
+                        ]);
+
+                        Session::flash('message','Jugador actualizo correctamente');
                         return Redirect::to('jugador/listar.html');
                     }
                     else//se ha cambiado el nombre del jugador entonces se tine que validar
                     {
-                        $haydocenteenequipo = Jugador::where('coddocente','=',$coddocente)->where('codequipo','=',Session::get('user_codequipo'))->first();
+                        $haydocenteenequipo = Jugador::where('codDocente','=',$coddocente)->where('codEquipo','=',Session::get('user_codequipo'))->first();
                         if($haydocenteenequipo == '')//jugador no existe todavia
                         {
                             $file->move('storage/jugador', $namefotocomplete);
-                            Jugador::where('idjugador','=',$idjugador)->update(['foto'=>$namefotocomplete,'codequipo'=>$coddocente]);
+                            Jugador::where('dni','=',$idjugador)->update(['foto'=>$namefotocomplete,'codDocente'=>$coddocente]);
                         }
                         else//jugador ya existe
                         {

@@ -22,11 +22,11 @@
 					<div class="panel-body">
 						<div class="col-md-6">
 						@foreach($consultatabla as $camp)
-							  {{ Form::open(array('url' => 'docente/formulario2/'.$camp->coddocente,'method' => 'post', 'files' => true, 'class' => 'form-horizontal')) }}
+							  {{ Form::open(array('url' => 'docente/formulario2/'.$camp->codDocente,'method' => 'post', 'files' => true, 'class' => 'form-horizontal')) }}
 							
 								<div class="form-group">
 									<label>Codigo de docente</label>
-									<input class="form-control" placeholder="codDocente" name="coddocente" value="{{$camp->coddocente}}" readonly="readonly">
+									<input class="form-control" placeholder="codDocente" name="coddocente" value="{{$camp->codDocente}}" readonly="readonly">
 								</div>
 								<div class="form-group">
 									<label>Nombre</label>
@@ -34,11 +34,11 @@
 								</div>
 								<div class="form-group">
 									<label>Apellido Paterno</label>
-									<input class="form-control" placeholder="Apellido Paterno" name="apellidopaterno" value="{{$camp->apellidopaterno}}">
+									<input class="form-control" placeholder="Apellido Paterno" name="apellidopaterno" value="{{$camp->apellidoP}}">
 								</div>
 								<div class="form-group">
 									<label>Apellido Materno</label>
-									<input class="form-control" placeholder="Apellido Materno" name="apellidomaterno" value="{{$camp->apellidomaterno}}">
+									<input class="form-control" placeholder="Apellido Materno" name="apellidomaterno" value="{{$camp->apellidoM}}">
 								</div>
 								<div class="form-group">
 									<label>Categoria</label>
@@ -48,25 +48,8 @@
 									</select>
 								</div>
                                 <div class="form-group">
-                                    <label>DNI</label>
-                                    <input class="form-control" placeholder="48435758" name="dni" value="{{$camp->dni}}"maxlength="8" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Direccion</label>
-                                    <input class="form-control" placeholder="Av. La Cultura 1034" name="direccion" value="{{$camp->direccion}}" required>
-                                </div>
-                                <div class="form-group">
                                     <label>Email</label>
                                     <input class="form-control" placeholder="wil@gmail.com" name="email" value="{{$camp->email}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Edad</label>
-                                    <input class="form-control" placeholder="32" name="edad"maxlength="2" value="{{$camp->edad}}"required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Telefono</label>
-                                    <input class="form-control" placeholder="947750261" name="telefono" maxlength="9" value="{{$camp->telefono}}"required>
                                 </div>
 								<div class="form-group">
 									<label>Id Departamento Academico</label>

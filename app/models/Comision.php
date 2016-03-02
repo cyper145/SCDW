@@ -1,9 +1,9 @@
 <?php
 
 class Comision extends Eloquent{
-    protected $table = 'tcom_orgdor';
+    protected $table = 'tcom_org';
     public $timestamps= false;
-    protected $primaryKey = 'idcom_orgdor';
+    protected $primaryKey = 'codCom_Org';
     
     public static function editar($idusuario,$input)
     {
@@ -26,16 +26,16 @@ class Comision extends Eloquent{
             if($password1 == $password2)
             {                    
                 DB::table('tusuarios')
-                    ->where('idusuario',$idusuario)
+                    ->where('idUsuario',$idusuario)
                     ->update([
                         'username'=> Input::get('usuario'),
                         'password'=> Hash::make(Input::get('password')),
                         'tipo'=>'comision organizadora',
                         'estado'=>Input::get('estado')]);
 
-                DB::table('tcom_orgdor')
-                    ->where('idusuario',$idusuario)
-                    ->update(['nombre'=> Input::get('Comision'),'idusuario'=> $idusuario]);
+                DB::table('tcom_org')
+                    ->where('idUsuario',$idusuario)
+                    ->update(['nombre'=> Input::get('Comision'),'idUsuario'=> $idusuario]);
                 $respuesta['mensaje'] = 'Datos Actualizados';
                 $respuesta['error'] = false;
             }

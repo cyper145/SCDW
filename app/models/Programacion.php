@@ -2,6 +2,7 @@
 
 class Programacion extends Eloquent {
 
-		protected $table = 'tprogramacionpartido';
+		protected $table = 'tprogramacion';
 		public $timestamps= false;
+    protected $primaryKey = 'codProgramacion';
 }

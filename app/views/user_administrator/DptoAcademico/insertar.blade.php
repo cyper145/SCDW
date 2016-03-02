@@ -42,7 +42,7 @@
 		                        @endif
 
                                 <div class="form-group">
-                                    <label>Codigo</label>
+                                    <label >Codigo</label>
                                     <input class="form-control" placeholder="codigo de departamento academico" name="codigo" required maxlength="10">
                                 </div>
 								<div class="form-group">

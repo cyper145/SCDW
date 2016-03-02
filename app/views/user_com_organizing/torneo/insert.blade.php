@@ -45,9 +45,7 @@
                             {{Form::label('lbltipo','Dia Inicio')}}
                             {{ Form::text('diainicio', null, array('type' => 'text','required', 'class' => 'form-control datepicker','placeholder' => '2015-12-21', 'id' => 'calendar')) }}
                         </div>
-                        <div class="form-group">
-                            {{Form::hidden('nrofechas',0,['class'=>'form-control','placeholder'=>'5','id'=>'docenteauto'])}}
-                        </div>
+
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <button type="reset" class="btn btn-default">Limpiar</button>
                         <button type="submit" class="btn btn-danger" onclick="history.back()">Cancelar</button>

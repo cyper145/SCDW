@@ -44,18 +44,18 @@
                     <tbody>
                     @foreach($jugadores as $val)
                         <tr>
-                            <td>{{$val->dataDocente[0]->nombre}} {{$val->dataDocente[0]->apellidopaterno}} {{$val->dataDocente[0]->apellidomaterno}}</td>
-                            <td>{{$val->dataDocente[0]->dni}}</td>
+                            <td>{{$val->dataDocente[0]->nombre}} {{$val->dataDocente[0]->apellidoP}} {{$val->dataDocente[0]->apellidoM}}</td>
+                            <td>{{$val->dni}}</td>
                             <td>{{ HTML::image('storage/jugador/'.$val->foto,'imagen jugador',['class'=>'img-responsive','style'=>'width: 70px']) }}</td>
                             <td>{{$val->estado}}</td>
                             <td>
-                                <a class="label label-primary" href="{{URL::to('jugadoredit'.$val->idjugador)}}">
+                                <a class="label label-primary" href="{{URL::to('jugadoredit'.$val->dni)}}">
                                     <span class="glyphicon glyphicon-edit">&nbsp;Edit</span>
                                 </a><br>
-                                <a class="label label-success" href="{{URL::to('jugador/'.$val->idjugador.'/detail/.html')}}" >
+                                <a class="label label-success" href="{{URL::to('jugador/'.$val->dni.'/detail/.html')}}" >
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>
-                                <a class="label label-danger" href="{{URL::to('jugador/'.$val->idjugador.'/delete/.html')}}">
+                                <a class="label label-danger" href="{{URL::to('jugador/'.$val->dni.'/delete/.html')}}">
                                     <span class="glyphicon glyphicon-trash">&nbsp;Delete</span>
                                 </a>
                             </td>

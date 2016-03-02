@@ -3,5 +3,5 @@
 class Actividad extends Eloquent{
     protected $table = 'tactividad';
     public $timestamps= false;
-    protected $primaryKey = 'nroactividad';
+    protected $primaryKey = 'codActividad';
 }

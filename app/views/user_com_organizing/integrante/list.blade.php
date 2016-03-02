@@ -35,6 +35,7 @@
             <table data-toggle="table" data-url="tables/data2.json">
                 <thead>
                     <tr>
+                        <th>DNI</th>
                         <th>Nombre</th>
                         <th>Código</th>
                         <th>Rol</th>
@@ -44,11 +45,12 @@
                 <tbody>
                   @foreach($integrantesall as $val)
                       <tr>
-                          <td>{{ $val->DataDocente[0]->nombre.' '.$val->DataDocente[0]->apellidopaterno.' '.$val->DataDocente[0]->apellidomaterno }}</td>
-                          <td>{{ $val->coddocente }}</td>
+                          <td>{{ $val->dni}}</td>
+                          <td>{{ $val->DataDocente[0]->nombre.' '.$val->DataDocente[0]->apellidoP.' '.$val->DataDocente[0]->apellidoM }}</td>
+                          <td>{{ $val->codDocente }}</td>
                           <td>{{ $val->rol}}</td>
                           <td>
-                              <a class="label label-danger" href="{{URL::to('comision/integrantes/delete/'.$val->id)}}">
+                              <a class="label label-danger" href="{{URL::to('comision/integrantes/delete/'.$val->dni)}}">
                                   <span class="glyphicon glyphicon-trash">&nbsp;Delete</span>
                               </a>
                           </td>

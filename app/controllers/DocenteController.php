@@ -6,7 +6,7 @@ class DocenteController extends \BaseController {
 
  public function index()
     {
-        $docentetodo = Docente::paginate(2);
+        $docentetodo = Docente::paginate(7);
         return View::make('user_administrator.Docente.listar')->with('docentetodo',$docentetodo);
     }
 
@@ -26,7 +26,7 @@ class DocenteController extends \BaseController {
     public function store()
     {
          $input = Input::all();
-         $regla = [  'codigo'=>'required|max:5',
+         $regla = [ 'codigo'=>'required|max:6',
                     'apellidopaterno'=>'required',
                     'apellidomaterno'=>'required',
                     'nombre'=>'required'
@@ -42,14 +42,14 @@ class DocenteController extends \BaseController {
                 $apellidopaterno = Input::get('apellidopaterno');
                 $apellidomaterno = Input::get('apellidomaterno');
                 $codigo = Input::get('codigo');
-                if($iddocente = Docente::where('coddocente', '=', $codigo)->first())
+                if($iddocente = Docente::where('codDocente', '=', $codigo)->first())
                 {
                     $error = ['wilson'=>'El codigo '. $codigo. '  ya existe'];
                     return Redirect::back()->withInput()->withErrors($error);
                 }
                 else
                 { 
-                    if($ddocente = Docente::where('nombre', '=', $nombre)->where('apellidopaterno','=',$apellidopaterno)->where('apellidomaterno','=',$apellidomaterno)->first())
+                    if($ddocente = Docente::where('nombre', '=', $nombre)->where('apellidoP','=',$apellidopaterno)->where('apellidoM','=',$apellidomaterno)->first())
                     {
                         $error = ['wilson'=>'Este docente ya ha sido insertado'];
                         return Redirect::back()->withInput()->withErrors($error);
@@ -57,17 +57,13 @@ class DocenteController extends \BaseController {
                     else
                     {  
                         $Docente = new Docente;
-                        $Docente->coddocente = Input::get('codigo');
+                        $Docente->codDocente = Input::get('codigo');
                         $Docente->nombre = Input::get('nombre');
-                        $Docente->apellidomaterno = Input::get('apellidomaterno');
-                        $Docente->apellidopaterno = Input::get('apellidopaterno');
+                        $Docente->apellidoM = Input::get('apellidomaterno');
+                        $Docente->apellidoP = Input::get('apellidopaterno');
                         $Docente->categoria = Input::get('categoria');
-                        $Docente->dni = Input::get('dni');
-                        $Docente->direccion = Input::get('direccion');
                         $Docente->email = Input::get('email');
-                        $Docente->edad = Input::get('edad');
-                        $Docente->telefono = Input::get('telefono');
-                        $Docente->coddptoacademico = Input::get('iddepartamento');
+                        $Docente->codDptoAcademico = Input::get('iddepartamento');
                         $Docente->save();
                         return Redirect::to('docente/listar');
                     }
@@ -79,7 +75,7 @@ class DocenteController extends \BaseController {
      public function editardocente($id)
      {
             $dptotodo= DptoAcademico::all();
-            $consultatabla = Docente::where('coddocente', '=', $id)->get();
+            $consultatabla = Docente::where('codDocente', '=', $id)->get();
             return View::make('user_administrator.docente.editar',['consultatabla'=>$consultatabla,'dptotodo'=>$dptotodo]);
      }
 
@@ -87,7 +83,7 @@ class DocenteController extends \BaseController {
     {
         $recuperado = Input::all();
         DB::table('tdocente')
-                ->where('coddocente',$id)
+                ->where('codDocente',$id)
                 ->update(array(
                             'nombre'=> $recuperado['nombre'],
                             'apellidomaterno'=> $recuperado['apellidomaterno'],
@@ -116,7 +112,7 @@ class DocenteController extends \BaseController {
         //DB::delete('delete from tdocente where id = '.$id);
         //$test = DB::table('tdocente')->where('iddocente',$id);
         $consultatabla = DB::table('tdocente')
-            ->where('coddocente', $id)
+            ->where('codDocente', $id)
             ->delete();
         //$test = Docente::where('coddocente','=',$id)->delete($id);
         //print_r($test);

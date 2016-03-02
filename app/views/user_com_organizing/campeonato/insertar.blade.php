@@ -17,6 +17,13 @@
     <!-- BEGIN PARA MANEJO DE ERRORES -->
     @include('alerts.allerrors')
     @include('alerts.errors')
+    <?php
+    $users = DB::table('tcom_org')->count();
+    $users++;
+    $cadena= "CAM0"."0".$users;
+
+
+    ?>
     <!-- END PARA MANEJO DE ERRORES -->
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -25,8 +32,8 @@
                 <div class="col-md-6">
                     {{ Form::open(array('url'=>'campeonato/formulario1','autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
                     <div class="form-group">
-                        <label>Codigo (codigo tiene que ser autogenerado de tipo int)</label>
-                        <input class="form-control" placeholder="Codigo del campeonato" name="Codigo" required>
+                        <label>Codigo </label>
+                        <input class="form-control" value="{{$cadena}}" placeholder="Codigo del campeonato" name="Codigo" readonly="readonly" required>
                     </div>
                     <div class="form-group">
                         <label>Nombre</label>
@@ -37,13 +44,19 @@
                         <input class="form-control" placeholder="2015-II" name="Anio" required>
                     </div>
                     <div class="form-group">
-                        <label>Fecha creacion</label>
-                        <input class="form-control" placeholder="05/05/2015" name="Fecha" required>
+                        {{ Form::label('Fecha creacion')}}
+                        {{ Form::date('Fecha','',array('class' => 'form-control','placeholder'=>'05/05/2015' )) }}
+                        <span class="help-block">{{ $errors->first('fecha') }}</span>
                     </div>
+
+                    <!-- estudiar archivos-->
                     <div class="form-group">
-                        <label>Reglamento(Bases) en esta parte se tiene que inportar un archivo .doc o .pdf</label>
-                        <textarea class="form-control" rows="3" name="reglamento" ></textarea>
+                        <label>logo:</label><br>
+                        <div class="col-sm-10">
+                            <input name="reglamento" type="file" id="imgInp" class="btn btn-default">
+                        </div>
                     </div>
+
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-default">Limpiar</button>
                     <button type="submit" class="btn btn-danger" onclick="history.back()">Cancelar</button>

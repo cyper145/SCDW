@@ -3,7 +3,7 @@
 class Equipo extends Eloquent{
     protected $table = 'tequipo';
     public $timestamps= false;
-    protected $primaryKey = 'codequipo';
+    protected $primaryKey = 'codEquipo';
     
     public static function editar($idusuario,$input)
     {
@@ -26,7 +26,7 @@ class Equipo extends Eloquent{
             if($password1 == $password2)
             {                    
                 DB::table('tusuarios')
-                    ->where('idusuario',$idusuario)
+                    ->where('idUsuario',$idusuario)
                     ->update([
                         'username'=> Input::get('usuario'),
                         'password'=> Hash::make(Input::get('password')),
@@ -34,8 +34,8 @@ class Equipo extends Eloquent{
                         'estado'=>Input::get('estado')]);
 
                 DB::table('tequipo')
-                    ->where('idusuario',$idusuario)
-                    ->update(['nombre'=> Input::get('Equipo'),'idusuario'=> $idusuario]);
+                    ->where('idUsuario',$idusuario)
+                    ->update(['nombre'=> Input::get('Equipo'),'idUsuario'=> $idusuario]);
                 $respuesta['mensaje'] = 'Datos Actualizados';
                 $respuesta['error'] = false;
             }

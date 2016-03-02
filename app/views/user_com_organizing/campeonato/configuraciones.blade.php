@@ -22,12 +22,14 @@
     <!-- END PARA MANEJO DE ERRORES -->
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Nueva configuracion de campeonato</div>
+            <div class="panel-heading">Nueva configuracion Inicial del campeonato</div>
             <div class="panel-body">
                 <div class="col-md-12">
                     {{ Form::open(array('method' => 'POST','url'=>'campeonato/detail/'.$campeonato->codcampeonato.'/configuracion/add.html','autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
+
+                    <div class="row">
+                        <div class="col-md-6">
                     <!-- torneo-->
-                    <div class="col-lg-offset-1">
                         <div class="panel-default">
                             <div class="panel-heading">
                                 <h3> campeonato:</h3>
@@ -54,11 +56,10 @@
                             </div>
 
                         </div>
-
-                    </div>
                     <!-- end torne0-->
+                        </div>
+                        <div class="col-md-6">
                     <!--  ruedas-->
-                    <div class="col-lg-offset-3" >
                         <div class="panel-default">
                             <div class="panel-heading">
                                 <h3>torneo :</h3>
@@ -81,11 +82,12 @@
                             </div>
 
                         </div>
-                    </div>
                     <!--  endruedas-->
-
+                            </div>
+                    </div>
+                    <div class="row">
                     <!-- participantes-->
-                    <div class="col-lg-offset-5">
+                        <div class="col-md-6">
                         <div class="panel-default">
                             <div class="panel-heading">
                                 <h3>participantes :</h3>
@@ -107,10 +109,11 @@
                             </div>
 
                         </div>
-                    </div>
+
                     <!-- endparticipantes-->
+                        </div>
+                        <div class="col-md-6">
                     <!--partido -->
-                    <div class="col-lg-offset-7">
                         <div class="panel-default">
                             <div class="panel-heading">
                                 <h3>partido :</h3>
@@ -138,9 +141,9 @@
                             </div>
 
                         </div>
-                    </div>
                     <!--endpartido -->
-
+                        </div>
+                   </div>
 
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-default">Limpiar</button>

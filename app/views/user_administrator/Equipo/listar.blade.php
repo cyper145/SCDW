@@ -82,10 +82,10 @@
                           <td>{{ $user->tipo }}</td>
                           <td>{{ $user->estado }}</td>
                           <td>
-                              <a class="label label-primary" href="{{ URL::to('/usuarioequipo/editar');}}/{{$user->idusuario }}">
+                              <a class="label label-primary" href="{{ URL::to('/usuarioequipo/editar');}}/{{$user->idUsuario }}">
                                   <span class="glyphicon glyphicon-edit"></span>
                               </a>&nbsp
-                              <a class="label label-danger" href="{{ URL::to('/usuarioequipo/eliminar');}}/{{ $user->idusuario }}">
+                              <a class="label label-danger" href="{{ URL::to('/usuarioequipo/eliminar');}}/{{ $user->idUsuario }}">
                                   <span class="glyphicon glyphicon-trash"> </span>
                               </a>
                           </td>

@@ -22,9 +22,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">Ingrese los datos modificados del administrador</div>
             <div class="panel-body">
-                
+                99999
                 <div class="col-md-12 col-sm-8">
-                    {{ Form::open(array('url'=>'usuarioupdate'.$usuarioaeditar -> idusuario,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
+                    {{ Form::open(array('url'=>'usuarioupdate/'.$usuarioaeditar->idUsuario,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
 
                         <!-- BEGIN PARA MANEJO DE ERRORES -->
                         @if (count($errors) > 0)
@@ -38,7 +38,7 @@
                                 </li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div>º
                         @endif
                         <!-- END PARA MANEJO DE ERRORES -->
 
@@ -60,7 +60,7 @@
                         
                         <div class="form-group">
                             {{Form::label('lbldocente','Docente:')}}
-                            {{Form::text('docente',$docente -> coddocente.' '.$docente -> nombre.' '.$docente -> apellidopaterno.' '.$docente -> apellidomaterno,['class'=>'form-control','placeholder'=>'ingrese docente','id'=>'docenteauto','maxlength'=>"100", 'required'])}}
+                            {{Form::text('docente',$docente -> codDocente.' '.$docente -> nombre.' '.$docente -> apellidoP.' '.$docente -> apellidoM,['class'=>'form-control','placeholder'=>'ingrese docente','id'=>'docenteauto','maxlength'=>"100", 'required'])}}
                         </div>
                         
                         <div class="form-group">
@@ -89,7 +89,7 @@
 <script>
     $(function() {
      $("#docenteauto").autocomplete({
-        source: "usuariocrearauto",
+        source: "autodocente",
          minLength: 1,
          select: function( event, ui ) {
              $('#response').val(ui.item.id);

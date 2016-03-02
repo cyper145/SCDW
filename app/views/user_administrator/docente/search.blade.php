@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-8">
             <div class="panel panel-default">
-                <div class="panel-heading">lista de usuarios de tipo administrador</div>
+                <div class="panel-heading">busqueda de docente</div>
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-8">
 
@@ -43,9 +43,7 @@
                                     <th >Codigo</th>
                                     <th >Nombre</th>
                                     <th >Categoria</th>
-                                    <th >DNI</th>
-                                    <th >Edad</th>
-                                    <th >telefono</th>
+
                                     <th >Dpto Academcico</th>
                                     <th >Acciones</th>
                                 </tr>
@@ -53,15 +51,12 @@
                                 <tbody>
                                 @if($docente != "")
                                     <tr>
-                                        <td>{{$docente->coddocente}}</td>
-                                        <td>{{$docente->nombre." ".$docente->apellidopaterno." ".$docente->apellidomaterno}} </td>
+                                        <td>{{$docente->codDocente}}</td>
+                                        <td>{{$docente->nombre." ".$docente->apellidoP." ".$docente->apellidoM}} </td>
                                         <td>{{$docente->categoria}} </td>
-                                        <td>{{$docente->dni}} </td>
-                                        <td>{{$docente->edad}} </td>
-                                        <td>{{$docente->telefono}} </td>
                                         <td>{{$docente->dataDptoAcademico[0]->nombre}}</td>
-                                        <td><a href="editar/{{$docente->coddocente}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-                                            <a href="eliminar/{{ $docente->coddocente}}" class="btn btn-xs btn-secundary" style="background-color:#900 !important"><i class="glyphicon glyphicon-trash" ></i></a>
+                                        <td><a href="editar/{{$docente->codDocente}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                                            <a href="eliminar/{{ $docente->codDocente}}" class="btn btn-xs btn-secundary" style="background-color:#900 !important"><i class="glyphicon glyphicon-trash" ></i></a>
                                             <!--{{ $docente->coddocente }} {{ $docente->apellidopaterno }}{{ $docente->apellidomaterno }}{{ $docente->nombre }}{{ $docente->categoria }}{{ $docente->iddepartamente }}</a></td> -->
                                         </td>
                                     </tr>

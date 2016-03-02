@@ -23,7 +23,7 @@
                 <div class="panel-heading">Ingrese los datos del nuevo administrador</div>
                 <div class="panel-body">
 
-                    <div class="col-md-7 col-sm-8">
+                    <div class="col-xs-7 col-md-7 col-sm-8">
                         {{ Form::open(array('url'=>'miembrocomjusticia/formulario1','autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
 
                         <!-- BEGIN PARA MANEJO DE ERRORES -->
@@ -40,24 +40,38 @@
                                 </ul>
                             </div>
                             @endif
-                                    <!-- END PARA MANEJO DE ERRORES -->
+                        <!-- END PARA MANEJO DE ERRORES -->
 
                             <!-- BEGIN CONTENIDO DEL FORMULARIO -->
 
                             <div class="form-group">
                                 {{Form::label('lbldocente','Docente:')}}
-                                {{Form::text('docente',Input::old('docenteauto'),['class'=>'form-control','placeholder'=>'ingrese docente','id'=>'docenteauto'])}}
+                                {{Form::text('docente','',['class'=>'form-control','placeholder'=>'ingrese dni','maxlength'=>'8'])}}
                             </div>
+
                             <div class="form-group">
                                 <label>Rol</label>
                                 <br>
                                 {{Form::select('rol',['Presitente'=>'Presitente','Secretario'=>'Secretario'],null,['class'=>'form-control-static label-success'])}}
                             </div>
                             <div class="form-group">
+                                <label>Nombre</label>
+                                <input class="form-control" placeholder="Juan" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido Paterno</label>
+                                <input class="form-control" placeholder="Perez" name="apellidopaterno" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido Materno</label>
+                                <input class="form-control" placeholder="Perez" name="apellidomaterno" required>
+                            </div>
+                            <div class="form-group">
                                 <label>Campeonato</label>
-                                <select  class="form-control" name="campeonato">
+                                <br>
+                                <select  class="form-control-static label-success" name="campeonato">
                                     @foreach( $camptodo as $val)
-                                        <option class="form-control" value="{{$val->codcampeonato}}">{{$val->codcampeonato}} {{$val->nombre}} </option>
+                                        <option class="form-control" value="{{$val->codCampeonato}}">{{$val->codCampeonato}} {{$val->nombre}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -79,6 +93,16 @@
         $(function() {
             $("#docenteauto").autocomplete({
                 source: "autodocente",
+                minLength: 1,
+
+                select: function( event, ui ) {
+                    $('#response').val(ui.item.id);
+                }
+            });
+        });
+        $(function() {
+            $("#arbitroauto").autocomplete({
+                source: "autoarbitro",
                 minLength: 1,
                 select: function( event, ui ) {
                     $('#response').val(ui.item.id);

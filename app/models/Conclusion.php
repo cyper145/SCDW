@@ -4,6 +4,6 @@ class Conclusion extends Eloquent {
 
 		protected $table = 'tconclusion';
 		public $timestamps= false;
-		protected $primaryKey='nroconclusion';
+		protected $primaryKey='codConclusion';
 		
 }

@@ -23,7 +23,7 @@
                 <div class="panel-body">
 
                     <div class="col-md-7 col-sm-8">
-                        {{ Form::open(array('url'=>'miembrocomjusticia/formulario2/'.$consultatabla->id,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
+                        {{ Form::open(array('url'=>'miembrocomjusticia/formulario2/'.$consultatabla->dni,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
 
                         <!-- BEGIN PARA MANEJO DE ERRORES -->
                         @if (count($errors) > 0)
@@ -44,8 +44,8 @@
                             <!-- BEGIN CONTENIDO DEL FORMULARIO -->
 
                             <div class="form-group">
-                                {{Form::label('lbldocente','Docente:')}}
-                                {{Form::text('docente',$consultatabla->dataDocente[0]->coddocente.' '.$consultatabla->dataDocente[0]->nombre.' '.$consultatabla->dataDocente[0]->apellidopaterno.' '.$consultatabla->dataDocente[0]->apellidomaterno,['class'=>'form-control','placeholder'=>'ingrese docente','id'=>'docenteauto'])}}
+                                {{Form::label('lbldocente','DNI')}}
+                                {{Form::text('docente',$consultatabla->dni,['class'=>'form-control','readonly'=>'readonly'])}}
                             </div>
                             <div class="form-group">
                                 <label>Rol</label>
@@ -53,10 +53,22 @@
                                 {{Form::select('rol',['Presitente'=>'Presitente','Secretario'=>'Secretario'],null,['class'=>'form-control-static label-success'])}}
                             </div>
                             <div class="form-group">
+                                <label>Nombre</label>
+                                <input class="form-control" value="{{$consultatabla->nombre}}" placeholder="Juan" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido Paterno</label>
+                                <input class="form-control" value="{{$consultatabla->apellidoP}}" placeholder="Perez" name="apellidopaterno" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido Materno</label>
+                                <input class="form-control" value="{{$consultatabla->apellidoM}}" placeholder="Perez" name="apellidomaterno" required>
+                            </div>
+                            <div class="form-group">
                                 <label>Campeonato</label>
                                 <select  class="form-control" name="campeonato">
                                     @foreach( $camptodo as $val)
-                                        <option class="form-control" value="{{$val->codcampeonato}}">{{$val->codcampeonato}} {{$val->nombre}} </option>
+                                        <option class="form-control" value="{{$val->codCampeonato}}"> {{$val->nombre}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -74,17 +86,7 @@
 
 @section ('scrips')
     <script src="{{asset('/js/jquery-ui/jquery-ui.js')}}"></script>
-    <script>
-        $(function() {
-            $("#docenteauto").autocomplete({
-                source: "autodocente",
-                minLength: 1,
-                select: function( event, ui ) {
-                    $('#response').val(ui.item.id);
-                }
-            });
-        });
-    </script>
+
 @stop
 
 @endsection

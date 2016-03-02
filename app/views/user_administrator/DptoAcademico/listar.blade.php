@@ -49,11 +49,11 @@
 						    <tbody>
 							@foreach( $dptotodo as $dpto)
 								<tr>
-                            	<td>{{$dpto->coddptoacademico}}</td>
+                            	<td>{{$dpto->codDptoAcademico}}</td>
 								<td>{{$dpto->nombre}} </td>
 								<td>{{$dpto->carrera}} </td>
-								<td><a href="{{ URL::to('DptoAcademico/editar')}}/{{$dpto->coddptoacademico}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-									<a href="{{ URL::to('DptoAcademico/eliminar')}}/{{ $dpto->coddptoacademico}}" class="btn btn-xs btn-secundary" style="background-color:#900 !important"><i class="glyphicon glyphicon-trash" ></i></a>
+								<td><a href="{{ URL::to('DptoAcademico/editar')}}/{{$dpto->codDptoAcademico}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+									<a href="{{ URL::to('DptoAcademico/eliminar')}}/{{ $dpto->codDptoAcademico}}" class="btn btn-xs btn-secundary" style="background-color:#900 !important"><i class="glyphicon glyphicon-trash" ></i></a>
 								</td>
 								</tr>
 							@endforeach

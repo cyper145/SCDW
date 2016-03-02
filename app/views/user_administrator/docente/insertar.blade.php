@@ -46,7 +46,7 @@
 		                        <!-- BEGIN CONTENIDO DEL FORMULARIO -->
 								<div class="form-group">
 									<label>Codigo de docente</label>
-									<input class="form-control" placeholder="11223" name="codigo" pattern="[0-9]{5}" maxlength="5" required>
+									<input class="form-control" placeholder="11223" name="codigo"  maxlength="6" required>
 								</div>
 								<div class="form-group">
 									<label>Nombre</label>
@@ -67,33 +67,17 @@
 										<option class="form-control" value="contratado">contratado</option>
 									</select>
 								</div>
-                                <div class="form-group">
-                                    <label>DNI</label>
-                                    <input class="form-control" placeholder="48435758" name="dni" maxlength="8" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Direccion</label>
-                                    <input class="form-control" placeholder="Av. La Cultura 1034" name="direccion" required>
-                                </div>
+
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input class="form-control" placeholder="wil@gmail.com" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Edad</label>
-                                    <input class="form-control" placeholder="32" name="edad"maxlength="2" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Telefono</label>
-                                    <input class="form-control" placeholder="947750261" name="telefono" maxlength="9" required>
                                 </div>
 
 								<div class="form-group">
 									<label>Departamento Academico</label>
 									<select  class="form-control" name="iddepartamento">
 									@foreach( $dptotodo as $dpto)
-										<option class="form-control" value="{{$dpto->coddptoacademico}}">{{$dpto->coddptoacademico}} {{$dpto->nombre}} </option>
+										<option class="form-control" value="{{$dpto->codDptoAcademico}}"> {{$dpto->nombre}} </option>
 									@endforeach
 									</select>
 								</div>
@@ -111,6 +95,5 @@
 @stop
 @section ('scrips')
 
-    </script>
 @stop
 @endsection

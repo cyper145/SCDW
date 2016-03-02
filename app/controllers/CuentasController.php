@@ -9,14 +9,14 @@ class CuentasController extends \BaseController {
     {
         $term = Str::lower(Input::get('term'));
         //convertimos los datos a un arreglo puro
-        $data = DB::table('tdocente')->select('coddocente','nombre','apellidopaterno','apellidomaterno')->get();
+        $data = DB::table('tdocente')->select('codDocente','nombre','apellidoP','apellidoM')->get();
         $arregloDocente = [];
         foreach($data as $docente)
         {
-            $codigo = $docente->coddocente;
+            $codigo = $docente->codDocente;
             $nombre = $docente->nombre;
-            $ap = $docente->apellidopaterno;
-            $am = $docente->apellidomaterno;
+            $ap = $docente->apellidoP;
+            $am = $docente->apellidoM;
             $aux = [$codigo=>$codigo.' '.$nombre.' '.$ap.' '.$am];
             $arregloDocente = array_merge($aux,$arregloDocente);
         }
@@ -52,11 +52,11 @@ class CuentasController extends \BaseController {
         else
         {
             //verificamos que el docente exista
-            $iddocente = substr(Input::get('docente'), 0,5);
-            if($docente = Docente::where('coddocente', '=', $iddocente)->first())
+            $iddocente = substr(Input::get('docente'), 0,6);
+            if($docente = Docente::where('codDocente', '=', $iddocente)->first())
             {
                 //verificamos si este docente no tiene una cuenta todavia
-                if($administrador = Administrador::where('coddocente', '=', $iddocente)->first())
+                if($administrador = Administrador::where('codDocente', '=', $iddocente)->first())
                 {
                     $error = ['wilson'=>'Este docente ya tiene una cuenta de administrador'];
                     return Redirect::back()->withInput()->withErrors($error);
@@ -79,9 +79,13 @@ class CuentasController extends \BaseController {
                             'tipo'=>$tipo,
                             'estado'=>$estado
                             ]);
+
+                        $price = DB::table('tadministrador')->max('idAdministrador');
+                        $price++;
                         $admin = new Administrador;
-                        $admin -> coddocente = $iddocente;
-                        $admin -> idusuario = $idusuario;
+                        $admin->idAdministrador=$price;
+                        $admin -> codDocente = $iddocente;
+                        $admin -> idUsuario = $idusuario;
                         $admin -> save();
                         return Redirect::to('usuario/listar');
                     }
@@ -112,10 +116,10 @@ class CuentasController extends \BaseController {
     }
     public function editaradmin($idusuario)
     {
-        $usuarioaeditar = User::where('idusuario', '=', $idusuario)->first();
-        $administrador = Administrador::where('idusuario','=',$idusuario)->first();
-        $coddocente = $administrador->coddocente;
-        $docente = Docente::where('coddocente','=',$coddocente)->first();
+        $usuarioaeditar = User::where('idUsuario', '=', $idusuario)->first();
+        $administrador = Administrador::where('idUsuario','=',$idusuario)->first();
+        $coddocente = $administrador->codDocente;
+        $docente = Docente::where('codDocente','=',$coddocente)->first();
         return View::make('user_administrator.admin.editar')
                 ->with('usuarioaeditar',$usuarioaeditar)
                 ->with('docente',$docente)
@@ -135,6 +139,7 @@ class CuentasController extends \BaseController {
     public function eliminaradmin($idusuario)
     {
        // los usuarios no se pueden eliminar de la base de datos solo se pueden poner en estado de bloqueado
+        //primero se elimina el administrador luego el usuario
         $respuesta = Administrador::eliminar($idusuario);
         if($respuesta['error']==true)
         {
@@ -149,8 +154,15 @@ class CuentasController extends \BaseController {
         return View::make('user_administrator.Corganizador.crear');
     }
     //escribe en la base de datos el nuevo usuario de la comision organizadora
+    public function crearcodcomision($id)
+    {
+        $users = DB::table('tcom_org')->count();
+        $users++;
+        return  "COM0".$id."0".$users;
+    }
     public function crearco_post()
     {
+
         $input = Input::all();
         $regla = [  'usuario'=>'required',
                     'password'=>'required',
@@ -196,9 +208,11 @@ class CuentasController extends \BaseController {
                                     'estado'=>$estado
                                 ));
                         //ahora como son relacionales este id ingresamos tambien en la tabla comision
+                        $cod=$this->crearcodcomision($idusuario);
                         $newComision = new Comision;
+                        $newComision -> codCom_Org=$cod;
                         $newComision -> nombre = $nombreco;
-                        $newComision -> idusuario = $idusuario;
+                        $newComision -> idUsuario = $idusuario;
                         $newComision -> save();                        
                         return Redirect::to('usuariocorg/listar');
                     }
@@ -220,9 +234,9 @@ class CuentasController extends \BaseController {
     public function listarcorg()
     {
         $userallcomorgdor = DB::table('tusuarios')
-                ->join('tcom_orgdor', 'tusuarios.idusuario', '=', 'tcom_orgdor.idusuario')
+                ->join('tcom_org', 'tusuarios.idUsuario', '=', 'tcom_org.idUsuario')
                 //->where('tipo','=','comision organizadora')
-                ->groupBy('tusuarios.idusuario')
+                ->groupBy('tusuarios.idUsuario')
                 ->paginate(3);
         return View::make('user_administrator.Corganizador.listar')
                 ->with('userallcomorgdor',$userallcomorgdor);
@@ -230,8 +244,8 @@ class CuentasController extends \BaseController {
     
     public function editarcorg($idusuario)
     {
-        $usuarioaeditar = User::where('idusuario', '=', $idusuario)->first();
-        $comision = Comision::where('idusuario','=',$idusuario)->first();
+        $usuarioaeditar = User::where('idUsuario', '=', $idusuario)->first();
+        $comision = Comision::where('idUsuario','=',$idusuario)->first();
         return View::make('user_administrator.Corganizador.editar')
                 ->with('usuarioaeditar',$usuarioaeditar)
                 ->with('comision',$comision);
@@ -250,6 +264,7 @@ class CuentasController extends \BaseController {
     public function eliminarcorg($idusuario)
     {
        // los usuarios no se pueden eliminar de la base de datos solo se pueden poner en estado de bloqueado
+        //primero se elimina la cuenta de comision luego el usuario que corresponde
         $respuesta = Administrador::eliminar($idusuario);
         if($respuesta['error']==true)
         {
@@ -261,7 +276,15 @@ class CuentasController extends \BaseController {
     public function creareq_get()
     {
         return View::make('user_administrator.Equipo.crear');
-    }    
+    }
+
+    public function crearcodequipo($id)
+    {
+        $users = DB::table('tequipo')->count();
+        $users++;
+        return  "EQU0".$id."0".$users;
+    }
+
     public function creareq_post()
     {
         $input = Input::all();
@@ -300,8 +323,8 @@ class CuentasController extends \BaseController {
                         $password = Hash::make(Input::get('password'));
                         $tipo = 'equipo';
                         $estado = 'bloqueado';//este campo se debe crear como bloqueado cuando pague recien se debe activar
-                        $ultimafecha = Campeonato::max('fechacreacion');
-                        $campeonatoactual = Campeonato::where('fechacreacion','=',$ultimafecha)->first();
+                        $ultimafecha = Campeonato::max('fechaCreacion');
+                        $campeonatoactual = Campeonato::where('fechaCreacion','=',$ultimafecha)->first();
                         //agregamos un nuevo usurio en la tabla tusuarios y recupramos su id                       
                         $idusuario = DB::table('tusuarios')->insertGetId(
                                 [
@@ -311,13 +334,16 @@ class CuentasController extends \BaseController {
                                     'estado'=>$estado
                                 ]);
                         //ahora como son relacionales este id ingresamos tambien en la tabla equipo
+                        $cod=$this->crearcodequipo($idusuario);
                         $newEquipo = new Equipo;
+                        $newEquipo -> codEquipo = $cod;
                         $newEquipo -> nombre = $nombreequipo;
                         $newEquipo -> logo = "";
-                        $newEquipo -> fotouniforme = "";
+                        $newEquipo -> coloresUniforme = "";
+                        $newEquipo -> coloresAlternos = "";
                         $newEquipo -> estado = "habilitado";
-                        $newEquipo -> codcampeonato = $campeonatoactual->codcampeonato;
-                        $newEquipo -> idusuario = $idusuario;
+                        $newEquipo -> codCampeonato = $campeonatoactual->codCampeonato;
+                        $newEquipo -> idUsuario = $idusuario;
                         $newEquipo -> save();
                         return Redirect::to('usuarioequipo/listar');
                     }
@@ -339,17 +365,17 @@ class CuentasController extends \BaseController {
     public function listarequipo()
     {        
         $userallequipo = DB::table('tusuarios')
-                ->join('tequipo', 'tusuarios.idusuario', '=', 'tequipo.idusuario')
-                ->groupBy('tusuarios.idusuario')                
-                ->select('tusuarios.idusuario','tusuarios.username', 'tusuarios.tipo', 'tusuarios.estado','tequipo.nombre')               
-                ->paginate(3);
+                ->join('tequipo', 'tusuarios.idUsuario', '=', 'tequipo.idUsuario')
+                ->groupBy('tusuarios.idUsuario')
+                ->select('tusuarios.idUsuario','tusuarios.username', 'tusuarios.tipo', 'tusuarios.estado','tequipo.nombre')
+                ->paginate(6);
         return View::make('user_administrator.Equipo.listar')
                 ->with('userallequipo',$userallequipo);
     }    
     public function editarequipo($idusuario)
     {        
-        $usuarioaeditar = User::where('idusuario', '=', $idusuario)->first();
-        $equipo = Equipo::where('idusuario','=',$idusuario)->first();
+        $usuarioaeditar = User::where('idUsuario', '=', $idusuario)->first();
+        $equipo = Equipo::where('idUsuario','=',$idusuario)->first();
         return View::make('user_administrator.Equipo.editar')
                 ->with('usuarioaeditar',$usuarioaeditar)
                 ->with('equipo',$equipo);
@@ -367,6 +393,7 @@ class CuentasController extends \BaseController {
     public function eliminarequipo($idusuario)
     {
        // los usuarios no se pueden eliminar de la base de datos solo se pueden poner en estado de bloqueado
+        //primero eliminar equipo
         $respuesta = Administrador::eliminar($idusuario);
         if($respuesta['error']==true)
         {

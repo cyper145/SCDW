@@ -83,15 +83,15 @@
                       @foreach($useralladmin as $user)
                           <tr>
                               <td>{{ $user->username }}</td>
-                              <td><a style="color: #1c94c4" href="{{ URL::to('#');}}"> {{ $user->nombre.' '.$user->apellidopaterno.' '.$user->apellidomaterno}}</a></td>
-                              <td>{{ $user->coddocente }}</td>
+                              <td><a style="color: #1c94c4" href="{{ URL::to('#');}}"> {{ $user->nombre.' '.$user->apellidoP.' '.$user->apellidoM}}</a></td>
+                              <td>{{ $user->codDocente }}</td>
                               <td>{{ $user->tipo }}</td>
                               <td>{{ $user->estado }}</td>
                               <td>
-                                  <a class="label label-primary" href="{{ URL::to('usuarioeditar');}}{{$user->idusuario }}">
+                                  <a class="label label-primary" href="{{ URL::to('usuarioeditar'.$user->idUsuario)}}">
                                       <span class="glyphicon glyphicon-edit"> Edit</span>
                                   </a>&nbsp
-                                  <a class="label label-danger" href="{{ URL::to('/usuario/delete');}}/{{ $user->idusuario }}">
+                                  <a class="label label-danger" href="{{ URL::to('/usuariodelete/'.$user->idUsuario) }}">
                                       <span class="glyphicon glyphicon-trash"> Delete</span>
                                   </a>
                               </td>

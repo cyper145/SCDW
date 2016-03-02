@@ -27,7 +27,7 @@
                                 <a class="btn btn-danger margin text-lowercase text-capitalize" type="button" href="pdf"><span class="glyphicon glyphicon-list-alt"></span>PDF</a>
                                 <a class="btn btn-default margin text-lowercase" type="button" href="insertar"><span class="glyphicon glyphicon-plus"></span> Add New</a>
                                 <label class="label"><span class="glyphicon glyphicon-search"></span></label>
-                                <input type="text" class="form-control" name="valor" placeholder="Buscar por Codigo" maxlength="5">
+                                <input type="text" class="form-control" name="valor" placeholder="Buscar por Codigo" maxlength="6">
                             </div>
                             {{Form::close()}}
                         </div>
@@ -41,9 +41,6 @@
                             <th >Codigo</th>
                             <th >Nombre</th>
                             <th >Categoria</th>
-                            <th >DNI</th>
-                            <th >Edad</th>
-                            <th >telefono</th>
                             <th >Dpto Academcico</th>
                             <th >Acciones</th>
                         </tr>
@@ -51,17 +48,14 @@
                         <tbody>
                         @foreach( $docentetodo as $docente)
                             <tr>
-                                <td>{{$docente->coddocente}}</td>
-                                <td>{{$docente->nombre." ".$docente->apellidopaterno." ".$docente->apellidomaterno}} </td>
+                                <td>{{$docente->codDocente}}</td>
+                                <td>{{$docente->nombre." ".$docente->apellidoP." ".$docente->apellidoM}} </td>
                                 <td>{{$docente->categoria}} </td>
-                                <td>{{$docente->dni}} </td>
-                                <td>{{$docente->edad}} </td>
-                                <td>{{$docente->telefono}} </td>
                                 <td>{{$docente->dataDptoAcademico[0]->nombre}}</td>
                                 <td>
-                                    <a class="label label-primary" href="editar/{{$docente->coddocente}}" ><span class="glyphicon glyphicon-edit"></span> &nbsp;Edit</a>
+                                    <a class="label label-primary" href="editar/{{$docente->codDocente}}" ><span class="glyphicon glyphicon-edit"></span> &nbsp;Edit</a>
                                     <a class="label label-success" href="#" ><span class="glyphicon glyphicon-list"></span> &nbsp;Detail</a>
-                                    <a class="label label-danger" href="eliminar/{{ $docente->coddocente}}" ><span class="glyphicon glyphicon-trash"></span> &nbsp;Delete</a>
+                                    <a class="label label-danger" href="eliminar/{{ $docente->codDocente}}" ><span class="glyphicon glyphicon-trash"></span> &nbsp;Delete</a>
                                 </td>
                             </tr>
                         @endforeach

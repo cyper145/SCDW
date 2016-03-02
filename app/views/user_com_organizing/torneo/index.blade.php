@@ -34,23 +34,21 @@
                 <table data-toggle="table" data-url="tables/data2.json">
                     <thead>
                     <tr>
-                        <th>Tipo</th>
-                        <th>Dia Inicio</th>
-                        <th>Numero de fechas</th>
+                        <th>Nombre</th>
+                        <th>fecha Creacion</th>
                         <th>Acción</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($torneos as $torneo)
                         <tr>
-                            <td>{{$torneo->tipo}}</td>
-                            <td>{{$torneo->diainicio}}</td>
-                            <td>{{$torneo->nrofechas}}</td>
+                            <td>{{$torneo->nombre}}</td>
+                            <td>{{$torneo->fechaCreacion}}</td>
                             <td>
-                                <a class="label label-success" href="{{ URL::to('torneo/');}}/{{$torneo->idtorneo}}/{{$codcampeonato}}/detail.html" >
+                                <a class="label label-success" href="{{ URL::to('torneo/');}}/{{$codcampeonato}}/{{$torneo->codRueda}}/detail.html" >
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>
-                                <a class="label label-danger" href="{{ URL::to('torneo/delete/');}}/{{$torneo->idtorneo}}/{{$codcampeonato}}">
+                                <a class="label label-danger" href="{{ URL::to('torneo/delete/');}}/{{$codcampeonato}}/{{$torneo->codRueda}}">
                                     <span class="glyphicon glyphicon-trash">&nbsp;Delete</span>
                                 </a>
                             </td>

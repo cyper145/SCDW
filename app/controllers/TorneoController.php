@@ -48,7 +48,7 @@ class TorneoController extends \BaseController {
      */
     public function show($codcampeonato)
     {
-        $torneos = Torneo::where('codcampeonato','=',$codcampeonato)->get();
+        $torneos = Torneo::where('codCampeonato','=',$codcampeonato)->get();
         return View::make('user_com_organizing.torneo.index',compact('torneos'))
             ->with('codcampeonato',$codcampeonato);
     }
@@ -65,17 +65,11 @@ class TorneoController extends \BaseController {
 
     }
 
-    function nroequipos($idtorneo)
+    function nroequipos($codcampeonato)
     {
-        //User::where('votos', '>', 100)->count();
-        //$listaE=DB::Select("CALL listaequipo(?)",array($idtorneo));
-        $listaE=DB::select('CALL listaequipo(?)', array($idtorneo));
-        $nro=count($listaE);
-        //$nro=Equipo::where('estado', '=', 'habilitado')->count();
-
-
+        $nro=DB::table('tequipo')->where( 'codCampeonato', '=', $codcampeonato)->count();
+        //$nro=Equipo::where('estado', '=', 'habilitado')->count(
         return $nro;
-
     }
     function obtener1($vs)
     {
@@ -196,11 +190,11 @@ class TorneoController extends \BaseController {
 
         return  $MatrizAB;
     }
-    function coordinar($idtorneo)
+    function coordinar($campeonato)
     {
         $todopartido=Equipo::where('estado', '=', 'habilitado')->get();
         //$todopartido=Equipoxtorne::where('estado', '=', 'habilitado')->get();
-        $nro=$this->nroequipos($idtorneo);
+        $nro=$this->nroequipos($campeonato);
         $nro1=0;
         echo $nro."locos";
         //int mt_rand ( 1 , $nro)
@@ -237,7 +231,7 @@ class TorneoController extends \BaseController {
 
         foreach ($todopartido as $value) {
 
-            $cod=$value->codequipo;
+            $cod=$value->codEquipo;
             echo $j;
 
             $nada2=$arra1[$j];
@@ -305,11 +299,11 @@ class TorneoController extends \BaseController {
         return $fixture;
 
     }
-    function establecer($idtorneo)
+    function establecer($campeonato,$idtorneo)
     {
-        $nro=$this->nroequipos($idtorneo);
+        $nro=$this->nroequipos($campeonato);
         $fixture=$this->programacion($nro);
-        $arr=$this->coordinar($idtorneo);
+        $arr=$this->coordinar($campeonato);
         $codigo=1;//generar ultimo
         $p=0;
         $s=0;
@@ -322,16 +316,18 @@ class TorneoController extends \BaseController {
                 $vs=$fixture[$i][$j];
                 $p=$this->obtener1($vs);
                 $s=$this->obtener2($vs);
+                $countfixture=DB::table('tfixtureaux')->count();
+                $codFixture=substr($idtorneo,3,strlen($idtorneo));;
                 $rueda = new Fixtureaux;
+                $rueda->codFixture="FIX".$codFixture.($countfixture+1);
+                $rueda->nroFecha = $i+1;
 
-                $rueda->idfecha = $i+1;
-
-                $uno=$rueda->equipo2 =$this->obtenercodigo($arr,$s);
-                $dos=$rueda->equipo1 =$this->obtenercodigo($arr,$p);
+                $uno=$rueda->codEquipo2 =$this->obtenercodigo($arr,$s);
+                $dos=$rueda->codEquipo1 =$this->obtenercodigo($arr,$p);
                 //$rueda->equipo2 =$this->obtenercodigo($arr,$s);
                 //$rueda->partido=$this->generar();
-                $rueda->nropartido=$codigo++;// generar
-                $rueda->idtorneo = $idtorneo;
+                $rueda->nroPartido=$codigo++;// generar
+                $rueda->codRueda = $idtorneo;
                 $rueda->save();
                 $k++;
 
@@ -341,41 +337,31 @@ class TorneoController extends \BaseController {
     }
     function fixture($idcampeonato,$idtorneo)
     {
-        $this->establecer($idtorneo);
+        $this->establecer($idcampeonato,$idtorneo);
         $fixtureaux=Fixtureaux::all();
         foreach($fixtureaux as $val ) {
-            if (($val->equipo1) && ($val->equipo2)) {
-                $id=$val->id;
-                $equipo1=$val->equipo1;
-                $equipo2=$val->equipo2;
-                $nropartido=$val->nropartido;
-                $fecha=$val->idfecha;
+            if (($val->codEquipo1) && ($val->codEquipo2)) {
+                $id=$val->codFixture;
+                $equipo1=$val->codEquipo1;
+                $equipo2=$val->codEquipo2;
+                $nropartido=$val->nroPartido;
+                $fecha=$val->nroFecha;
                 $hora=$val->hora;
-                $torneo = $val->idtorneo;
+                $torneo = $val->codRueda;
                 $elemento=Fixtureaux::find($id);
                 $elemento->delete();
                 $nuevo=new Fixture();
-                $nuevo->idfixture=$id;
-                $nuevo->equipo1=$equipo1;
-                $nuevo->equipo2=$equipo2;
-                $nuevo->nropartido=$nropartido;
-                $nuevo->idfecha=$fecha;
+                $nuevo->codFixture=$id;
+                $nuevo->codEquipo1=$equipo1;
+                $nuevo->codEquipo2=$equipo2;
+                $nuevo->nroPartido=$nropartido;
+                $nuevo->nroFecha=$fecha;
                 $nuevo->hora=$hora;
-                $nuevo->idtorneo=$torneo;
+                $nuevo->codRueda=$torneo;
                 $nuevo->save();
             }
         }
         return Redirect::to('torneo/'.$idtorneo.'/'.$idcampeonato.'/detail.html');
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-
     }
 
 
@@ -385,35 +371,43 @@ class TorneoController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($idtorneo,$codcampeonato)
+    public function destroy($codcampeonato,$idtorneo)
     {
-        $jugador = Torneo::where('idtorneo','=',$idtorneo)->where('codcampeonato','=',$codcampeonato)->first();
+        $jugador = Torneo::where('codRueda','=',$idtorneo)->where('codCampeonato','=',$codcampeonato)->first();
         $jugador->delete();
         $respuesta['mensaje'] = 'Torneo elimnado correctamente';
         return Redirect::to('torneo/'.$codcampeonato)->withErrors($respuesta['mensaje']);
     }
 
 
-    public  function detail($idtorneo,$codcampeonato)
+    public  function detail($codcampeonato,$idtorneo)
     {
-        $tabla= DB::select('call TABLAPOSICIONES');
-        $fixture=Fixture::where('idtorneo','=',$idtorneo);
-        $fechas = Fechas::where('idtorneo','=',$idtorneo)->get();
-        $equipos = Equipoxtorneo::where('idtorneo','=',$idtorneo)->get();
-        $fechasdeltorneo = Fechas::where('idtorneo','=',$idtorneo)->get();
-        $campeonato = Campeonato::where('codcampeonato','=',$codcampeonato)->first();
-        $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
-        $nroequipos=$this->nroequipos($idtorneo);
-        return View::make('user_com_organizing.torneo.detail',compact('fechasdeltorneo'))
-            ->with('campeonato',$campeonato)
-            ->with('codcampeonato',$codcampeonato)
-            ->with('equipos',$equipos)
-            ->with('fechas',$fechas)
-            ->with('torneo',$torneo)
-            ->with('fixture',$fixture)
-            ->with('tabla',$tabla)
-            ->with('nroequipos',$nroequipos);
+
+
+        //$tabla = DB::select('call TABLAPOSICIONES');
+        $fixture = Fixture::where('codRueda', '=', $idtorneo)->get();
+        $fechas = Fechas::where('codRueda', '=', $idtorneo)->get();
+        //$equipos = Equipoxtorneo::where('codRueda', '=', $idtorneo)->get();
+        $fechasdeltorneo = Fechas::where('codRueda', '=', $idtorneo)->get();
+        $campeonato = Campeonato::where('codCampeonato', '=', $codcampeonato)->first();
+        $torneo = Torneo::where('codRueda', '=', $idtorneo)->first();
+        $nroequipos = $this->nroequipos($codcampeonato);
+        return View::make('user_com_organizing.torneo.detail', compact('fechasdeltorneo'))
+            ->with('codcampeonato', $codcampeonato)
+            //->with('equipos', $equipos)
+            ->with('torneo', $torneo)
+           // ->with('tabla', $tabla)
+            ->with('nroequipos', $nroequipos);
+
+
+
+
+
+
+
+
     }
+
 
     public function agregarE($idcampeonato,$idtorneo)
     {

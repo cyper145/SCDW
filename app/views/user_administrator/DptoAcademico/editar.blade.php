@@ -23,10 +23,10 @@
 					<div class="panel-body">
 						<div class="col-md-6">
 						@foreach($consultatabla as $camp)
-							  {{ Form::open(array('url' => 'DptoAcademico/formulario2/'.$camp->coddptoacademico,'method' => 'post', 'files' => true, 'class' => 'form-horizontal')) }}
+							  {{ Form::open(array('url' => 'DptoAcademico/formulario2/'.$camp->codDptoAcademico,'method' => 'post', 'files' => true, 'class' => 'form-horizontal')) }}
 								<div class="form-group">
 									<label>Departamento Academico</label>
-									<input class="form-control" placeholder="1234" name="iddepartamento" value="{{$camp->coddptoacademico}}">
+									<input class="form-control" placeholder="1234" name="iddepartamento" value="{{$camp->codDptoAcademico}}" readonly="readonly">
 								</div>
 								<div class="form-group">
 									<label>Nombre</label>

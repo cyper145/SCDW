@@ -26,7 +26,7 @@ Route::group(array('before'=>'admin'), function()
             Route::post('usuariocrear','CuentasController@crear_post');            
             Route::get('usuario/listar','CuentasController@listar');            
             Route::any('usuarioeditar{id}','CuentasController@editaradmin');
-            Route::post('usuarioupdate{id}','CuentasController@updateadmin');
+            Route::post('usuarioupdate/{id}','CuentasController@updateadmin');
             Route::get('usuario/delete/{id}','CuentasController@eliminaradmin');
             //para la comision organizadora
             Route::get('usuariocorgcrear','CuentasController@crearco_get');
@@ -57,7 +57,7 @@ Route::group(array('before'=>'admin'), function()
             Route::post('docente/formulario1', 'DocenteController@store');
             Route::post('docente/formulario2/{id}', 'DocenteController@update');
             Route::get('docente/eliminar/{id}', 'DocenteController@delete');
-            Route::post('docente/search', 'DocenteController@buscar');
+            Route::any('docente/search', 'DocenteController@buscar');
             Route::any('docente/pdf','DocenteController@getPDF');
             //departamento academico
             Route::get('DptoAcademico/listar', 'DptoAcademicoController@index');
@@ -66,6 +66,17 @@ Route::group(array('before'=>'admin'), function()
             Route::post('DptoAcademico/formulario1', 'DptoAcademicoController@store');
             Route::post('DptoAcademico/formulario2/{id}', 'DptoAcademicoController@update');
             Route::get('DptoAcademico/eliminar/{id}', 'DptoAcademicoController@delete');
+
+            //espectadores
+            Route::get('espectadores/listar', 'ExpectadoresController@index');
+            Route::get('espectadores/insertar', 'ExpectadoresController@insertardocente');
+            Route::get('espectadores/editar/{id}', 'ExpectadoresController@editardocente');
+            Route::post('espectador/formulario1', 'ExpectadoresController@store');
+            Route::post('espectador/formulario2/{id}', 'ExpectadoresController@update');
+            Route::get('espectadores/eliminar/{id}', 'ExpectadoresController@delete');
+            Route::post('espectadores/search', 'ExpectadoresController@buscar');
+           // Route::any('docente/pdf','DocenteController@getPDF');
+
         });
 
 //===================Funciones de la Comision Organizadora====================
@@ -138,17 +149,66 @@ Route::group(array('before'=>'organ'), function()
             Route::get('campeonato/detail/{id}/configuracion.html', 'CampeonatoController@configuracion');
             Route::post('campeonato/detail/{id}/configuracion/add.html', 'CampeonatoController@addconfig');
 
+            Route::get('campeonato/detail/{id}/configuracionD.html', 'CampeonatoController@configuracionD');
+            Route::post('campeonato/detail/{id}/configuracionD/add.html', 'CampeonatoController@addconfigD');
+
+
             Route::get('campeonato/detail/{id}/actividad.html', 'CampeonatoController@actividad');
             Route::post('campeonato/detail/{id}/actividad/add.html', 'CampeonatoController@addacti');
 
+            Route::get('campeonato/detail/{id}/actadd.html', 'ActaController@conclusiones_all');
+            Route::any('campeonato/detail/{id}/actaagregar', 'ActaController@conclusiones_add');
+            //campeonato/detail/{id}/actaedit/{id2}
+            Route::get('campeonato/detail/{id}/actaedit/{id2}', 'ActaController@conclusiones_get_edit');
+            Route::post('campeonato/detail/{id}/actaedit/{id2}', 'ActaController@conclusiones_post_edit');
+
+            Route::get('campeonato/detail/{id}/actadelete/{id2}', 'ActaController@conclusiones_delete');
+            //campeonato/detail/{id}/actadetalle/{id2}
+            Route::get('campeonato/detail/{id}/actadetalle/{id2}', 'ActaController@actare_all');
+
+            //campeonato/detail/{id}/abriracta/{id2}
+            Route::get('campeonato/detail/{id}/abriracta/{id2}', 'ActaController@actareunion_all');
+            Route::get('campeonato/detail/{id}/abriracta/{id2}/autodelegado','AutocompletadoController@autocompletedelegado');
+            //asistencia
+            Route::any('campeonato/detail/{id}/addasistencia/{id2}', 'ActaController@actareunion_add1');
+            //agenda
+            Route::post('campeonato/detail/{id}/addagenda/{id2}', 'ActaController@actareunion_add2');
+            //conclusion
+            Route::post('campeonato/detail/{id}/addconclusion/{id2}', 'ActaController@actareunion_add3');
+            //eliminacion
+
+            Route::get('campeonato/detail/{id}/abriracta/{id2}/delete1/{id3}', 'ActaController@actareunion_delete1');
+
+            Route::get('campeonato/detail/{id}/abriracta/{id2}/delete2/{id3}', 'ActaController@actareunion_delete2');
+
+            Route::get('campeonato/detail/{id}/abriracta/{id2}/delete3/{id3}', 'ActaController@actareunion_delete3');
+
+            //=======             Equipo            =============
+
+            Route::get('campeonato/detail/{id}/equipodetalle/{id2}', 'CampeonatoController@detalleEquipo');
+            Route::post('campeonato/detail/{id}/equipodetalle/{id2}/{id3}', 'CampeonatoController@editJugador');
+            Route::post('campeonato/detail/{id}/equipodetalle/{id2}/delegado/{id3}', 'CampeonatoController@editDelegado');
+            //campeonato/detail/{id}/equipodetalle/{id2}
+
+
+
+
+
+            //campeonato/detail/{id}/abriracta/{id2}/delete1/{id3}
+            //campeonato/detail/CAM001/abriracta/reu002
+
 
             //acta de reunion
-            Route::get('acta/ver', 'ActaController@index');  
+            Route::get('acta/ver', 'ActaController@index');
+            //agregar nueva reunion
             Route::get('acta/verc', 'ActaController@conclusiones_all'); 
             Route::post('acta/verc/add', 'ActaController@conclusiones_add');
+
+
             Route::get('/acta/verc/edit/{id}', 'ActaController@conclusiones_get_edit');
             Route::post('/acta/verc/edit/{id}', 'ActaController@conclusiones_post_edit');
             Route::get('/acta/verc/delete/{id}', 'ActaController@conclusiones_delete');
+
             Route::get('acta/verA/{id}', 'ActaController@actareunion_all'); 
             Route::any('/acta/verA/add1', 'ActaController@actareunion_add1');
             Route::post('/acta/verA/add2', 'ActaController@actareunion_add2');
@@ -176,9 +236,26 @@ Route::group(array('before'=>'organ'), function()
             Route::get('fechas/{id1}/{id2}/{id3}/detail.html','FechasController@detail');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/partido.html','PartidoController@partido');
             Route::post('fechas/{id1}/{id2}/{id3}/{id4}/partido.html/planilla/{id5}','PartidoController@planilla');
+            //======= creacion de fechas la programacion ===============
             Route::get('fecha/edit/{id}/{id2}/{id3}', 'FechasController@actualizarfechas');
             Route::post('fecha/edit/{id}/{id2}/add', 'FechasController@add');
+                //====== programacion de partido
+            Route::get('fecha/edit/{id}/{id2}/programacion/{id3}', 'ProgramacionController@editpartido_get');
+            Route::post('fecha/edit/{id}/{id2}/programacioPartido/{id3}', 'ProgramacionController@editpartido_post');
+
+           // 'fecha/edit/'.$codcampeonato.'/'.$codtorneo.'/programacioPartido/'.$codfixture
+
+            Route::get('fecha/edit/{id}/{id2}/programacion/escenarioauto', 'AutocompletadoController@autocompleteescenario');
+
+
+
+
+
+
+            //======= END creacion de fechas la programacion ===============
             Route::post('fechas/detail/partido/arbitros/add.html', 'PartidoController@arbitroadd');
+            Route::post('fechas/detail/partido/plantillas/add.html', 'PartidoController@enviarP');
+
             Route::post('fechas/detail/partido/jugador/add.html', 'PartidoController@jugadoradd');
             Route::get('fechas/{id1}/{id2}/{id3}/{id4}/{id5}/eliminar.html', 'PartidoController@jugadordelete');//borra a un jugador del partido
             //gol
@@ -203,11 +280,33 @@ Route::group(array('before'=>'equip'), function()
             //jugador
             Route::get('jugador/listar.html', 'JugadorController@listar');
             Route::get('jugadorinsertar', 'JugadorController@insertar_get');
+
+
+
             Route::post('jugador/insertar.html', 'JugadorController@insertar_post');
             Route::get('jugador/{id}/delete/.html', 'JugadorController@delete');
             Route::get('jugador/{id}/detail/.html', 'JugadorController@detail');
             Route::any('jugadoredit{id}', 'JugadorController@edit_get');
             Route::post('jugador/edit.html', 'JugadorController@edit_post');
+
+            //delegado
+            Route::get('delegado/listar.html', 'DelegadoController@listar');
+            Route::get('delegadoinsertar', 'DelegadoController@insertar_get');
+
+
+
+            Route::post('delegado/insertar.html', 'DelegadoController@insertar_post');
+            Route::get('delegado/{id}/delete/.html', 'DelegadoController@delete');
+            Route::get('delegado/{id}/detail/.html', 'DelegadoController@detail');
+            Route::any('delegadoedit{id}', 'DelegadoController@edit_get');
+            Route::post('delegado/edit.html', 'DelegadoController@edit_post');
+           //plantilla
+            Route::get('plantilla/{id}', 'EquipoController@agregarplantilla_get');
+            Route::get('plantilla/{id}/autodocente', 'EquipoController@autocompletedocente');
+
+
+
+
             //--equipo
             Route::get('jugador/camiseta.html','EquipoController@camisetaadd_get');
             Route::post('jugador/camiseta.html','EquipoController@camisetaadd_post');
@@ -216,10 +315,17 @@ Route::group(array('before'=>'equip'), function()
             Route::get('jugador/logo.html','EquipoController@logoadd_get');
             Route::post('jugador/logo.html','EquipoController@logoadd_post');
             Route::get('jugador/logo/delete.html','EquipoController@logodelete');
+
+            //plantilla
+            //Route::get('plantilla/{id}','EquipoController@indexPlantilla');
+
         });
            
 //===================Funciones del User Normal====================
 Route::get('autodocente','AutocompletadoController@autocompletedocente');//autocompletardo
+//Route::get('escenarioauto', 'AutocompletadoController@autocompleteescenario');
+
+//Route::get('autodelegado','AutocompletadoController@autocompletedelegado');
 
 Route::get('arbitros/ver', 'ArbitroController@index');
 Route::get('tablaposicion/ver.html','UsernormalController@tablaposiciones');

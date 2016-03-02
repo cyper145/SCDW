@@ -76,6 +76,22 @@
                 </ul>
             </li>
             <!-- end docente-->
+            <!-- begin docente -->
+            <li class="parent ">
+                <a href="{{ URL::to( 'espectadores/listar');}}">
+                    <span class="glyphicon glyphicon-user"></span> espectadores <span data-toggle="collapse" href="#sub-item-espectador" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
+                </a>
+
+                <ul class="children collapse" id="sub-item-espectador">
+                    <li>
+                        <a class="" href="{{ URL::to( 'espectadores/insertar');}}">
+                            <span class="glyphicon glyphicon-share-alt"></span> Agregar espectador
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <!-- end docente-->
             <!-- begin departamento academico -->
             <li class="parent ">
                 <a href="{{ URL::to( 'DptoAcademico/listar');}}">
@@ -92,7 +108,7 @@
                 </ul>
             </li>
             <!-- end departamento academico -->
-            
+
                 
             <!-- ////////////////////////////////////END USER ADMINISTRADOR ////////////////////////////////////-->
         <?php 

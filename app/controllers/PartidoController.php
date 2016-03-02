@@ -216,17 +216,90 @@ public function partido_all()
 		//
 	}
 
-    public  function partido($codcampeonato,$idtorneo,$idfecha,$idfixture)
+    public  function partido($codcampeonato,$codrueda,$idfecha,$codpartido)
     {
-        $todoConclusion = Cambio::all();
-
-        $torneo = Torneo::where('idtorneo','=',$idtorneo)->first();
-        $fixture = Fixture::where('idfixture','=',$idfixture)->first();
-        $jugadoresequipo1 = Jugador::where('codequipo','=',$fixture->equipo1)->get();
-        $jugadoresequipo2 = Jugador::where('codequipo','=',$fixture->equipo2)->get();
+        //$todoConclusion = Cambio::all();
+        //elementos
+        $fecha=Fechas::find($idfecha);
+        $partido=Partido::find($codpartido);
+        $programacion=Programacion::find($partido->codProgramacion);
+        $torneo = Torneo::where('codRueda','=',$codrueda)->first();
         $arbitros = Arbitro::all();
-        //todos los jugadores de este partido  $torneo $idtorneo,$idfecha,$idfixture)
+        $arbixPart=ArbitroPorPartido::where('codPartido','=',$codpartido)->count();
+        $todosArbitros=ArbitroPorPartido::where('codPartido','=',$codpartido)->get();
+        //end elementos
+        $nroPartido=$programacion->nroPartido;
+        $fixture=Fixture::where('codRueda','=',$torneo->codRueda)
+            ->where('nroFecha','=',$fecha->nroFecha)
+            ->where('nroPartido','=',$nroPartido)->first();
+        //elementos
+        $equipo1=Equipo::find($fixture->codEquipo1);
+        $equipo2=Equipo::find($fixture->codEquipo2);
+        $activarPlanilla=Planilla::where('codPartido','=',$codpartido)->first();
 
+        $fechaactual=DB::select("select curdate() as fecha");
+        $fechasiguiente=DB::select("select  adddate(curdate(),1) as fecha");
+        $fechaAnterior=DB::select("select  subdate(curdate(),1) as fecha");
+        $hora=DB::select("select  curtime() as hora");
+        $horaAsistencia=DB::select("select  subtime(?,3000) as fecha",array($partido->horaInicio));
+
+        foreach($fechaactual as $value)
+        {$Factual=$value->fecha;}
+
+        foreach($fechasiguiente as $value)
+        {$Fsiguiente=$value->fecha;}
+
+        foreach($hora as $value)
+        {$horaA=$value->hora;}
+
+        foreach($fechaAnterior as $value)
+        {$Fantes=$value->fecha;}
+
+        foreach($horaAsistencia as $value)
+        {$HrAistencia=$value->fecha;}
+
+
+  ///===== es la dia de programacion
+        $HH=DB::select("select  if(?=?,1,0) as fecha",array($fecha->diaFecha,$Factual));
+        foreach($HH as $value)
+        { $esdiaProgramacion=$value->fecha;}
+     //end fechaf
+      // mañena es dia de programacion
+        $HH=DB::select("select  if(?<?,1,0) as fecha",array($fecha->diaFecha,$Fsiguiente));
+        foreach($HH as $value)
+        {$manenaProgramacion=$value->fecha;}
+       // ayer fue dia de programacion
+        $HH=DB::select("select  if(?=?,1,0) as fecha",array($fecha->diaFecha,$Fantes));
+        foreach($HH as $value)
+        {$ayerFProgramacion=$value->fecha;}
+
+        // si la  hora es mayor 23:50
+        $HH=DB::select("select  if(?=?,1,0) as fecha",array(substr($horaA,0,5),"23:50"));
+        foreach($HH as $value)
+        {$esHora=$value->fecha;}
+        // es hora de inicio
+        $HH=DB::select("select  if(curtime()>=? and curtime()<?,1,0) as fecha",array($partido->horaInicio,"23:50:00"));
+        foreach($HH as $value)
+        {$HoraI=$value->fecha;}
+        //hora de tomo asistencia 30 min
+        $HH=DB::select("select  if(curtime()>=? and curtime()<=?,1,0) as fecha",array($HrAistencia,$partido->horaInicio));
+        foreach($HH as $value)
+        {$AH=$value->fecha;}
+        $jugadoresequipo1="";
+        $jugadoresequipo2="";
+
+        $activarPlanilla=Planilla::where('codPartido','=',$codpartido)->first();
+        if($activarPlanilla!="") {
+            $Planilla1=Planilla::where('codPartido','=',$codpartido)->where('nroPlantilla','=',1)->first();
+            $Planilla2=Planilla::where('codPartido','=',$codpartido)->where('nroPlantilla','=',2)->first();
+
+            //$fixture->codEquipo1
+            //$Jequipo1 = Jugador::where('codequipo', '=', $fixture->equipo1)->get();
+            //$Jequipo2 = Jugador::where('codequipo', '=', $fixture->equipo2)->get();
+            //$arbitros = Arbitro::all();
+            //todos los jugadores de este partido  $torneo $idtorneo,$idfecha,$idfixture)
+        }
+        /*
         $Delanteros1 = '';
         $Mediocampistas1 = '';
         $Defensas1 = '';
@@ -236,11 +309,11 @@ public function partido_all()
         //recuperamos los arbitros del partido
         $arbitrosdelpartido = '';
         //verificamos si el partido ya se jugó
-        if($partido = Partido::where('idfixture', '=', $idfixture)->first())
-        {
             //recuperar los datos del partido jugado
-            $arbitrosdelpartido = ArbitroPorPartido::where('idarbitroporpartido','=',$partido->idarbitroporpartido)->first();
-            //resuperamos todos los jugadores de este partido
+            $arbitrosdelpartido = ArbitroPorPartido::where('codPartido','=',$partido->codPartido)->first();
+
+            //resuperamos todos los jugadores de este partido  ... un rato
+/*
             $Delanteros1 = DB::table('tjugadorenjuego')
                 ->join('tjugador','tjugadorenjuego.idjugador','=','tjugador.idjugador')
                 ->join('tdocente','tdocente.coddocente','=','tjugador.coddocente')
@@ -286,29 +359,33 @@ public function partido_all()
                 ->where('tjugadorenjuego.codpartido','=',$partido->codpartido)
                 ->where('tjugador.codequipo','=',$fixture->equipo2)
                 ->get();
-        }
-        else//crear un nuevo partido
-        {
-            $partidonew = new Partido();
-            $partidonew -> idfixture = $idfixture;
-            $partidonew->save();
-        }
+   */
+
+
+        $activarPlanilla=Planilla::where('codPartido','=',$codpartido)->first();
+
+
+
         return View::make('user_com_organizing.fecha.partido.index',compact('fixture'))
             ->with('idfecha',$idfecha)
             ->with('torneo',$torneo)
+            ->with('programacion',$programacion)
             ->with('codcampeonato',$codcampeonato)
-            ->with('jugadoresequipo1',$jugadoresequipo1)
-            ->with('jugadoresequipo2',$jugadoresequipo2)
-            ->with('partido',$partido)
-            ->with('arbitrosdelpartido',$arbitrosdelpartido)
-            ->with('Delanteros1',$Delanteros1)
-            ->with('Mediocampistas1',$Mediocampistas1)
-            ->with('Defensas1',$Defensas1)
-            ->with('Guardameta1',$Guardameta1)
-            ->with('suplentes1',$suplentes1)
-            ->with('jugadoresdeunpartido2',$jugadoresdeunpartido2)
             ->with('arbitros',$arbitros)
-            ->with('todoConclusion', $todoConclusion);
+            ->with('partido',$partido)
+            ->with('arbixPart',$arbixPart)
+            ->with('todosArbitros',$todosArbitros)
+            ->with('equipo1',$equipo1)
+            ->with('equipo2',$equipo2)//comienza las validaciones
+
+            ->with('activarPlanilla',$activarPlanilla)
+            ->with('esdiaProgramacion',$esdiaProgramacion)
+            ->with('manenaProgramacion',$manenaProgramacion)
+            ->with('ayerFProgramacion',$ayerFProgramacion)
+            ->with('esHora',$esHora)
+            ->with('HoraI',$HoraI)
+            ->with('AH',$AH);
+            //->with('todoConclusion', $todoConclusion);
     }
 
     public  function arbitroadd()
@@ -316,11 +393,66 @@ public function partido_all()
         $idfecha = Input::get('idfecha');
         $codcampeonato = Input::get('codcampeonato');
         $idtorneo = Input::get('idtorneo');
-        $idfixture = Input::get('idfixture');
-
+        $codpartido=Input::get('codpartido');
         $respuesta = ArbitroPorPartido::isertar(Input::all());
-        return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/partido.html')->withErrors($respuesta['mensaje']);
+        return Redirect::to('fechas/'.$codcampeonato.'/'.$idtorneo.'/'.$idfecha.'/'.$codpartido.'/partido.html')->withErrors($respuesta['mensaje']);
     }
+    public function  crear($id,$nro)
+    {
+
+        $nro1=DB::table('tpartido')->count();
+
+        return "PLA".$nro1.$nro;
+
+    }
+    public  function enviarP()
+    {
+        $idfecha = Input::get('idfecha');
+        $codcampeonato = Input::get('codcampeonato');
+        $idtorneo = Input::get('idtorneo');
+        $codpartido = Input::get('codpartido');
+        $codequipo1=Input::get('codequipo1');
+        $codequipo2=Input::get('codequipo2');
+
+
+        $plantilla1 = new Planilla();
+        $plantilla1->codPantilla = $this->crear($codpartido, 1);
+        $plantilla1->nroPlantilla = 1;
+        $plantilla1->codPartido = $codpartido;
+        $plantilla1->save();
+
+        $plantilla2 = new Planilla();
+        $plantilla2->codPantilla = $this->crear($codpartido, 2);
+        $plantilla2->nroPlantilla = 2;
+        $plantilla2->codPartido = $codpartido;
+        $plantilla2->save();
+        $nro=DB::table('tequipopartido')->count();
+        $nro1=DB::table('tpartido')->count();
+        $cod="EP0".$nro1.($nro+1);
+        $equipo1Partido=new EquipoPartido();
+        $equipo1Partido->codEquiPart=$cod;
+        $equipo1Partido->puntaje=0;
+        $equipo1Partido->observacion="";
+        $equipo1Partido->reclamo="";
+        $equipo1Partido->codPartido=$codpartido;
+        $equipo1Partido->codEquipo=$codequipo1;
+        $equipo1Partido->save();
+
+
+        $nro=DB::table('tequipopartido')->count();
+        $cod="EP0".$nro1.($nro+1);
+        $equipo1Partido=new EquipoPartido();
+        $equipo1Partido->codEquiPart=$cod;
+        $equipo1Partido->puntaje=0;
+        $equipo1Partido->observacion="";
+        $equipo1Partido->reclamo="";
+        $equipo1Partido->codEquipo=$codequipo2;
+        $equipo1Partido->codPartido=$codpartido;
+        $equipo1Partido->save();
+        return Redirect::to('fechas/'.$codcampeonato.'/'.$idtorneo.'/'.$idfecha.'/'.$codpartido.'/partido.html');
+    }
+
+
 
     public function jugadoradd()
     {
@@ -334,7 +466,7 @@ public function partido_all()
         {
             return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/partido.html')->withErrors($respuesta['mensaje']);
         }
-        return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/partido.html')->withErrors($respuesta['mensaje']);
+         return Redirect::to('fechas/'.$idfecha.'/'.$codcampeonato.'/'.$idtorneo.'/'.$idfixture.'/partido.html')->withErrors($respuesta['mensaje']);
     }
 
     public function jugadordelete($idfecha,$codcampeonato,$idtorneo,$idfixture,$idjugadorenjuego)

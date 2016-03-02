@@ -1,9 +1,9 @@
 <?php
 class Torneo extends Eloquent {
 
-    protected $table = 'ttorneo';
+    protected $table = 'trueda';
     public $timestamps= false;
-    protected $primaryKey='idtorneo';
+    protected $primaryKey='codRueda';
 
     public static function crear($input)
     {
@@ -12,7 +12,7 @@ class Torneo extends Eloquent {
             [
                 'tipo'=>array('required'),
                 'diainicio'=>array('required'),
-                'nrofechas'=>array('required')
+
             ];
         $validador = Validator::make($input,$reglas);
         if($validador->fails()){
@@ -21,7 +21,7 @@ class Torneo extends Eloquent {
         }
         else
         {
-            $torneo = Torneo::where('tipo','=',Input::get('tipo'))->where('codcampeonato','=',Input::get('codcampeonato'))->first();
+            $torneo = Torneo::where('nombre','=',Input::get('tipo'))->where('codCampeonato','=',Input::get('codcampeonato'))->first();
             if($torneo == '')
             {
                 //recuperamos la fecha ingresada y lo acomodamos para ingresar a la base de datos
@@ -31,11 +31,17 @@ class Torneo extends Eloquent {
                 $año = substr($fecha,6,4);
                 $fecha = $año.'-'.$mes.'-'.$dia;
                 //se crea un torneo
+                $codCampeonato=Input::get('codcampeonato');
+                $users = DB::table('trueda')->count();
+                $users++;
+                $users1=(int)substr($codCampeonato,3,strlen($codCampeonato));
+                $codconclusion="TORO".$users1.$users;
+                $input = Input::all();
                 $newtorneo = new Torneo();
-                $newtorneo->tipo = Input::get('tipo');
-                $newtorneo->diainicio = $fecha;
-                $newtorneo->nrofechas = Input::get('nrofechas');
-                $newtorneo->codcampeonato = Input::get('codcampeonato');
+                $newtorneo->codRueda=$codconclusion;
+                $newtorneo->nombre = Input::get('tipo');
+                $newtorneo->fechaCreacion= $fecha;
+                $newtorneo->codCampeonato = $codCampeonato;
                 $newtorneo->save();
 
                 $respuesta['mensaje'] = 'Datos guardados correctamente';

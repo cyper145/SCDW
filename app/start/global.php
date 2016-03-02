@@ -104,3 +104,36 @@ Form::macro('time', function($name, $default = NULL, $attrs = array())
  
   return $item;
 });
+
+Form::macro('tel', function($name, $default = NULL, $attrs = array())
+{
+    $item = '<input type="tel" name="'. $name .'" ';
+
+    if ($default) {
+        $item .= 'value="'. $default .'" ';
+    }
+
+    if (is_array($attrs)) {
+        foreach ($attrs as $a => $v)
+            $item .= $a .'="'. $v .'" ';
+    }
+    $item .= ">";
+
+    return $item;
+});
+Form::macro('number', function($name, $default = NULL, $attrs = array())
+{
+    $item = '<input type="number" name="'. $name .'" ';
+
+    if ($default) {
+        $item .= 'value="'. $default .'" ';
+    }
+
+    if (is_array($attrs)) {
+        foreach ($attrs as $a => $v)
+            $item .= $a .'="'. $v .'" ';
+    }
+    $item .= ">";
+
+    return $item;
+});

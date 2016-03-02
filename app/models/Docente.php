@@ -3,11 +3,11 @@
 class Docente extends Eloquent{
     protected $table = 'tdocente';
     public $timestamps= false;
-    protected $primaryKey = 'coddocente';
-    protected $fillable = ['coddocente','nombre','apellidopaterno','apellidomaterno','categoria','dni','direccion','email','edad','telefono','coddptoacademico'];
+    protected $primaryKey = 'codDocente';
+    protected $fillable = ['codDocente','nombre','apellidoP','apellidoM','email','categoria','codDptoAcademico'];
 
     public function dataDptoAcademico()
     {
-       return $this -> hasMany("DptoAcademico",'coddptoacademico','coddptoacademico');
+       return $this -> hasMany("DptoAcademico",'codDptoAcademico','codDptoAcademico');
     }
 }

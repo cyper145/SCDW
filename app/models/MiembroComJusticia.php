@@ -1,18 +1,13 @@
 <?php
 
 class MiembroComJusticia extends Eloquent {
-    protected $table = 'tmiembrocomjusticia';
+    protected $table = 'tmiembrojusticia';
     public $timestamps= false;
-    protected $primaryKey = 'id';
-    protected $fillable = ['id','rol','codcampeonato','coddocente'];
-
-    public function dataDocente()
-    {
-        return $this -> hasMany("Docente",'coddocente','coddocente');
-    }
+    protected $primaryKey = 'dni';
+    protected $fillable = ['dni','rol','nombre','apellidoP','apellidoM','codCampeonato'];
 
     public function dataCampeonato()
     {
-        return $this -> hasMany("Campeonato",'codcampeonato','codcampeonato');
+        return $this -> hasMany("Campeonato",'codCampeonato','codCampeonato');
     }
 }

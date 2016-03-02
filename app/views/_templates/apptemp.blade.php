@@ -22,7 +22,7 @@
     </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
+		<div class="container-fluid ">
 			<div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -73,9 +73,9 @@
     <div class="modal-footer">
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b> Versión</b> 3.2
+                <b> Versión</b> 3.3
             </div>
-            <strong>Copyright &copy; UNSAAC-2015 Wilson RS. </strong> All rights reserved.
+            <strong>Copyright &copy; UNSAAC-2016 Wilson RS y Percy CA . </strong> All rights reserved.
         </footer>
     </div>
         

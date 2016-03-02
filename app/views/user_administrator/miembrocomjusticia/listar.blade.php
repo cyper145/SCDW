@@ -33,6 +33,7 @@
                 <table data-toggle="table" data-url="tables/data2.json">
                     <thead>
                     <tr>
+                        <th>DNI</th>
                         <th>Nombre Completo</th>
                         <th>Rol</th>
                         <th>Campeonato</th>
@@ -42,13 +43,14 @@
                     <tbody>
                     @foreach($todomiembros as $camp)
                         <tr>
-                            <td>{{$camp->dataDocente[0]->nombre.' '.$camp->dataDocente[0]->apellidopaterno.' '.$camp->dataDocente[0]->apellidomaterno}}</td>
+                            <td>{{$camp->dni}}</td>
+                            <td>{{$camp->nombre.' '.$camp->apellidopaterno.' '.$camp->apellidomaterno}}</td>
                             <td>{{$camp->rol}}</td>
                             <td>{{$camp->dataCampeonato[0]->nombre}}</td>
                             <td>
-                                <a class="label label-primary" href="{{ URL::to('miembrocomjusticiaeditar'.$camp->id);}}" ><span class="glyphicon glyphicon-edit"></span> &nbsp;Edit</a>
+                                <a class="label label-primary" href="{{ URL::to('miembrocomjusticiaeditar'.$camp->dni);}}" ><span class="glyphicon glyphicon-edit"></span> &nbsp;Edit</a>
                                 <a class="label label-success" href="#" ><span class="glyphicon glyphicon-list"></span> &nbsp;Detail</a>
-                                <a class="label label-danger" href="eliminar/{{ $camp->id}}" ><span class="glyphicon glyphicon-trash"></span> &nbsp;Delete</a>
+                                <a class="label label-danger" href="eliminar/{{ $camp->dni}}" ><span class="glyphicon glyphicon-trash"></span> &nbsp;Delete</a>
                             </td>
                         </tr>
                     @endforeach

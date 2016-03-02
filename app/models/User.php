@@ -12,21 +12,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	/**
 	 * The database table used by the model.
 	 *
-	 * @var string
+	 * @var stringF
 	 */
 	protected $table = 'tusuarios';
     public $timestamps=false;
-    protected $primaryKey = 'idusuario';
-    protected $fillable = ['idusuario','username','password','tipo','estado'];
+    protected $primaryKey = 'idUsuario';
+    protected $fillable = ['idUsuario','username','password','tipo','estado'];
 
     public function DataComision()
     {
-        return $this->hasMany('Comision', 'idusuario', 'idusuario');
+        return $this->hasMany('Comision', 'idUsuario', 'idUsuario');
     }
 
     public function DataEquipo()
     {
-        return $this->hasMany('Equipo', 'idusuario', 'idusuario');
+        return $this->hasMany('Equipo', 'idUsuario', 'idUsuario');
     }
 	/**
 	 * The attributes excluded from the model's JSON form.

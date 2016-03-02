@@ -24,7 +24,7 @@
             <div class="panel-body">
                 
                 <div class="col-md-12 col-sm-8">
-                    {{ Form::open(array('url'=>'usuariocorg/update/'.$usuarioaeditar -> idusuario,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
+                    {{ Form::open(array('url'=>'usuariocorg/update/'.$usuarioaeditar -> idUsuario,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
 
                         <!-- BEGIN PARA MANEJO DE ERRORES -->
                         @if (count($errors) > 0)

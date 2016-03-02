@@ -1,8 +1,9 @@
 <?php
 class Fixtureaux extends Eloquent
 {
-    protected $table = 'fixtureaux';
+    protected $table = 'tfixtureaux';
     public $timestamps = false;
+    protected $primaryKey = 'codFixture';
 
 
 

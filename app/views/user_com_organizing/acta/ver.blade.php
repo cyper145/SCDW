@@ -29,10 +29,6 @@
 					<tr>
 						<td>idreunion</td>
 						<td>fecha</td>
-						
-						
-
-
 					</tr>
 				</thead>
 				<tbody>
@@ -40,16 +36,8 @@
 					<tr>
 						<td>{{$cat->idreunion}}</td>
 						<td>{{$cat->fecha}}</td>
-						
-						
-
-						<?php 
-
-						
+						<?php
 						$habilitado="20".date("y-m-d");
-						
-						$habilitado2=DB::select('select date(now())');
-						$habilitado3=date("d");
 						//$a=(string)$habilitado2;
 						$anio1=substr($habilitado, 0,4);
 						$mes1=substr($habilitado, 5,2);
@@ -107,8 +95,6 @@
 
 						 ?>
 
-						
-						
 						@if($mayor>=0)
 							@if($mayor==0)
 

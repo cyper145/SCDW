@@ -30,6 +30,23 @@
                         {{ Form::open(['url'=>'jugador/insertar.html','files' => true,'autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'])}}
                         <!-- BEGIN CONTENIDO DEL FORMULARIO -->
                         <div class="form-group">
+                            {{Form::label('lbldni','DNI:')}}
+                            {{Form::text('DNI','',['class'=>'form-control','placeholder'=>'ingrese el dni','maxlength'=>'8'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('lbldireccion','direccion:')}}
+                            {{Form::text('direccion','',['class'=>'form-control','placeholder'=>'ingrese el direccion'])}}
+                        </div>
+                        <div class="form-group">
+                            {{Form::label('lbltelefono','telefono:')}}
+                            {{Form::tel('telefono','',['class'=>'form-control','placeholder'=>'ingrese el telefono'])}}
+                        </div>
+
+                        <div class="form-group">
+                            {{Form::label('lbledad','edad:')}}
+                            {{Form::number('edad','',['class'=>'form-control','placeholder'=>'ingrese el edad'])}}
+                        </div>
+                        <div class="form-group">
                             {{Form::label('lbldocente','Nombre:')}}
                             {{Form::text('Nombre',Input::old('docenteauto'),['class'=>'form-control','placeholder'=>'ingrese el nombre del integrante','id'=>'docenteauto'])}}
                         </div>

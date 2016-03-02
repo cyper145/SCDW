@@ -3,7 +3,7 @@
 class Administrador extends Eloquent{
     protected $table = 'tadministrador';
     public $timestamps= false;
-    
+    protected $primaryKey='idAdministrador';
     
     public static function editar($idusuario,$input){
         $respuesta = array();
@@ -19,13 +19,13 @@ class Administrador extends Eloquent{
             $respuesta['error'] = true;
         }
         else{
-            $iddocente = substr(Input::get('docente'), 0,5);      
-            if($docente = Docente::where('coddocente', '=' , $iddocente)->first()){
+            $iddocente = substr(Input::get('docente'), 0,6);
+            if($docente = Docente::where('codDocente', '=' , $iddocente)->first()){
                 $password1 = Input::get('password');
                 $password2 = Input::get('password2');
                 if($password1 == $password2){                    
                     DB::table('tusuarios')
-                        ->where('idusuario',$idusuario)
+                        ->where('idUsuario',$idusuario)
                         ->update([
                             'username'=> Input::get('usuario'),
                             'password'=> Hash::make(Input::get('password')),
@@ -33,8 +33,8 @@ class Administrador extends Eloquent{
                             'estado'=>Input::get('estado')]);
                     
                     DB::table('tadministrador')
-                        ->where('idusuario',$idusuario)
-                        ->update(['coddocente'=> $iddocente,'idusuario'=> $idusuario]);
+                        ->where('idUsuario',$idusuario)
+                        ->update(['codDocente'=> $iddocente,'idUsuario'=> $idusuario]);
                     $respuesta['mensaje'] = 'Datos Actualizados';
                     $respuesta['error'] = false;
                 }

@@ -9,27 +9,39 @@ class CampeonatoController extends \BaseController {
 	 */
 	public function index()
 	{
-		$todocampeonato = Campeonato::where('idcom_orgdor','=',Session::get('user_idcom_orgdor'))->paginate(2);
+		$todocampeonato = Campeonato::where('codCom_Org','=',Session::get('user_idcom_orgdor'))->paginate(2);
         return View::make('user_com_organizing.campeonato.listar')->with('todocampeonato',$todocampeonato);
 	}
 
     public function detalle($codcampeonato)
     {
-        $equipos = Equipo::where('codcampeonato','=',$codcampeonato)->get();
-        $campeonato = Campeonato::where("codcampeonato",'=',$codcampeonato)->where('idcom_orgdor','=',Session::get('user_idcom_orgdor'))->first();
-        $Actividades = Actividad::where('codcampeonato','=',$codcampeonato)->get();
-        $configuracion=Configuracion::where('codcampeonato','=',$codcampeonato)->get();
+        $equipos = Equipo::where('codCampeonato','=',$codcampeonato)->get();
+        $campeonato = Campeonato::where("codCampeonato",'=',$codcampeonato)->where('codCom_Org','=',Session::get('user_idcom_orgdor'))->first();
+        $Actividades = Actividad::where('codCampeonato','=',$codcampeonato)->get();
+        $configuracion=Configuracion::where('codCampeonato','=',$codcampeonato)->get();
+        $todoReunion=DB::table('treunion')
+            ->join('tfecha', 'treunion.idFecha', '=', 'tfecha.idFecha')
+            ->join('trueda', 'tfecha.codRueda', '=', 'trueda.codRueda')
+            ->join('tcampeonato', 'trueda.codCampeonato', '=', 'tcampeonato.codCampeonato')
+            ->select('treunion.codReunion', 'treunion.fecha')
+            ->where( 'tcampeonato.codCampeonato', '=', $codcampeonato)
+            ->get();
+
+
+
         return View::make('user_com_organizing.campeonato.detail')
             ->with('campeonato',$campeonato)
             ->with('Actividades',$Actividades)
             ->with('equipos',$equipos)
-            ->with('configuracion', $configuracion);
+            ->with('configuracion', $configuracion)
+            ->with('todoReunion', $todoReunion);
     }
+
 
     public function detalleequipojugador($codequipo,$codcampeonato)
     {
-        $equipo = Equipo::where('codequipo','=',$codequipo)->first();
-        $jugadoresdelequipo = Jugador::where('codequipo','=',$codequipo)->get();
+        $equipo = Equipo::where('codEquipo','=',$codequipo)->first();
+        $jugadoresdelequipo = Jugador::where('codEquipo','=',$codequipo)->get();
         return View::make('user_com_organizing.campeonato.equipojugador.detail')
             ->with('equipo',$equipo)
             ->with('codcampeonato',$codcampeonato)
@@ -38,7 +50,7 @@ class CampeonatoController extends \BaseController {
 
     public function detallejugador($codequipo,$codcampeonato,$idjugador)
     {
-        $jugador = Jugador::where('idjugador','=',$idjugador)->first();
+        $jugador = Jugador::where('codJugador','=',$idjugador)->first();
         return View::make('user_com_organizing.campeonato.equipojugador.jugador.detail')
             ->with('codequipo',$codequipo)
             ->with('codcampeonato',$codcampeonato)
@@ -52,175 +64,96 @@ class CampeonatoController extends \BaseController {
 
 	public function  actividad($codcampeonato)
     {
-        $campeonato = Campeonato::where('codcampeonato','=',$codcampeonato)->first();
+        $campeonato = Campeonato::where('codCampeonato','=',$codcampeonato)->first();
         return  View::make('user_com_organizing.campeonato.actividad')
         ->with('codcampeonato',$codcampeonato)
         ->with('campeonato',$campeonato);
 
     }
+    public function crearcodactividad($id)
+    {
+        $users = DB::table('tactividad')->count();
+        $users++;
+        return  "ACT0".$id."0".$users;
+    }
     public function addacti($id)
     {
+
         $acti1=new Actividad();
+        $acti1->codActividad=$this->crearcodactividad($id);
         $acti1->actividad=Input::get('actividad');
-        $acti1->fechainicio=Input::get('fechaI');
-        $acti1->fechafin=Input::get('fechaf');
+        $acti1->fechaInicio=Input::get('fechaI');
+        $acti1->fechaFin=Input::get('fechaf');
         $acti1->observaciones=Input::get('observacion');;
-        $acti1->codcampeonato=$id;
+        $acti1->codCampeonato=$id;
         $acti1->save();
         return Redirect::to('campeonato/detail/'.$id);
     }
-
-    public function  configuracion($codcampeonato)
+    public function crearcoodconfig($id)
     {
-        $campeonato = Campeonato::where('codcampeonato','=',$codcampeonato)->first();
-       return  View::make('user_com_organizing.campeonato.configuraciones')
+        $users = DB::table('tconfiguracion')->count();
+        $users++;
+        return  "COF0".$id."0".$users;
+    }
+    public function  configuracionD($codcampeonato)
+    {
+        $campeonato = Campeonato::where('codCampeonato','=',$codcampeonato)->first();
+       return  View::make('user_com_organizing.campeonato.configuracionesD')
        ->with('codcampeonato',$codcampeonato)
        ->with('campeonato',$campeonato);
 
     }
 
-    public function addconfig($id)
+    public function addconfigD($id)
     {
         $all=Input::all();
+
+
         $configguracion1 = new Configuracion;
-        $configguracion1->descripcion="nro de ruedas";
-        $configguracion1->valor=Input::get('ruedas');
-        $configguracion1->codcampeonato=$id;
+        $configguracion1->idConfiguracion=$this->crearcoodconfig($id);
+        $configguracion1->descripcion=Input::get('descripcion');
+        $configguracion1->valor=Input::get('valor');
+        $configguracion1->codCampeonato=$id;
         $configguracion1->save();
-
-        $acti1=new Actividad();
-        $acti1->actividad="limite inscriones";
-        $acti1->fechainicio=Input::get('fechaI');
-        $acti1->fechafin=Input::get('fechaf');
-        $acti1->observaciones="pasada esta fecha no habra mas inscripciones";
-        $acti1->codcampeonato=$id;
-        $acti1->save();
-
-        $acti3=new Actividad();
-        $acti3->actividad="tentativa de apertura";
-        $acti3->fechainicio=Input::get('apertura');
-        $acti3->codcampeonato=$id;
-        $acti3->save();
-
-        $acti2=new Actividad();
-        $acti2->actividad="tentativa de clausura";
-        $acti2->fechainicio=Input::get('clausura');
-        $acti2->codcampeonato=$id;
-        $acti2->save();
-
-
-        $configguracion2 = new Configuracion;
-        $configguracion2->descripcion="maximo nro de dptacademicos por equipo";
-        $configguracion2->valor=Input::get('maximo');
-        $configguracion2->codcampeonato=$id;
-        $configguracion2->save();
-
-        $configguracion3 = new Configuracion;
-        $configguracion3->descripcion="maximo nro de lugadores libres";
-        $configguracion3->valor=Input::get('maximo');
-        $configguracion3->codcampeonato=$id;
-        $configguracion3->save();
-
-        $configguracion4 = new Configuracion;
-        $configguracion4->descripcion="duracion de tiempos";
-        $configguracion4->valor=Input::get('duracion');
-        $configguracion4->codcampeonato=$id;
-        $configguracion4->save();
-
-        $configguracion5 = new Configuracion;
-        $configguracion5->descripcion="tiempo de descanso";
-        $configguracion5->valor=Input::get('descanso');
-        $configguracion5->codcampeonato=$id;
-        $configguracion5->save();
-
-        $configguracion6 = new Configuracion;
-        $configguracion6->descripcion="maximo de juagadores menores de 25 años";
-        $configguracion6->valor=Input::get('maximoM');
-        $configguracion6->codcampeonato=$id;
-        $configguracion6->save();
 
         return Redirect::to('campeonato/detail/'.$id);
     }
-
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
 		$campeonato = new Campeonato;
 		
-		$campeonato->codcampeonato = Input::get('Codigo');
+		$campeonato->codCampeonato = Input::get('Codigo');
 		$campeonato->nombre = Input::get('Nombre');
-		$campeonato->anioacademico = Input::get('Anio');
-		$campeonato->fechacreacion = Input::get('Fecha');
+		$campeonato->anioAcademico = Input::get('Anio');
+		$campeonato->fechaCreacion = Input::get('Fecha');
 		$campeonato->reglamento= Input::get('reglamento');
-		$campeonato->estado = "habilitado"; //esta parte ami parecer tiene que ser un combobox en la vista
-        $campeonato->idcom_orgdor = Session::get('user_idcom_orgdor');
+		$campeonato->habilitar = "habilitado"; //esta parte ami parecer tiene que ser un combobox en la vista
+        $campeonato->codCom_Org = Session::get('user_idcom_orgdor');
 		$campeonato->save();
 		return Redirect::to('campeonato/listar');
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function editarcampeonato($id)
 	{
-        $campeonato = Campeonato::where("codcampeonato",'=',$id)->where('idcom_orgdor','=',Session::get('user_idcom_orgdor'))->first();
+        $campeonato = Campeonato::where("codcampeonato",'=',$id)->where('codCom_Org','=',Session::get('user_idcom_orgdor'))->first();
 		return View::make('user_com_organizing.campeonato.editar')->with('campeonato',$campeonato);
 	}
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
 		//$todocampeonato = Campeonato::all();
 		$entra = Input::all();
 		$campeonato = DB::table('tcampeonato')
-            ->where('codcampeonato', $id)
+            ->where('codCampeonato', $id)
             ->update(array(
 		'nombre' => $entra['Nombre'],
-		'anioacademico' => $entra['Anio'],
-		'fechacreacion' => $entra['Fecha'],
+		'anioAcademico' => $entra['Anio'],
+		'fechaCreacion' => $entra['Fecha'],
 		'reglamento' => $entra['reglamento']));
         return Redirect::to('campeonato/listar');
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 	public function delete($id)
 	{
 		
@@ -230,7 +163,7 @@ class CampeonatoController extends \BaseController {
         return Redirect::to('campeonato/listar');
 	}
 
-public function find()
+    public function find()
 	{
 		$Docentestodo=docente::all();
 
@@ -245,5 +178,80 @@ public function find()
 
         return View::make('docente.listar')->with('Docentestodo',$Docentestodo);
 	}
+
+    //====== equipo =====
+    public function detalleEquipo($codcampeonato,$codequipo)
+    {
+        $delegadosEquipo=DB::table('tequipo')
+            ->join('tdelegando', 'tequipo.codEquipo', '=', 'tdelegando.codEquipo')
+            ->join('tdocente', 'tdelegando.codDocente', '=', 'tdocente.codDocente')
+            ->select('tdelegando.dni','tdocente.codDocente', 'tdocente.nombre','tdocente.apellidoP','tdocente.apellidoM','tdelegando.rol','tdelegando.estado')
+            ->where( 'tequipo.codEquipo', '=', $codequipo)->where( 'tequipo.codCampeonato', '=', $codcampeonato)
+            ->get();
+
+        $jugadoresEquipo=DB::table('tequipo')
+            ->join('tjugador', 'tequipo.codEquipo', '=', 'tjugador.codEquipo')
+            ->join('tdocente', 'tjugador.codDocente', '=', 'tdocente.codDocente')
+            ->select('tjugador.dni','tdocente.codDocente', 'tdocente.nombre','tdocente.apellidoP','tdocente.apellidoM','tequipo.estado')
+            ->where( 'tequipo.codEquipo', '=', $codequipo)->where( 'tequipo.codCampeonato', '=', $codcampeonato)
+            ->get();
+
+        return View::make('user_com_organizing.equipo.detail')->with('delegadosEquipo', $delegadosEquipo)
+            ->with('jugadoresEquipo', $jugadoresEquipo)
+            ->with('codcampeonato',$codcampeonato)
+            ->with('codequipo',$codequipo);
+    }
+
+    public function editJugador($codcampeonato,$codequipo,$dni)
+    {
+        $ediJ=Jugador::find($dni);
+        $habilitado="";
+        if('habilitado'==Input::get('habilitado'))
+        {
+            $habilitado="habilitado";
+
+        }
+        else
+        {
+            $habilitado="desabilitado";
+        }
+        if('desabilitado'==Input::get('desabilitado'))
+        {
+            $habilitado="desabilitado";
+        }
+        $ediJ->estado=$habilitado;
+        $ediJ->save();
+
+
+        return Redirect::to('campeonato/detail/'.$codcampeonato.'/equipodetalle/'.$codequipo.'#jugadores');
+    }
+
+
+    public function editDelegado($codcampeonato,$codequipo,$dni)
+    {
+        $ediJ=Delegado::find($dni);
+        $habilitado="";
+        if('habilitado'==Input::get('habilitado'))
+        {
+            $habilitado="habilitado";
+
+        }
+        else
+        {
+            $habilitado="desabilitado";
+        }
+        if('desabilitado'==Input::get('desabilitado'))
+        {
+            $habilitado="desabilitado";
+        }
+        $ediJ->estado=$habilitado;
+        $ediJ->save();
+
+
+        return Redirect::to('campeonato/detail/'.$codcampeonato.'/equipodetalle/'.$codequipo.'#delegados');
+    }
+
+
+
 
 }

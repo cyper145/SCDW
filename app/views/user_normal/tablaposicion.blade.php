@@ -13,33 +13,14 @@
 @stop
 
 @section('contenido')
-    <div>
-
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-                        Campeonato: {{$campeonatoactual->nombre}} /
-                        Año: {{$campeonatoactual->anioacademico}}
-                    </div>
-					<div class="panel-body">
-						<div class="canvas-wrapper">
-                            (puntaje)
-							<canvas class="main-chart" id="bar-chart" height="200" width="600"></canvas>
-						</div>
-					</div>
-                    <div class="panel-footer">
-                        Leyenda:
-                    </div>
-				</div>
-			</div>
-		</div><!--/.row-->
 
 
 
-	</div>	<!--/.main-->
-    <div class="col-md-12" id="posiciones">
-        <div class="panel panel-danger">
+        <!--/.main-->
+    <div class="container">
+    <div class="row">
+    <div class=" col-md-11" id="posiciones">
+        <div class="panel panel-info ui-tabs-panel">
             <div class="panel-heading">Tabla de Colocaciones </div>
             <div class="panel-body color-orange">
 
@@ -63,7 +44,7 @@
                     @foreach($tabla as $value)
                         <tr>
                             <td>{{$nro++}}</td>
-                            <td>{{$value->equipo}}</td>
+                            <td>{{Equipo::find($value->equipo)->nombre}}</td>
                             <td>{{$value->PJ}}</td>
                             <td>{{$value->PG}}</td>
                             <td>{{$value->PE}}</td>
@@ -77,47 +58,33 @@
                     </tbody>
                 </table>
             </div>
-            <div class="panel-footer">
-                <a class="btn btn-danger" href="#">Aceptar</a>
-            </div>
+
         </div>
+    </div>
+
+    </div>
+        <div class="row">
+            <div class=" col-md-11" id="posiciones">
+                <div class="datepicker glyphicon-calendar" >
+                    nada
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
     </div>
 
 
 
 @section ('scrips')
     <script src="{{asset('/js/bootstrap-table.js')}}"></script>
-    <script type="text/javascript">
-        // nombre de equipos            // valor de
-        var a = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var b = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var c = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var d = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var e = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var f = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var g = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var h = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
-        var i = "<?php echo $d; ?>";    var a = "<?php echo $d; ?>";
 
-        matriz = new Array();
-        matriz[0] = 10;
-        matriz[1] = 20;
-        matriz[2] = 30;
-        matriz[3] = 40;
-
-        var barChartData = {
-            labels : ["Info","Civil","Mate","Mate","test","Info","Civil","Mate","test"],
-            datasets : [
-                {
-                    fillColor : "rgba(147, 208, 60, 1)",
-                    strokeColor : "rgba(48, 164, 255, 0.8)",
-                    highlightFill : "rgba(48, 164, 255, 0.75)",
-                    highlightStroke : "rgba(48, 164, 255, 1)",
-                    data : matriz
-                }
-            ]
-        }
-    </script>
 @stop
 
 @endsection

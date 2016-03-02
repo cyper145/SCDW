@@ -18,14 +18,23 @@ class ActaController extends \BaseController {
         return View::make('user_com_organizing.acta.ver')->with('todoReunion',$todoReunion);
 	}
 
-    public function conclusiones_all()
+    public function conclusiones_all($codcampeonato)
 	{
+        $todoConclusion=DB::table('treunion')
+            ->join('tfecha', 'treunion.idFecha', '=', 'tfecha.idFecha')
+            ->join('trueda', 'tfecha.codRueda', '=', 'trueda.codRueda')
+            ->join('tcampeonato', 'trueda.codCampeonato', '=', 'tcampeonato.codCampeonato')
+            ->select('treunion.codReunion', 'treunion.fecha')
+            ->where( 'tcampeonato.codCampeonato', '=', $codcampeonato)
+            ->get();
+
 		//$categories = Category::all();
-		$todoConclusion = DB::select('select * from treunion');
-		return View::make('user_com_organizing.acta.verc')->with('todoConclusion', $todoConclusion);
+		//$todoConclusion = DB::select('select * from treunion');
+		return View::make('user_com_organizing.acta.verc')->with('todoConclusion', $todoConclusion)->
+            with('codcampeonato',$codcampeonato);
 	}
 
-	public function conclusiones_add()
+	public function conclusiones_add($id)
 	{
 		$input = Input::all();
 
@@ -46,27 +55,36 @@ class ActaController extends \BaseController {
 		else
 		{
 			$category = new Reunion;
-				$category->idreunion = Input::get('idreunion');
+				$category->codReunion = Input::get('idreunion');
 				$category->fecha = Input::get('fecha');
-				$category->nrofecha = Input::get('idfecha');
+				$category->idFecha = Input::get('idfecha');
 			$category->save();
 
-			return Redirect::to('/acta/verc');
+			return Redirect::to('/campeonato/detail/'.$id);
 		}
 	}
 
-	public function conclusiones_get_edit($id)
+	public function conclusiones_get_edit($codcampeonato,$id)
 	{
 		$todoConclusion = Reunion::all();
+        $todoConclusion=DB::table('treunion')
+            ->join('tfecha', 'treunion.idFecha', '=', 'tfecha.idFecha')
+            ->join('trueda', 'tfecha.codRueda', '=', 'trueda.codRueda')
+            ->join('tcampeonato', 'trueda.codCampeonato', '=', 'tcampeonato.codCampeonato')
+            ->select('treunion.codReunion', 'treunion.fecha')
+            ->where( 'tcampeonato.codCampeonato', '=', $codcampeonato)
+            ->get();
 
 		//$category = DB::table('treunion')->where('id', '=', $id)->get();
 
 		$category = Reunion::find($id);
+
 //		$category = DB::select('select * from  treunion where id=?',array($id));
-		return View::make('user_com_organizing.acta.verc')->with('todoConclusion', $todoConclusion)->with('category', $category);
+		return View::make('user_com_organizing.acta.verc')->with('todoConclusion', $todoConclusion)->with('category', $category)
+            ->with('codcampeonato',$codcampeonato);;
 	}
 
-	public function conclusiones_post_edit($id)
+	public function conclusiones_post_edit($codcampeonato,$id)
 	{
 		$input = Input::all();
 		$rules = array(
@@ -86,67 +104,96 @@ class ActaController extends \BaseController {
 
 		$category = Reunion::find($id);
 			$category->fecha = Input::get('fecha');
-			$category->nrofecha = Input::get('idfecha');
+			$category->idFecha = Input::get('idfecha');
 			$category->save();
 
-			return Redirect::to('/acta/verc');
-		}
+            return Redirect::to('/campeonato/detail/'.$codcampeonato);
+        }
 	}
 
-	public function conclusiones_delete($id)
+	public function conclusiones_delete($codcampeonato,$id)
 	{
 		//$category = DB::select('select * from  treunion where id=?',array($id));
 		$category = Reunion::find($id);
 		$category->delete();
-		return Redirect::to('/acta/verc');
+        return Redirect::to('/campeonato/detail/'.$codcampeonato);
 	}
 	
 
-	public function actare_all($id)
+	public function actare_all($codcampeonato,$id)
 	{
 		//$category = DB::select('select * from Tcambio where idreunion=? ',array($id));
 		$category=Reunion::find($id);
 		$buscar=$id;
-		$todoasistente=DB::select('call resumen_asistente(?)',array($id));
-		$todoAgenda=DB::select('select * from tagenda where idreunion=?',array($id));
-		$todoConclusion=DB::select('call resumen_conclusion(?)',array($id));
+        $todoasistente=DB::table('treunion')
+            ->join('tasistente', 'treunion.codReunion', '=', 'tasistente.codReunion')
+            ->join('tdelegando', 'tasistente.dni', '=', 'tdelegando.dni')
+            ->join('tdocente', 'tdelegando.codDocente', '=', 'tdocente.codDocente')
+            ->select('tdocente.codDocente', 'tdocente.nombre','tdocente.apellidoP','tdocente.apellidoM','tdelegando.rol')
+            ->where( 'treunion.codreunion', '=', $id)
+            ->get();
 
-
-
+        //$todoasistente=DB::select('call resumen_asistente(?)',array($id));
+		$todoAgenda=DB::select('select * from tagenda where codReunion=?',array($id));
+        $todoConclusion=DB::table('tconclusion')
+            ->join('tagenda', 'tconclusion.codAgenda', '=', 'tagenda.codAgenda')
+            ->join('treunion', 'treunion.codReunion', '=', 'treunion.codReunion')
+            ->select('tagenda.codAgenda', 'tconclusion.conclusion')
+            ->where( 'treunion.codreunion', '=', $id)
+            ->get();
+        //$todoConclusion=DB::select('call resumen_conclusion(?)',array($id));
 		return View::make('user_com_organizing.acta.verAs')->with('category', $category)->with('todoasistente', $todoasistente)
-		->with('todoAgenda',$todoAgenda)->with('todoConclusion',$todoConclusion)->with('buscar',$buscar);
+		->with('todoAgenda',$todoAgenda)->with('todoConclusion',$todoConclusion)->with('buscar',$buscar)
+            ->with('codcampeonato',$codcampeonato);
 		
 
 
 	}
-	public function actareunion_all($id)
+	public function actareunion_all($codcampeonato,$id)
 	{
 		//$category = DB::select('select * from Tcambio where idreunion=? ',array($id));
-		$category=Reunion::find($id);
-		$buscar=$id;
-		$todoasistente=DB::select('call resumen_asistente(?)',array($id));
-		$todoAgenda=DB::select('select * from tagenda where idreunion=?',array($id));
-		$todoConclusion=DB::select('call resumen_conclusion(?)',array($id));
+        $category=Reunion::find($id);
+        $buscar=$id;
+        $todoasistente=DB::table('treunion')
+            ->join('tasistente', 'treunion.codReunion', '=', 'tasistente.codReunion')
+            ->join('tdelegando', 'tasistente.dni', '=', 'tdelegando.dni')
+            ->join('tdocente', 'tdelegando.codDocente', '=', 'tdocente.codDocente')
+            ->select('tasistente.codAsistente','tdocente.codDocente', 'tdocente.nombre','tdocente.apellidoP','tdocente.apellidoM','tdelegando.rol')
+            ->where( 'treunion.codreunion', '=', $id)
+            ->get();
+
+        //$todoasistente=DB::select('call resumen_asistente(?)',array($id));
+        $todoAgenda=DB::select('select * from tagenda where codReunion=?',array($id));
+        $todoConclusion=DB::table('tconclusion')
+            ->join('tagenda', 'tconclusion.codAgenda', '=', 'tagenda.codAgenda')
+            ->join('treunion', 'treunion.codReunion', '=', 'treunion.codReunion')
+            ->select('tconclusion.codConclusion','tagenda.codAgenda', 'tconclusion.conclusion')
+            ->where( 'treunion.codreunion', '=', $id)
+            ->get();
 
 
 
-		return View::make('user_com_organizing.acta.verA')->with('category', $category)->with('todoasistente', $todoasistente)
-		->with('todoAgenda',$todoAgenda)->with('todoConclusion',$todoConclusion)->with('buscar',$buscar);
+
+        return View::make('user_com_organizing.acta.verA')->with('category', $category)->with('todoasistente', $todoasistente)
+		->with('todoAgenda',$todoAgenda)->with('todoConclusion',$todoConclusion)->with('buscar',$buscar)
+            ->with('codcampeonato',$codcampeonato);
 		
 
 
 	}
-	public function actareunion_add1()
+	public function actareunion_add1($codcampeonato,$id)
 	{
+        $users = DB::table('tasistente')->count();
+        $users++;
+        $users1=substr($id,3,strlen($id));
+        $codasistente="ASIT".$users1.$users;
 		$input = Input::all();
+
 
 		$rules = array(
 
-			'codigo' => 'required',
-			'nombre' => 'required',
-			'idreunion' => 'required',
+			'delegado' => 'required',
 
-			
 		);
 
 		$validator = Validator::make($input, $rules);
@@ -157,41 +204,32 @@ class ActaController extends \BaseController {
 		}
 		else
 		{
-			$nobre = Input::get('codigo');
- 			$codigo = Input::get('nombre');
- 			$idreunion = Input::get('idreunion');
- 			//$category = DB::select('select * from Tcambio where tdocente=? ',array($id));
- 			$cc=Docente::find($codigo);
-			//$reunio=Asistente::find($codigo);
-			//$reunio=DB::select('select * from tasistente where coddocente=? and idreunion=?',array($codigo,$idreunion));
-			//echo gettype($reunio) ;
- 			//$nombre1=$cc->nombre." ".$cc->apellidopaterno." ".$cc->apellidomaterno;
- 			//echo $nombre1;
- 			
- 			
- 				$price = DB::table('tasistente')->max('idasistente');
-				$nuevo =(int)$price+1;
-				$category = new Asistente;
-				$category->idasistente= $nuevo;
-				$category->coddocente = $codigo;
-				$category->idreunion = $idreunion;
-				
-			$category->save();
+			    $dni = substr(Input::get('delegado'),0,8);
+              if(!$Asi=DB::table('tasistente')->where('dni','=',$dni)->where('codReunion','=',$id)->get()) {
 
-			return Redirect::to('/acta/verA/'.$idreunion);
+                  $category = new Asistente;
+                  $category->codAsistente = $codasistente;
+                  $category->dni = $dni;
+                  $category->codReunion = $id;
+
+                  $category->save();
+              }
+
+			return Redirect::to('campeonato/detail/'.$codcampeonato.'/abriracta/'.$id);
 				
 		}
 	}
-	public function actareunion_add2()
+	public function actareunion_add2($codcampeonato,$id)
 	{
+        $users = DB::table('tagenda')->count();
+        $users++;
+        //$users1 = DB::table('treunion')->count();
+        $users1=substr($id,3,strlen($id));
+        $codagenda="AGE".$users1.$users;
 		$input = Input::all();
 
 		$rules = array(
-			'nroAgenda' => 'required',
 			'tema' => 'required',
-			'idreunion2' => 'required',
-			
-			
 		);
 
 		$validator = Validator::make($input, $rules);
@@ -202,40 +240,31 @@ class ActaController extends \BaseController {
 		}
 		else
 		{
-				$nroAge = Input::get('nroAgenda');
-				$tem = Input::get('tema');
-				$idnion = Input::get('idreunion2');	
-			$validar=DB::select('select * from tagenda where nroagenda=? and idreunion=?',array($nroAge,$idnion));
-			$ver=null;
-			foreach ($validar as $key) {
-				$ver=$key->nroagenda;
-			}
-			if($ver!=null)
- 			{
- 				return Redirect::to('/acta/verA/'.$idnion);
- 			}
- 			else{	
+
+
   				$category = new Agenda;
-				$category->nroagenda = $nroAge;
-				$category->tema = $tem;
-				$category->idreunion = $idnion;
+				$category->codAgenda = $codagenda;
+				$category->tema =Input::get('tema');
+				$category->codReunion = $id;
 			$category->save();
 
-			return Redirect::to('/acta/verA/'.$idnion);
-		  }
+			return Redirect::to('campeonato/detail/'.$codcampeonato.'/abriracta/'.$id);
+
+
 		}
 	}
-	public function actareunion_add3()
+	public function actareunion_add3($codcampeonato,$id)
 	{
+        $users = DB::table('tconclusion')->count();
+        $users++;
+        $users1=substr($id,3,strlen($id));
+        $codconclusion="CON".$users1.$users;
 		$input = Input::all();
 
  
 		$rules = array(
-
-			'idconclusion' => 'required',
-			'conclusion' => 'required',
-			'agenda' => 'required',
-			
+			'tema' => 'required',
+            'codagenda'=>'required'
 		);
 
 		$validator = Validator::make($input, $rules);
@@ -247,121 +276,52 @@ class ActaController extends \BaseController {
 		else
 		{
 			$idcon = Input::get('idconclusion');
-			$conclu = Input::get('conclusion');
-			$idage = Input::get('agenda');
-			$reunion=	Input::get('idreunion3');
-			$validar=DB::select('select * from tconclusion where nroconclusion=? and nroagenda=?',array($idcon,$idage));
-            $ver=null;
-			foreach ($validar as $key) {
-				$ver=$key->idconclusion;
-			}
 
-			if($validar!=null)
- 			{
- 				return Redirect::to('/acta/verA/'.$reunion);
- 			}
- 			else{	
 			$category = new Conclusion;
-				$category->nroconclusion = $idcon;
-				$category->conclusion = $conclu;
-				$category->nroagenda = $idage;
+				$category->codConclusion = $codconclusion;
+				$category->conclusion = Input::get('tema');
+				$category->codAgenda = Input::get('codagenda');
 			$category->save();
 
-			return Redirect::to('/acta/verA/'.$reunion);
-		  }
+            return Redirect::to('campeonato/detail/'.$codcampeonato.'/abriracta/'.$id);
+
 			
 		}
 	}
 
-	public function actareunion_delete1($id1,$id2)
+	public function actareunion_delete1($codcampeonato,$id,$id2)
 	{
 		//$category = DB::select('select * from  tasistente where idasistente=?',array($id));
 		$category=Asistente::find($id2);
 		$category->delete();
-		return Redirect::to('/acta/verA/'.$id1);
+        return Redirect::to('campeonato/detail/'.$codcampeonato.'/abriracta/'.$id);
 	}
-	public function actareunion_delete2($id1,$id2)
+	public function actareunion_delete2($codcampeonato,$id,$id2)
 	{
-		$category=Agenda::find($id2);
+        //elimiminar primero todas las conclusiones  de la agenda
+		//$category=Agenda::find($id2);
+        $todoconclusion=Conclusion::where('codAgenda','=',$id2)->get();
+
+        foreach($todoconclusion as $value)
+        {
+            $conclusion=Conclusion::find($value->codConclusion);
+            $conclusion->delete();
+
+        }
+
+        $category=Agenda::find($id2);
+        //luego recien la agenda
 		$category->delete();
-		return Redirect::to('/acta/verA/'.$id1);
+        return Redirect::to('campeonato/detail/'.$codcampeonato.'/abriracta/'.$id);
 	}
-	public function actareunion_delete3($id1,$id2)
+	public function actareunion_delete3($codcampeonato,$id,$id2)
 	{
 		//$category = DB::select('select * from  treunion where nroconclusion=?',array($id));
 		$category=Conclusion::find($id2);
 		$category->delete();
-		return Redirect::to('/acta/verA/'.$id1);
+        return Redirect::to('campeonato/detail/'.$codcampeonato.'/abriracta/'.$id);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 
 }

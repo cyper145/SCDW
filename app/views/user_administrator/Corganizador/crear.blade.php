@@ -58,7 +58,7 @@
                             {{Form::label('lblpassword2','Confirmar contraseña:')}}
                             {{Form::password('password2',['class'=>'form-control','placeholder'=>'repita la contraseña','value'=>''])}}
                         </div>
-                        
+                        <!-- determinar segun los integrantes(su departamento academico)  -->
                         <div class="form-group">
                             {{Form::label('lblorganizador','Nombre comision organizadora:')}}
                             {{Form::text('Comision',null,['class'=>'form-control','placeholder'=>'ingrese un nombre para la comision organizadora'])}}

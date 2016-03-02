@@ -42,16 +42,16 @@
                     @foreach($todocampeonato as $camp)
                         <tr>
                             <td>{{$camp->nombre}}</td>
-                            <td>{{$camp->fechacreacion}}</td>
+                            <td>{{$camp->fechaCreacion}}</td>
                             <td>{{$camp->reglamento}}</td>
                             <td>
-                                <a class="label label-primary" href="editar/{{ $camp->codcampeonato}}">
+                                <a class="label label-primary" href="editar/{{ $camp->codCampeonato}}">
                                     <span class="glyphicon glyphicon-edit">&nbsp;Edit</span>
                                 </a><br>
-                                <a class="label label-success" href="detail/{{ $camp->codcampeonato}}" >
+                                <a class="label label-success" href="detail/{{ $camp->codCampeonato}}" >
                                     <span class="glyphicon glyphicon-list"></span> &nbsp;Detail
                                 </a><br>
-                                <a class="label label-danger" href="eliminar/{{ $camp->codcampeonato}}">
+                                <a class="label label-danger" href="eliminar/{{ $camp->codCampeonato}}">
                                     <span class="glyphicon glyphicon-trash">&nbsp;Delete</span>
                                 </a>
                             </td>

@@ -45,7 +45,7 @@ class DptoAcademicoController extends \BaseController {
             else
             {
                 $DptoAcademico = new DptoAcademico;
-                $DptoAcademico->coddptoacademico = $codigo;
+                $DptoAcademico->codDptoAcademico = $codigo;
                 $DptoAcademico->nombre = $nombre;
                 $DptoAcademico->carrera = $carrera;
                 $DptoAcademico->save();
@@ -57,7 +57,7 @@ class DptoAcademicoController extends \BaseController {
 
      public function editarDptoAcademico($id)
       {
-            $consultatabla = DptoAcademico::where('coddptoacademico', '=', $id)->get();
+            $consultatabla = DptoAcademico::where('codDptoAcademico', '=', $id)->get();
             return View::make('user_administrator.DptoAcademico.editar')
                     ->with('consultatabla',$consultatabla);
     }
@@ -66,9 +66,9 @@ class DptoAcademicoController extends \BaseController {
     {
         $recuperado = Input::all();
         DB::table('tdptoacademico')
-            ->where('coddptoacademico',$id)
+            ->where('codDptoAcademico',$id)
             ->update(array(
-                    'coddptoacademico'=> $id,
+                    'codDptoAcademico'=> $id,
                     'carrera'=> $recuperado['carrera'],
                     'nombre'=> $recuperado['nombredpto'],)
             );
@@ -82,12 +82,12 @@ class DptoAcademicoController extends \BaseController {
      */
     public function delete($id)
     {
-        if($ddocent = Docente::where('coddptoacademico', '=', $id)->first())
+        if($ddocent = Docente::where('codDptoAcademico', '=', $id)->first())
         {
-            $error = ['wilson'=>'ERROR! El docente ' .$ddocent['nombre'].' con codigo '.$ddocent['coddocente']. ' pertenece al departamento '. $id];
+            $error = ['wilson'=>'ERROR! El docente ' .$ddocent['nombre'].' con codigo '.$ddocent['codDocente']. ' pertenece al departamento '. $id];
             return Redirect::back()->withInput()->withErrors($error);
         }
-        DptoAcademico::where('coddptoacademico','=',$id)->delete($id);
+        DptoAcademico::where('codDptoAcademico','=',$id)->delete($id);
         return Redirect::to('DptoAcademico/listar');
     }
 }

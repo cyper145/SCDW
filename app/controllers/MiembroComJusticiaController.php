@@ -40,19 +40,22 @@ class MiembroComJusticiaController extends \BaseController {
 	public function store()
 	{
         //verificamos que el docente exista
-        $iddocente = substr(Input::get('docente'), 0,5);
-        if($docente = Docente::where('coddocente', '=', $iddocente)->first())
+        $iddocente =Input::get('docente');
+        if(!$docente = MiembroComJusticia::where('dni', '=', $iddocente)->first())
         {
             $miembro = new MiembroComJusticia;
+            $miembro->dni=$iddocente;
             $miembro->rol = Input::get('rol');
-            $miembro->codcampeonato = Input::get('campeonato');
-            $miembro->coddocente = $iddocente;
+            $miembro->nombre=Input::get('nombre');
+            $miembro->apellidoP=Input::get('apellidopaterno');
+            $miembro->apellidoM=Input::get('apellidomaterno');
+            $miembro->codCampeonato = Input::get('campeonato');
             $miembro->save();
             return Redirect::to('miembrocomjusticia/listar');
         }
         else
         {
-            $error = ['wilson'=>'Este docente no existe'];
+            $error = ['wilson'=>'Este miembro ya tiene cargo '];
             return Redirect::back()->withInput()->withErrors($error);
         }
 	}
@@ -94,19 +97,24 @@ class MiembroComJusticiaController extends \BaseController {
 	 */
 	public function update($id)
 	{
+
         //verificamos que el docente exista
-        $iddocente = substr(Input::get('docente'), 0,5);
-        if($docente = Docente::where('coddocente', '=', $iddocente)->first())
+        $iddocente = Input::get('docente');
+        if($docente = MiembroComJusticia::where('dni', '=', $iddocente)->first())
         {
             $datosformulario = Input::all();
-            DB::table('tmiembrocomjusticia')
-                ->where('id', $id)
+            DB::table('tmiembrojusticia')
+                ->where('dni', $id)
                 ->update(array(
                     'rol' => $datosformulario['rol'],
-                    'codcampeonato' => $datosformulario['campeonato'],
-                    'coddocente' => $iddocente));
+                    'nombre' => $datosformulario['nombre'],
+                    'apellidoP' => $datosformulario['apellidopaterno'],
+                    'apellidoM' => $datosformulario['apellidomaterno'],
+                    'codCampeonato' => $datosformulario['campeonato'],
+                    ));
             return Redirect::to('miembrocomjusticia/listar');
         }
+
 	}
 
 
@@ -122,8 +130,8 @@ class MiembroComJusticiaController extends \BaseController {
 	}
 	public function delete($id)
 	{
-        DB::table('tmiembrocomjusticia')
-            ->where('id', $id)
+        DB::table('tmiembrojusticia')
+            ->where('dni', $id)
             ->delete();
         return Redirect::to('miembrocomjusticia/listar');
 	}

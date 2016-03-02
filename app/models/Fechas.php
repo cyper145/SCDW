@@ -1,7 +1,7 @@
 <?php
 class Fechas extends Eloquent
 {
-    protected $table = 'tfechas';
+    protected $table = 'tfecha';
     public $timestamps = false;
-    protected $primaryKey = 'idfecha';
+    protected $primaryKey = 'idFecha';
 }

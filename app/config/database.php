@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'db_championship',
+			'database'  => 'bd_campeonatodocente',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

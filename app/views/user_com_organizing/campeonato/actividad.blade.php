@@ -25,7 +25,7 @@
             <div class="panel-heading">Nuevo cronograma de actividades</div>
             <div class="panel-body">
                 <div class="col-md-12">
-                    {{ Form::open(array('method' => 'POST','url'=>'campeonato/detail/'.$campeonato->codcampeonato.'/actividad/add.html','autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
+                    {{ Form::open(array('method' => 'POST','url'=>'campeonato/detail/'.$campeonato->codCampeonato.'/actividad/add.html','autocomplete'=>'off','class'=>'form_horizontal','role'=>'form'))}}
                     <!-- torneo-->
                     <div class="col-lg-offset-1">
                         <div class="panel-default">

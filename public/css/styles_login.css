@@ -757,7 +757,7 @@ a.bg-danger:hover {
 
 .navbar {
 	border: 0;
-	background: rgba(0, 0, 0, .2);//background: rgba(0, 0, 0, .75);wilson
+	background: rgba(0, 0, 0, .2);//background: rgba(0, 0, 0, .75);//wilson
 }
 
 .navbar input {
@@ -796,7 +796,7 @@ a.bg-danger:hover {
 .sidebar {
 	display: block;
 	background-color: #333;
-	background: rgba(0, 0, 0, .1);//background: rgba(0, 0, 0, .5);wilson
+	background: rgba(0, 0, 0, .1);//background: rgba(0, 0, 0, .5);//wilson
 	padding: 0;
 	display: none;
 }
